@@ -5,8 +5,8 @@ main:
   id: 4
   content: |
     在很多项目里，真正难的不是买到设备，而是把零件、部件、底盘和业务目标真正组织起来。补全星科技通过方案服务帮助客户把能力拼装、场景导入和验证节奏连成闭环。
-  imgCard: "@/images/product-image-4.avif"
-  imgMain: "@/images/product-image-main-4.avif"
+  imgCard: "@/images/doc-assets/ppt/image49.jpeg"
+  imgMain: "@/images/doc-assets/ppt/image33.jpeg"
   imgAlt: "方案服务案例展示图"
 tabs:
   - id: "tabs-with-card-item-1"
@@ -50,6 +50,6 @@ specificationsRight:
   - title: "长期意义"
     subTitle: "让客户沉淀属于自己的无人化装备导入方法。"
 blueprints:
-  first: "@/images/product-image-main-2.avif"
-  second: "@/images/product-image-main-1.avif"
+  first: "@/images/doc-assets/ppt/image33.jpeg"
+  second: "@/images/doc-assets/ppt/image49.jpeg"
 ---

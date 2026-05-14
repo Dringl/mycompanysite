@@ -33,6 +33,8 @@ export interface HomeCaseHighlight {
   href: string;
 }
 
+import homeAerialView from "@/images/aerial-view.avif";
+
 export interface CompanyContentSection {
   title: string;
   subTitle: string;
@@ -341,7 +343,7 @@ export const contactHighlights = [
 ] as const;
 
 export const homeAdvantageVisual = {
-  src: "/home/aerial-view.avif",
+  src: homeAerialView,
   alt: "农业与园区场景航拍示意图",
 } as const;
 

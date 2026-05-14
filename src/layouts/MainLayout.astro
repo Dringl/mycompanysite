@@ -40,22 +40,62 @@ interface Props {
     <title>{title}</title>
     <script is:inline>
       const STORAGE_KEY = "hs_theme";
+      const AUTO_THEME_START_HOUR = 7;
+      const AUTO_THEME_END_HOUR = 19;
+
       const resolveAutoThemeByHour = (date = new Date()) => {
         const hour = date.getHours();
-        return hour >= 7 && hour < 19 ? "light" : "dark";
+        return hour >= AUTO_THEME_START_HOUR && hour < AUTO_THEME_END_HOUR
+          ? "light"
+          : "dark";
       };
-      const storedTheme = localStorage.getItem(STORAGE_KEY);
-      const preference =
-        storedTheme === "light" || storedTheme === "dark" || storedTheme === "auto"
-          ? storedTheme
-          : null;
-      const effectiveTheme =
-        preference === "light" || preference === "dark"
-          ? preference
-          : resolveAutoThemeByHour();
 
-      document.documentElement.classList.toggle("dark", effectiveTheme === "dark");
-      document.documentElement.dataset.theme = effectiveTheme;
+      const getStoredThemePreference = () => {
+        const value = localStorage.getItem(STORAGE_KEY);
+        return value === "light" || value === "dark" || value === "auto"
+          ? value
+          : null;
+      };
+
+      const getEffectiveTheme = (preference) => {
+        if (preference === "light" || preference === "dark") return preference;
+        return resolveAutoThemeByHour();
+      };
+
+      const syncThemeToggleUi = (theme) => {
+        document.querySelectorAll(".theme-toggle-light").forEach((button) => {
+          button.classList.toggle("hidden", theme === "dark");
+          button.classList.toggle("flex", theme !== "dark");
+        });
+
+        document.querySelectorAll(".theme-toggle-dark").forEach((button) => {
+          button.classList.toggle("hidden", theme !== "dark");
+          button.classList.toggle("flex", theme === "dark");
+        });
+      };
+
+      const applyTheme = (theme) => {
+        document.documentElement.classList.toggle("dark", theme === "dark");
+        document.documentElement.dataset.theme = theme;
+        syncThemeToggleUi(theme);
+      };
+
+      const setThemePreference = (preference) => {
+        localStorage.setItem(STORAGE_KEY, preference);
+        applyTheme(getEffectiveTheme(preference));
+      };
+
+      const syncTheme = () => {
+        applyTheme(getEffectiveTheme(getStoredThemePreference()));
+      };
+
+      window.__siteTheme = {
+        applyTheme,
+        setThemePreference,
+        syncTheme,
+      };
+
+      syncTheme();
     </script>
     <script>
       import "@scripts/lenisSmoothScroll.js";
@@ -80,6 +120,30 @@ interface Props {
       </main>
     </div>
     <FooterSection />
+    <script is:inline>
+      if (!window.__siteThemeClickBound) {
+        document.addEventListener("click", (event) => {
+          const toggle =
+            event.target instanceof Element
+              ? event.target.closest("[data-theme-toggle]")
+              : null;
+
+          if (!(toggle instanceof HTMLElement)) return;
+
+          const nextTheme = toggle.getAttribute("data-theme-toggle");
+          if (nextTheme === "light" || nextTheme === "dark") {
+            window.__siteTheme?.setThemePreference(nextTheme);
+          }
+        });
+
+        window.__siteThemeClickBound = true;
+      }
+
+      window.__siteTheme?.syncTheme();
+      document.addEventListener("astro:page-load", () => {
+        window.__siteTheme?.syncTheme();
+      });
+    </script>
     <script>
       // https://preline.co
       import "preline/preline.js";

@@ -4,7 +4,7 @@ import ThemeIcon from "@components/ThemeIcon.astro";
 import NavLink from "@components/ui/links/NavLink.astro";
 import navigation from "@utils/navigation.ts";
 import { COMPANY_INFO, COMPANY_LINKS } from "@data/company";
-import brandIcon from "@images/logo.png";
+import brandIcon from "@images/logo_trans.png";
 import { Image } from "astro:assets";
 
 const strings = navigation;
@@ -27,12 +27,21 @@ const homeUrl = COMPANY_LINKS.home;
     <div class="flex items-center justify-between md:my-3 lg:my-3 xl:my-3">
       <!-- Brand logo -->
       <a
-        class="flex-none rounded-lg text-xl font-bold outline-hidden ring-zinc-500 focus-visible:ring-3 dark:ring-zinc-200 dark:focus:outline-hidden"
+        class="flex flex-none items-center gap-3 rounded-2xl text-xl font-bold outline-hidden ring-zinc-500 focus-visible:ring-3 dark:ring-zinc-200 dark:focus:outline-hidden"
         href={homeUrl}
         aria-label="Brand"
       >
-        <!-- <BrandLogo class="h-auto w-24" /> -->
-        <Image src={brandIcon} alt={`${COMPANY_INFO.shortName} Logo`} class="h-auto w-13" loading="lazy"/>
+        <span class="flex h-11 w-11 items-center justify-center rounded-2xl bg-neutral-950 shadow-[0_16px_32px_rgba(15,23,42,0.18)]">
+          <Image
+            src={brandIcon}
+            alt={`${COMPANY_INFO.shortName} Logo`}
+            class="h-7 w-7 brightness-0 invert"
+            loading="eager"
+          />
+        </span>
+        <span class="hidden text-base font-semibold tracking-[0.18em] text-[color:var(--text-strong)] uppercase sm:inline-block">
+          {COMPANY_INFO.shortName}
+        </span>
       </a>
       <!-- Collapse toggle for smaller screens -->
       <div class="ml-auto mr-5 md:hidden">
@@ -108,65 +117,3 @@ const homeUrl = COMPANY_LINKS.home;
     </div>
   </nav>
 </header>
-<!-- Theme Appearance script to manage light/dark modes -->
-<script is:inline>
-  const STORAGE_KEY = "hs_theme";
-  const AUTO_THEME_START_HOUR = 7;
-  const AUTO_THEME_END_HOUR = 19;
-
-  const resolveAutoThemeByHour = (date = new Date()) => {
-    const hour = date.getHours();
-    return hour >= AUTO_THEME_START_HOUR && hour < AUTO_THEME_END_HOUR
-      ? "light"
-      : "dark";
-  };
-
-  const getStoredThemePreference = () => {
-    const value = localStorage.getItem(STORAGE_KEY);
-    return value === "light" || value === "dark" || value === "auto"
-      ? value
-      : null;
-  };
-
-  const getEffectiveTheme = (preference) => {
-    if (preference === "light" || preference === "dark") return preference;
-    return resolveAutoThemeByHour();
-  };
-
-  const applyTheme = (theme) => {
-    document.documentElement.classList.toggle("dark", theme === "dark");
-    document.documentElement.dataset.theme = theme;
-
-    document.querySelectorAll(".theme-toggle-light").forEach((button) => {
-      button.classList.toggle("hidden", theme === "dark");
-      button.classList.toggle("flex", theme !== "dark");
-    });
-
-    document.querySelectorAll(".theme-toggle-dark").forEach((button) => {
-      button.classList.toggle("hidden", theme !== "dark");
-      button.classList.toggle("flex", theme === "dark");
-    });
-  };
-
-  const setThemePreference = (preference) => {
-    localStorage.setItem(STORAGE_KEY, preference);
-    applyTheme(getEffectiveTheme(preference));
-  };
-
-  const syncTheme = () => {
-    applyTheme(getEffectiveTheme(getStoredThemePreference()));
-  };
-
-  window.addEventListener("load", () => {
-    syncTheme();
-
-    document.querySelectorAll("[data-theme-toggle]").forEach((button) => {
-      button.addEventListener("click", () => {
-        const nextTheme = button.getAttribute("data-theme-toggle");
-        if (nextTheme === "light" || nextTheme === "dark") {
-          setThemePreference(nextTheme);
-        }
-      });
-    });
-  });
-</script>

@@ -5,6 +5,9 @@ import MainLayout from "@/layouts/MainLayout.astro";
 import MainSection from "@components/ui/blocks/MainSection.astro";
 import FeaturesStatsAlt from "@components/sections/features/FeaturesStatsAlt.astro";
 import VideoShowcase from "@components/sections/landing/VideoShowcase.astro";
+import { Image } from "astro:assets";
+import aboutIntroImage from "@images/doc-assets/ppt/image33.jpeg";
+import aboutStrengthImage from "@images/doc-assets/ppt/image27.jpeg";
 import { aboutPageContent, COMPANY_INFO, COMPANY_LINKS } from "@data/company";
 import { SITE } from "@data/constants";
 
@@ -51,16 +54,24 @@ const canonicalUrl = `${SITE.url}/about`;
     />
 
     <section class="mx-auto max-w-[85rem] px-4 py-6 sm:px-6 lg:px-8 lg:py-10 2xl:max-w-full">
-      <div class="max-w-4xl rounded-3xl border border-white/10 bg-white/5 p-6 backdrop-blur-sm lg:p-8">
-        <p class="text-sm font-semibold uppercase tracking-[0.2em] text-primary-blue">
-          公司简介
-        </p>
-        <h2 class="mt-4 text-3xl font-bold text-neutral-100 lg:text-4xl">
-          {aboutPageContent.overview.title}
-        </h2>
-        <p class="mt-5 text-pretty text-base leading-8 text-neutral-300 lg:text-lg">
-          {aboutPageContent.overview.subTitle}
-        </p>
+      <div class="grid items-center gap-8 rounded-3xl border border-[color:var(--border-soft)] bg-[color:var(--surface-1)]/88 p-6 backdrop-blur-sm lg:grid-cols-[1.1fr_0.9fr] lg:p-8">
+        <div>
+          <p class="text-sm font-semibold uppercase tracking-[0.2em] text-primary-blue">
+            公司简介
+          </p>
+          <h2 class="mt-4 text-3xl font-bold text-[color:var(--text-strong)] lg:text-4xl">
+            {aboutPageContent.overview.title}
+          </h2>
+          <p class="mt-5 text-pretty text-base leading-8 text-[color:var(--text-body)] lg:text-lg">
+            {aboutPageContent.overview.subTitle}
+          </p>
+        </div>
+        <Image
+          src={aboutIntroImage}
+          alt="补全星科技参加行业活动现场"
+          class="w-full rounded-2xl object-cover"
+          format={"avif"}
+        />
       </div>
     </section>
 
@@ -77,7 +88,7 @@ const canonicalUrl = `${SITE.url}/about`;
       title={aboutPageContent.strengths.title}
       subTitle={aboutPageContent.strengths.subTitle}
       benefits={[...aboutPageContent.strengths.benefits]}
-      src={aboutPageContent.strengths.src}
+      src={aboutStrengthImage}
       alt={aboutPageContent.strengths.alt}
     />
 

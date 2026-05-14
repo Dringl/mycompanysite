@@ -1,11 +1,14 @@
 ---
-// Importing necessary components
 import MainLayout from "@/layouts/MainLayout.astro";
 import PrimaryCTA from "@components/ui/buttons/PrimaryCTA.astro";
 import CardSmall from "@components/ui/cards/CardSmall.astro";
 import CardWide from "@components/ui/cards/CardWide.astro";
 import FeaturesStatsAlt from "@components/sections/features/FeaturesStatsAlt.astro";
 import TestimonialsSectionAlt from "@components/sections/testimonials/TestimonialsSectionAlt.astro";
+import testimonialAvatarOne from "@images/doc-assets/ppt/image49.jpeg";
+import testimonialAvatarTwo from "@images/doc-assets/ppt/image33.jpeg";
+import testimonialAvatarThree from "@images/doc-assets/ppt/image39.jpeg";
+import projectsStatsImage from "@images/doc-assets/ppt/image50.jpeg";
 
 // Importing necessary functions from Astro
 import { getCollection } from "astro:content";
@@ -32,8 +35,7 @@ const testimonials = [
       "“补全星科技在零件与部件配套上给了我们很大的帮助，很多本来会卡在适配和采购节奏的问题，被提前化解掉了。”",
     author: "李工",
     role: "无人化项目集成负责人",
-    avatarSrc:
-      "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?q=80&w=1374&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=facearea&facepad=2&w=320&h=320&q=80",
+    avatarSrc: testimonialAvatarOne.src,
     avatarAlt: "无人化项目客户头像",
   },
   {
@@ -41,8 +43,7 @@ const testimonials = [
       "“通用底盘方案让我们少走了很多弯路，后面新场景进来时不用再从头搭一套，扩展效率高很多。”",
     author: "王敏",
     role: "平台产品经理",
-    avatarSrc:
-      "https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&w=1376&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D8&auto=format&fit=facearea&facepad=2&w=320&h=320&q=80",
+    avatarSrc: testimonialAvatarTwo.src,
     avatarAlt: "平台客户头像",
   },
   {
@@ -50,8 +51,7 @@ const testimonials = [
       "“方案服务不是只给一份文档，而是真的陪着我们把部署顺下来，这对项目推进特别重要。”",
     author: "陈总",
     role: "场景项目负责人",
-    avatarSrc:
-      "https://images.unsplash.com/photo-1474176857210-7287d38d27c6?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D8&auto=format&fit=facearea&facepad=2&w=320&h=320&q=80",
+    avatarSrc: testimonialAvatarThree.src,
     avatarAlt: "场景客户头像",
   },
 ];
@@ -135,6 +135,8 @@ const projectsUrl = new URL("/projects", SITE.url).toString();
         "覆盖平台、设备、实施与培训协同，减少从方案到落地的断层。",
         "坚持长期陪跑与迭代优化，帮助客户沉淀可复制的运营能力。",
       ]}
+      src={projectsStatsImage}
+      alt="丘陵山地与无人化装备应用场景"
     />
     {/* Testimonials section */}
     <TestimonialsSectionAlt
