@@ -1,7 +1,7 @@
 import { c as createAstro, a as createComponent, m as maybeRenderHead, b as addAttribute, r as renderComponent, d as renderTemplate } from '../chunks/astro/server_Bnb6Ye4e.mjs';
 import 'kleur/colors';
-import { $ as $$Icon, S as SITE, a as $$MainLayout } from '../chunks/Icon_DaPNQlo-.mjs';
-import { $ as $$PrimaryCTA } from '../chunks/PrimaryCTA_CjPQ7Udp.mjs';
+import { $ as $$Icon, S as SITE, a as $$MainLayout } from '../chunks/Icon_DT7D7-Ea.mjs';
+import { $ as $$PrimaryCTA } from '../chunks/PrimaryCTA_BIzi_tZR.mjs';
 import '../chunks/index_BS0v8091.mjs';
 import { $ as $$Image } from '../chunks/_astro_assets_CbAMe3DI.mjs';
 import { $ as $$FeaturesStatsAlt } from '../chunks/FeaturesStatsAlt_B5k7ftnJ.mjs';

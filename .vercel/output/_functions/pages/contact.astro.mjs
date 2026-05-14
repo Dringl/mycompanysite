@@ -1,6 +1,6 @@
 import { c as createAstro, a as createComponent, m as maybeRenderHead, f as renderSlot, d as renderTemplate, b as addAttribute, r as renderComponent, F as Fragment, u as unescapeHTML } from '../chunks/astro/server_Bnb6Ye4e.mjs';
 import 'kleur/colors';
-import { i as inquiryTypes, c as COMPANY_INFO, d as contactHighlights, $ as $$Icon, a as $$MainLayout, S as SITE } from '../chunks/Icon_DaPNQlo-.mjs';
+import { i as inquiryTypes, c as COMPANY_INFO, d as contactHighlights, $ as $$Icon, a as $$MainLayout, S as SITE } from '../chunks/Icon_DT7D7-Ea.mjs';
 import 'clsx';
 export { renderers } from '../renderers.mjs';
 

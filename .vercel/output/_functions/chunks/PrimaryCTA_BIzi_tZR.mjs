@@ -1,6 +1,6 @@
 import { c as createAstro, a as createComponent, m as maybeRenderHead, b as addAttribute, r as renderComponent, d as renderTemplate } from './astro/server_Bnb6Ye4e.mjs';
 import 'kleur/colors';
-import { $ as $$Icon } from './Icon_DaPNQlo-.mjs';
+import { $ as $$Icon } from './Icon_DT7D7-Ea.mjs';
 
 const $$Astro = createAstro("https://bq-star.com/");
 const $$PrimaryCTA = createComponent(($$result, $$props, $$slots) => {

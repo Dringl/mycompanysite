@@ -2,7 +2,7 @@ import { c as createAstro, a as createComponent, m as maybeRenderHead, r as rend
 import 'kleur/colors';
 import './index_BS0v8091.mjs';
 import { $ as $$Image } from './_astro_assets_CbAMe3DI.mjs';
-import { $ as $$PrimaryCTA } from './PrimaryCTA_CjPQ7Udp.mjs';
+import { $ as $$PrimaryCTA } from './PrimaryCTA_BIzi_tZR.mjs';
 import 'clsx';
 
 const $$Astro$4 = createAstro("https://bq-star.com/");

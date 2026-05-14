@@ -1,6 +1,6 @@
 import { c as createAstro, a as createComponent, m as maybeRenderHead, b as addAttribute, d as renderTemplate, r as renderComponent } from './astro/server_Bnb6Ye4e.mjs';
 import 'kleur/colors';
-import { $ as $$PrimaryCTA } from './PrimaryCTA_CjPQ7Udp.mjs';
+import { $ as $$PrimaryCTA } from './PrimaryCTA_BIzi_tZR.mjs';
 
 const $$Astro = createAstro("https://bq-star.com/");
 const $$VideoShowcase = createComponent(($$result, $$props, $$slots) => {

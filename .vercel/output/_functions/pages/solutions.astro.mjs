@@ -1,8 +1,8 @@
 import { a as createComponent, r as renderComponent, d as renderTemplate, m as maybeRenderHead } from '../chunks/astro/server_Bnb6Ye4e.mjs';
 import 'kleur/colors';
-import { S as SITE, a as $$MainLayout, e as solutionsPageContent } from '../chunks/Icon_DaPNQlo-.mjs';
-import { $ as $$MainSection } from '../chunks/MainSection_D3z2uUCU.mjs';
-import { p as personWorking, a as aerialView, u as usingTools, b as blueprints, c as constructionWorkers, $ as $$RightSection, d as $$LeftSection, e as $$FeaturesStats } from '../chunks/using-tools_HZloaEgb.mjs';
+import { S as SITE, a as $$MainLayout, e as solutionsPageContent } from '../chunks/Icon_DT7D7-Ea.mjs';
+import { $ as $$MainSection } from '../chunks/MainSection_Dqv6q4rX.mjs';
+import { p as personWorking, a as aerialView, u as usingTools, b as blueprints, c as constructionWorkers, $ as $$RightSection, d as $$LeftSection, e as $$FeaturesStats } from '../chunks/using-tools_hoF_GsYy.mjs';
 export { renderers } from '../renderers.mjs';
 
 const progressBuilding = new Proxy({"src":"/_astro/progress-building.Cjca0suI.avif","width":1920,"height":2560,"format":"avif"}, {

@@ -1,10 +1,10 @@
 import { c as createAstro, a as createComponent, m as maybeRenderHead, b as addAttribute, d as renderTemplate, r as renderComponent, f as renderSlot, F as Fragment, u as unescapeHTML } from '../chunks/astro/server_Bnb6Ye4e.mjs';
 import 'kleur/colors';
-import { $ as $$Icon, a as $$MainLayout, h as homeCaseSection, f as homeCaseHighlights, c as COMPANY_INFO, g as homePillars, j as homeSolutionTabs, k as homeAdvantageVisual, l as companyAdvantages, m as homeClosingCta } from '../chunks/Icon_DaPNQlo-.mjs';
+import { $ as $$Icon, a as $$MainLayout, h as homeCaseSection, f as homeCaseHighlights, c as COMPANY_INFO, g as homePillars, j as homeSolutionTabs, k as homeAdvantageVisual, l as companyAdvantages, m as homeClosingCta } from '../chunks/Icon_DT7D7-Ea.mjs';
 import 'clsx';
-import { $ as $$PrimaryCTA } from '../chunks/PrimaryCTA_CjPQ7Udp.mjs';
+import { $ as $$PrimaryCTA } from '../chunks/PrimaryCTA_BIzi_tZR.mjs';
 import { $ as $$FeaturesStatsAlt } from '../chunks/FeaturesStatsAlt_B5k7ftnJ.mjs';
-import { $ as $$VideoShowcase } from '../chunks/VideoShowcase_CVYxG8kE.mjs';
+import { $ as $$VideoShowcase } from '../chunks/VideoShowcase_BuqkUu7L.mjs';
 export { renderers } from '../renderers.mjs';
 
 const $$Astro$a = createAstro("https://bq-star.com/");

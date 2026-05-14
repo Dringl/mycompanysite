@@ -1,6 +1,6 @@
 import { c as createAstro, a as createComponent, m as maybeRenderHead, b as addAttribute, r as renderComponent, d as renderTemplate, e as renderScript } from '../chunks/astro/server_Bnb6Ye4e.mjs';
 import 'kleur/colors';
-import { $ as $$Icon, a as $$MainLayout, S as SITE } from '../chunks/Icon_DaPNQlo-.mjs';
+import { $ as $$Icon, a as $$MainLayout, S as SITE } from '../chunks/Icon_DT7D7-Ea.mjs';
 export { renderers } from '../renderers.mjs';
 
 const $$Astro = createAstro("https://bq-star.com/");

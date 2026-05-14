@@ -32,10 +32,6 @@
 			"dest": "_render"
 		},
 		{
-			"src": "^/favicon\\.ico/?$",
-			"dest": "_render"
-		},
-		{
 			"src": "^/manifest\\.json/?$",
 			"dest": "_render"
 		},
