@@ -9,7 +9,9 @@ export default defineConfig({
   // https://docs.astro.build/en/guides/images/#authorizing-remote-images
   site: "https://bq-star.com/",
   output: "server",
-  adapter: vercel(),
+  adapter: vercel({
+    imageService: true,
+  }),
   image: {
     domains: ["images.unsplash.com"],
   },
