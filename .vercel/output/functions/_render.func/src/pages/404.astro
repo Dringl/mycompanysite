@@ -1,0 +1,46 @@
+---
+// Importing necessary components
+import MainLayout from "@/layouts/MainLayout.astro";
+import Btn404 from "@components/ui/buttons/Btn404.astro";
+import { SITE } from "@data/constants";
+
+const pageTitle = `页面未找到 | ${SITE.title}`;
+const subTitle = "抱歉，您访问的页面不存在或已移动。";
+const content = "请返回上一页继续浏览，或从首页重新进入您需要的内容。";
+const btnTitle = "返回上一页";
+---
+
+<MainLayout title={pageTitle}>
+  <section class="grid h-svh place-content-center">
+    <div class="mx-auto max-w-(--breakpoint-xl) px-4 py-8 lg:px-6 lg:py-16">
+      <div class="mx-auto max-w-(--breakpoint-sm) text-center">
+        <h1
+          class="text-dark mb-4 text-7xl font-extrabold text-primary-blue dark:text-primary-blue lg:text-9xl"
+        >
+          404
+        </h1>
+        <p
+          id="subtitle"
+          class="mb-4 text-balance text-3xl font-bold tracking-tight text-neutral-700 dark:text-neutral-300 md:text-4xl"
+        >
+          {subTitle}
+        </p>
+        <p
+          id="content"
+          class="mb-4 text-pretty text-lg text-neutral-600 dark:text-neutral-400"
+        >
+          {content}
+        </p>
+        <Btn404 title={btnTitle} id="go-back" />
+      </div>
+    </div>
+  </section>
+</MainLayout>
+
+<script>
+  const goBackButton = document.getElementById("go-back") as HTMLButtonElement;
+
+  goBackButton.addEventListener("click", () => {
+    history.back();
+  });
+</script>
