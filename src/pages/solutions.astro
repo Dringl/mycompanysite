@@ -5,14 +5,14 @@ import LeftSection from "@components/ui/blocks/LeftSection.astro";
 import RightSection from "@components/ui/blocks/RightSection.astro";
 import FeaturesStats from "@components/sections/features/FeaturesStats.astro";
 
-import blueprints from "@images/blueprints-image.avif";
-import personWorking from "@images/person-working.avif";
-import beforeAfter from "@images/before-after.avif";
-import constructionWorkers from "@images/construction-workers.avif";
 import aerialView from "@images/aerial-view.avif";
+import personWorking from "@images/person-working.avif";
 import usingTools from "@images/using-tools.avif";
+import blueprints from "@images/blueprints-image.avif";
+import progressBuilding from "@images/progress-building.avif";
+import constructionWorkers from "@images/construction-workers.avif";
 import { SITE } from "@data/constants";
-import { servicesPageContent } from "@data/company";
+import { solutionsPageContent } from "@data/company";
 
 interface RightArticle {
   type: "right";
@@ -39,59 +39,56 @@ interface LeftArticle {
   btnURL?: string;
 }
 
-const serviceSections = servicesPageContent.sections;
+const solutionSections = solutionsPageContent.sections;
 
 const sectionImages: (RightArticle | LeftArticle)[] = [
   {
     type: "right",
-    title: serviceSections[0].title,
-    subTitle: serviceSections[0].subTitle,
-    single: serviceSections[0].single,
-    imgOneAlt: serviceSections[0].imgOneAlt,
-    imgTwoAlt: serviceSections[0].imgTwoAlt,
-    btnExists: serviceSections[0].btnExists,
-    btnTitle: serviceSections[0].btnTitle,
-    btnURL: serviceSections[0].btnURL,
+    title: solutionSections[0].title,
+    subTitle: solutionSections[0].subTitle,
+    single: solutionSections[0].single,
+    imgOneAlt: solutionSections[0].imgOneAlt,
+    imgTwoAlt: solutionSections[0].imgTwoAlt,
+    btnExists: solutionSections[0].btnExists,
+    btnTitle: solutionSections[0].btnTitle,
+    btnURL: solutionSections[0].btnURL,
     imgOne: aerialView,
     imgTwo: personWorking,
   },
   {
     type: "left",
-    title: serviceSections[1].title,
-    subTitle: serviceSections[1].subTitle,
-    imgAlt: serviceSections[1].imgAlt,
-    btnExists: serviceSections[1].btnExists,
-    btnTitle: serviceSections[1].btnTitle,
-    btnURL: serviceSections[1].btnURL,
-    img: beforeAfter,
+    title: solutionSections[1].title,
+    subTitle: solutionSections[1].subTitle,
+    imgAlt: solutionSections[1].imgAlt,
+    img: usingTools,
   },
   {
     type: "right",
-    title: serviceSections[2].title,
-    subTitle: serviceSections[2].subTitle,
-    single: serviceSections[2].single,
-    imgOneAlt: serviceSections[2].imgOneAlt,
-    imgTwoAlt: serviceSections[2].imgTwoAlt,
+    title: solutionSections[2].title,
+    subTitle: solutionSections[2].subTitle,
+    single: solutionSections[2].single,
+    imgOneAlt: solutionSections[2].imgOneAlt,
+    imgTwoAlt: solutionSections[2].imgTwoAlt,
     imgOne: blueprints,
-    imgTwo: constructionWorkers,
+    imgTwo: progressBuilding,
   },
   {
     type: "left",
-    title: serviceSections[3].title,
-    subTitle: serviceSections[3].subTitle,
-    imgAlt: serviceSections[3].imgAlt,
-    btnExists: serviceSections[3].btnExists,
-    btnTitle: serviceSections[3].btnTitle,
-    btnURL: serviceSections[3].btnURL,
-    img: usingTools,
+    title: solutionSections[3].title,
+    subTitle: solutionSections[3].subTitle,
+    imgAlt: solutionSections[3].imgAlt,
+    btnExists: solutionSections[3].btnExists,
+    btnTitle: solutionSections[3].btnTitle,
+    btnURL: solutionSections[3].btnURL,
+    img: constructionWorkers,
   },
 ];
 
-const pageTitle = `产品与服务 | ${SITE.title}`;
+const pageTitle = `解决方案 | ${SITE.title}`;
 const metaDescription =
-  "补全星科技围绕农业社会化服务、无人机核心产品研发、无人车平台研发与场景化交付，提供面向真实农业现场的一体化产品与服务能力。";
-const ogTitle = "产品与服务 | 补全星科技";
-const servicesUrl = new URL("/services", SITE.url).toString();
+  "补全星科技提供农业社会化服务、低空作业、无人车平台联动与定制化场景运营支持等解决方案，帮助客户把无人化能力落到真实业务现场。";
+const ogTitle = "解决方案 | 补全星科技";
+const solutionsUrl = new URL("/solutions", SITE.url).toString();
 ---
 
 <MainLayout
@@ -101,9 +98,9 @@ const servicesUrl = new URL("/services", SITE.url).toString();
   structuredData={{
     "@context": "https://schema.org",
     "@type": "WebPage",
-    "@id": servicesUrl,
-    url: servicesUrl,
-    name: "补全星科技产品与服务",
+    "@id": solutionsUrl,
+    url: solutionsUrl,
+    name: "补全星科技解决方案",
     description: metaDescription,
     isPartOf: {
       "@type": "WebSite",
@@ -118,11 +115,11 @@ const servicesUrl = new URL("/services", SITE.url).toString();
     class="mx-auto w-full max-w-(--breakpoint-2xl) flex-grow px-4 sm:px-6 lg:px-8"
   >
     <MainSection
-      title={servicesPageContent.hero.title}
-      subTitle={servicesPageContent.hero.subTitle}
-      btnExists={servicesPageContent.hero.btnExists}
-      btnTitle={servicesPageContent.hero.btnTitle}
-      btnURL={servicesPageContent.hero.btnURL}
+      title={solutionsPageContent.hero.title}
+      subTitle={solutionsPageContent.hero.subTitle}
+      btnExists={solutionsPageContent.hero.btnExists}
+      btnTitle={solutionsPageContent.hero.btnTitle}
+      btnURL={solutionsPageContent.hero.btnURL}
     />
 
     {
@@ -155,11 +152,11 @@ const servicesUrl = new URL("/services", SITE.url).toString();
     }
 
     <FeaturesStats
-      title={servicesPageContent.stats.title}
-      subTitle={servicesPageContent.stats.subTitle}
-      mainStatTitle={servicesPageContent.stats.mainStatTitle}
-      mainStatSubTitle={servicesPageContent.stats.mainStatSubTitle}
-      stats={[...servicesPageContent.stats.items]}
+      title={solutionsPageContent.stats.title}
+      subTitle={solutionsPageContent.stats.subTitle}
+      mainStatTitle={solutionsPageContent.stats.mainStatTitle}
+      mainStatSubTitle={solutionsPageContent.stats.mainStatSubTitle}
+      stats={[...solutionsPageContent.stats.items]}
     />
   </div>
 </MainLayout>

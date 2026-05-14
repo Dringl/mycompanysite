@@ -1,29 +1,25 @@
 {
-  "subTitle": "Ask us anything about our brand and products, and get factual responses.",
+  "subTitle": "围绕咨询、交付方式与合作节奏，整理了首页阶段最常见的几个问题。",
   "faqs": [
     {
-      "question": "Why hire dedicated developers instead of freelancers?",
-      "answer": "Hiring a dedicated development team is the outsourcing model of the cooperation, which has its obvious benefits. Unlike freelancers, dedicated developers aren’t niche-oriented and have deep expertise in various technologies. Moreover, by opting for dedicated teams, you can form them of engineers and non-technical talents who’ve proved to collaborate well, enhance each other’s capabilities, and put their minds together to do something great. Dedicated development teams are suitable for middle-term and long-term projects. Advantages of that approach are reliability, security, commitment to the project, efficient communication, and possibility to extend the team or scale it down according to your business needs."
+      "question": "补全星科技主要提供哪些方向的服务？",
+      "answer": "目前重点聚焦农业社会化服务、无人机核心产品研发、无人车平台研发，以及智慧无人化装备相关的场景化交付与服务支持。"
     },
     {
-      "question": "What are the advantages of Custom Software Development?",
-      "answer": "Custom software development offers tailored solutions that fit your business perfectly. Unlike off-the-shelf software, custom solutions are built to meet your specific needs and workflows. This customization enhances efficiency and productivity, giving you a competitive edge in the market. Additionally, custom software can easily scale with your business, integrates seamlessly with existing systems, and provides better security. While it may involve higher upfront costs, custom software often leads to long-term savings and greater control over your technology."
+      "question": "是否支持按具体项目场景进行定制？",
+      "answer": "支持。我们会先了解项目场景、目标与约束，再评估采用标准能力组合、局部定制，或联合推进研发交付的方式。"
     },
     {
-      "question": "What is custom web app development services?",
-      "answer": "Custom web application development services refer to the creation of unique and tailored software solutions that meet the specific needs and requirements of a particular business or organization. Custom web application development services include designing, developing, testing, deploying, and maintaining a software solution that is optimized for a particular business process, providing efficient and effective solutions to any problems."
+      "question": "咨询前需要准备哪些信息？",
+      "answer": "建议准备应用场景、当前痛点、预期目标、计划周期和联系方式。即使信息还不完整，也可以先沟通需求方向。"
     },
     {
-      "question": "What kind of customer support can I expect?",
-      "answer": "All our customers receive dedicated email support. With the Starter Kit, you'll receive our standard support, while the Professional Toolbox plan upgrades you to priority support, meaning faster response times and specialized assistance."
+      "question": "合作流程通常是怎样的？",
+      "answer": "通常会先进行需求沟通与场景判断，再根据项目情况推进方案建议、能力匹配、实施安排与后续交付协同。"
     },
     {
-      "question": "How current are the online resources and tutorials?",
-      "answer": "We regularly update our online resources and tutorials to reflect the latest trends in DIY and construction, as well as introductions to new tools and techniques. Our material aims to be comprehensive and user-friendly for all skill levels."
-    },
-    {
-      "question": "Does ScrewFast offer services for large-scale construction projects?",
-      "answer": "Yes, our Enterprise Solutions are designed for larger companies requiring comprehensive services. We provide consultation, planning, and supply of high-grade tools and materials, as well as staffing solutions for substantial construction needs. Contact us for a customized quote."
+      "question": "是否可以先从小范围试点开始？",
+      "answer": "可以。对于仍在验证阶段的项目，先做小范围试点有助于确认场景适配性，再逐步扩展到更完整的部署与服务。"
     }
   ]
 }

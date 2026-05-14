@@ -1,0 +1,97 @@
+---
+import TextInput from "@components/ui/forms/input/TextInput.astro";
+import TextAreaInput from "@components/ui/forms/input/TextAreaInput.astro";
+import { inquiryTypes } from "@data/company";
+
+const { submitLabel = "提交咨询", compact = false } = Astro.props;
+
+interface Props {
+  submitLabel?: string;
+  compact?: boolean;
+}
+
+const formClass = compact ? "grid gap-4" : "grid gap-4";
+---
+
+<form class={formClass} data-inquiry-form>
+  <TextInput id="contact-name" label="姓名" name="name" />
+  <TextInput id="contact-company" label="公司名称" name="company" />
+  <TextInput id="contact-channel" label="联系方式" name="contact" />
+  <div>
+    <label for="contact-inquiry-type" class="sr-only">需求类型</label>
+    <select
+      id="contact-inquiry-type"
+      name="inquiryType"
+      class="block w-full rounded-lg border border-neutral-200 bg-neutral-50 px-4 py-3 text-sm text-neutral-700 focus:border-neutral-200 focus:outline-hidden focus:ring-3 focus:ring-neutral-400 disabled:pointer-events-none disabled:opacity-50 dark:border-neutral-600 dark:bg-neutral-700/30 dark:text-neutral-300 dark:focus:ring-1"
+    >
+      {inquiryTypes.map((item) => <option value={item}>{item}</option>)}
+    </select>
+  </div>
+  <TextAreaInput id="contact-details" label="需求描述" name="details" />
+  <button
+    type="submit"
+    class="inline-flex items-center justify-center rounded-lg bg-zinc-600 px-4 py-3 text-sm font-bold text-white transition duration-300 hover:bg-zinc-500"
+  >
+    {submitLabel}
+  </button>
+  <p class="text-sm text-neutral-600 dark:text-neutral-400" data-inquiry-status>
+    提交后我们会尽快与您联系。
+  </p>
+</form>
+
+<script is:inline>
+  const forms = Array.from(document.querySelectorAll("[data-inquiry-form]"));
+
+  forms.forEach((form) => {
+    if (!(form instanceof HTMLFormElement)) return;
+
+    const status = form.querySelector("[data-inquiry-status]");
+    const submitButton = form.querySelector('button[type="submit"]');
+
+    form.addEventListener("submit", async (event) => {
+      event.preventDefault();
+
+      const formData = new FormData(form);
+      const payload = Object.fromEntries(formData.entries());
+
+      if (status instanceof HTMLElement) {
+        status.textContent = "正在提交，请稍候…";
+      }
+
+      if (submitButton instanceof HTMLButtonElement) {
+        submitButton.disabled = true;
+      }
+
+      try {
+        const response = await fetch("/api/contact", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(payload),
+        });
+
+        const result = await response.json();
+
+        if (!response.ok || !result.ok) {
+          throw new Error(result.message || "提交失败，请稍后重试。");
+        }
+
+        form.reset();
+
+        if (status instanceof HTMLElement) {
+          status.textContent = result.message || "提交成功，我们会尽快与您联系。";
+        }
+      } catch (error) {
+        if (status instanceof HTMLElement) {
+          status.textContent =
+            error instanceof Error ? error.message : "提交失败，请稍后重试。";
+        }
+      } finally {
+        if (submitButton instanceof HTMLButtonElement) {
+          submitButton.disabled = false;
+        }
+      }
+    });
+  });
+</script>

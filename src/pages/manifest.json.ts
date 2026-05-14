@@ -44,14 +44,14 @@ export const GET: APIRoute = async () => {
   );
 
   const manifest = {
-    short_name: "ScrewFast",
-    name: "ScrewFast",
+    short_name: "补全星科技",
+    name: "重庆补全星科技有限公司",
     icons,
     display: "minimal-ui",
     id: "/",
     start_url: "/",
-    theme_color: "#FFEDD5",
-    background_color: "#262626",
+    theme_color: "#181c31",
+    background_color: "#16171b",
   };
 
   return new Response(JSON.stringify(manifest));

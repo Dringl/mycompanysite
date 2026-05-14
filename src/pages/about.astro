@@ -1,0 +1,135 @@
+---
+export const prerender = true;
+
+import MainLayout from "@/layouts/MainLayout.astro";
+import MainSection from "@components/ui/blocks/MainSection.astro";
+import FeaturesStatsAlt from "@components/sections/features/FeaturesStatsAlt.astro";
+import VideoShowcase from "@components/sections/landing/VideoShowcase.astro";
+import { aboutPageContent, COMPANY_INFO, COMPANY_LINKS } from "@data/company";
+import { SITE } from "@data/constants";
+
+const pageTitle = `关于我们｜${COMPANY_INFO.shortName}`;
+const metaDescription =
+  "了解重庆补全星科技有限公司在农业社会化服务、无人机核心产品、无人车平台与场景化交付方向的定位、使命与核心能力。";
+const canonicalUrl = `${SITE.url}/about`;
+---
+
+<MainLayout
+  title={pageTitle}
+  customDescription={metaDescription}
+  customOgTitle={pageTitle}
+  structuredData={{
+    "@context": "https://schema.org",
+    "@type": "AboutPage",
+    "@id": canonicalUrl,
+    url: canonicalUrl,
+    name: `${COMPANY_INFO.shortName} 关于我们`,
+    description: metaDescription,
+    about: {
+      "@type": "Organization",
+      name: COMPANY_INFO.name,
+      alternateName: COMPANY_INFO.shortName,
+      description: COMPANY_INFO.description,
+      url: SITE.url,
+    },
+    isPartOf: {
+      "@type": "WebSite",
+      url: SITE.url,
+      name: SITE.title,
+      description: SITE.description,
+    },
+    inLanguage: "zh-CN",
+  }}
+>
+  <div class="mx-auto w-full max-w-(--breakpoint-2xl) flex-grow px-4 sm:px-6 lg:px-8">
+    <MainSection
+      title={aboutPageContent.hero.title}
+      subTitle={aboutPageContent.hero.subTitle}
+      btnExists={aboutPageContent.hero.btnExists}
+      btnTitle={aboutPageContent.hero.btnTitle}
+      btnURL={aboutPageContent.hero.btnURL}
+    />
+
+    <section class="mx-auto max-w-[85rem] px-4 py-6 sm:px-6 lg:px-8 lg:py-10 2xl:max-w-full">
+      <div class="max-w-4xl rounded-3xl border border-white/10 bg-white/5 p-6 backdrop-blur-sm lg:p-8">
+        <p class="text-sm font-semibold uppercase tracking-[0.2em] text-primary-blue">
+          公司简介
+        </p>
+        <h2 class="mt-4 text-3xl font-bold text-neutral-100 lg:text-4xl">
+          {aboutPageContent.overview.title}
+        </h2>
+        <p class="mt-5 text-pretty text-base leading-8 text-neutral-300 lg:text-lg">
+          {aboutPageContent.overview.subTitle}
+        </p>
+      </div>
+    </section>
+
+    <VideoShowcase
+      title={aboutPageContent.mission.title}
+      subTitle={aboutPageContent.mission.subTitle}
+      highlights={[...aboutPageContent.mission.highlights]}
+      videoUrl={aboutPageContent.mission.videoUrl}
+      ctaTitle={aboutPageContent.mission.ctaTitle}
+      ctaUrl={aboutPageContent.mission.ctaUrl}
+    />
+
+    <FeaturesStatsAlt
+      title={aboutPageContent.strengths.title}
+      subTitle={aboutPageContent.strengths.subTitle}
+      benefits={[...aboutPageContent.strengths.benefits]}
+      src={aboutPageContent.strengths.src}
+      alt={aboutPageContent.strengths.alt}
+    />
+
+    <section class="mx-auto max-w-[85rem] px-4 py-10 sm:px-6 lg:px-8 lg:py-14 2xl:max-w-full">
+      <div class="rounded-3xl border border-white/10 bg-neutral-950/40 p-6 lg:p-10">
+        <div class="max-w-3xl">
+          <p class="text-sm font-semibold uppercase tracking-[0.2em] text-primary-blue">
+            企业能力概览
+          </p>
+          <h2 class="mt-4 text-3xl font-bold text-neutral-100 lg:text-4xl">
+            {aboutPageContent.stats.title}
+          </h2>
+          <p class="mt-4 text-pretty leading-8 text-neutral-300">
+            {aboutPageContent.stats.subTitle}
+          </p>
+        </div>
+
+        <div class="mt-10 grid gap-6 lg:grid-cols-[0.9fr_1.1fr] lg:items-start">
+          <div class="rounded-2xl border border-primary-blue/20 bg-primary-blue/10 p-6">
+            <div class="text-5xl font-extrabold text-neutral-50 lg:text-6xl">
+              {aboutPageContent.stats.mainStatTitle}
+            </div>
+            <p class="mt-4 text-base leading-7 text-neutral-200">
+              {aboutPageContent.stats.mainStatSubTitle}
+            </p>
+          </div>
+
+          <div class="grid gap-4 sm:grid-cols-2">
+            {aboutPageContent.stats.items.map((item) => (
+              <article class="rounded-2xl border border-white/10 bg-white/5 p-5">
+                <h3 class="text-lg font-semibold text-neutral-100">{item.stat}</h3>
+                <p class="mt-3 text-sm leading-7 text-neutral-300">{item.description}</p>
+              </article>
+            ))}
+          </div>
+        </div>
+
+        <div class="mt-8 flex flex-wrap items-center gap-4">
+          <a
+            href={COMPANY_LINKS.contact}
+            class="inline-flex items-center justify-center rounded-full bg-primary-blue px-6 py-3 text-sm font-semibold text-neutral-950 transition duration-300 hover:bg-primary-blue/80"
+          >
+            {aboutPageContent.stats.primaryCtaTitle}
+          </a>
+          <a
+            href={COMPANY_LINKS.services}
+            class="text-sm font-medium text-neutral-200 underline underline-offset-4 transition duration-300 hover:text-neutral-50"
+          >
+            {aboutPageContent.stats.secondaryCtaTitle}
+          </a>
+        </div>
+      </div>
+    </section>
+  </div>
+</MainLayout>

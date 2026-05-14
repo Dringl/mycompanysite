@@ -1,5 +1,5 @@
 {
-  "name": "cybercraftlabs",
+  "name": "bq-star-site",
   "type": "module",
   "version": "0.0.1",
   "scripts": {
@@ -11,9 +11,8 @@
   },
   "dependencies": {
     "@astrojs/check": "^0.9.4",
-    "@astrojs/mdx": "^4.3.4",
     "@astrojs/sitemap": "^3.5.1",
-    "@astrojs/starlight": "^0.35.2",
+    "@astrojs/vercel": "^9.0.5",
     "@tailwindcss/vite": "^4.1.12",
     "astro": "^5.13.5",
     "astro-compressor": "^1.1.2",
@@ -30,7 +29,6 @@
   },
   "devDependencies": {
     "@tailwindcss/forms": "^0.5.10",
-    "astro-vtbot": "^2.1.8",
     "prettier": "^3.6.2",
     "prettier-plugin-astro": "^0.14.1",
     "prettier-plugin-tailwindcss": "^0.6.14",

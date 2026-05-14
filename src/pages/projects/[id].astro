@@ -33,7 +33,10 @@ const { product } = Astro.props;
 
 const pageTitle: string = `${product.data.title} | ${SITE.title}`;
 const metaDescription = product.data.description;
-const ogTitle = `${product.data.title} | Cybersecurity and Software Development | Cybercraft Labs`;
+const ogTitle = `${product.data.title} | 客户案例 | ${SITE.title}`;
+const blueprintAltPrefix = `${product.data.title}现场画面`;
+const productPath = `/projects/${product.id.replace(/^en\//, "")}`;
+const productUrl = new URL(productPath, SITE.url).toString();
 ---
 
 <MainLayout
@@ -42,17 +45,30 @@ const ogTitle = `${product.data.title} | Cybersecurity and Software Development 
   customOgTitle={ogTitle}
   structuredData={{
     "@context": "https://schema.org",
-    "@type": "Product",
-    "@id": `https://cybercraftlabs.org/projects/${product.data.title.toLowerCase().replace(/\s+/g, "-")}`,
+    "@type": "CreativeWork",
+    "@id": productUrl,
+    url: productUrl,
     name: product.data.title,
     description: product.data.description,
-    brand: {
-      "@type": "Brand",
-      name: "Cybercraft Labs",
+    creator: {
+      "@type": "Organization",
+      name: "重庆补全星科技有限公司",
+      alternateName: "补全星科技",
+      url: SITE.url,
     },
+    publisher: {
+      "@type": "Organization",
+      name: "重庆补全星科技有限公司",
+      alternateName: "补全星科技",
+      url: SITE.url,
+    },
+    inLanguage: "zh-CN",
   }}
 >
-  <div id="overlay" class="fixed inset-0 bg-neutral-200 dark:bg-neutral-800">
+  <div
+    id="overlay"
+    class="pointer-events-none fixed inset-0 bg-neutral-200 opacity-0 dark:bg-neutral-800"
+  >
   </div>
 
   <section
@@ -245,7 +261,7 @@ const ogTitle = `${product.data.title} | Cybersecurity and Software Development 
             <Image
               src={product.data.blueprints.first}
               class="h-full w-full object-cover object-center"
-              alt="Blueprint Illustration"
+              alt={`${blueprintAltPrefix}一`}
               format={"avif"}
             />
           )
@@ -258,7 +274,7 @@ const ogTitle = `${product.data.title} | Cybersecurity and Software Development 
             <Image
               src={product.data.blueprints.second}
               class="h-full w-full object-cover object-center"
-              alt="Blueprint Illustration"
+              alt={`${blueprintAltPrefix}二`}
               format={"avif"}
             />
           )
@@ -358,7 +374,7 @@ const ogTitle = `${product.data.title} | Cybersecurity and Software Development 
       button.classList.add(
         "active",
         "bg-neutral-100",
-        ",hover:border-transparent",
+        "hover:border-transparent",
         "dark:bg-white/[.05]"
       );
 

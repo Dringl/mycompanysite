@@ -23,48 +23,46 @@ const product: CollectionEntry<"products">[] = (
 );
 
 // Define variables for page content
-const title: string = "Project Showcase";
+const title: string = "客户案例";
 const subTitle: string =
-  "Discover our diverse range of projects, from development to design, to deployment, maintenance, security and beyond.";
+  "聚焦补全星科技在农业社会化服务、无人机核心产品、无人车平台与场景化交付中的真实落地实践。";
 
 // Testimonial data that will be rendered in the component
 const testimonials = [
-  // First testimonial data
   {
     content:
-      " \"Since switching to ScrewFast's hardware tools, the efficiency on our construction sites has skyrocketed. The durability of the hex bolts and precision of the machine screws are simply unmatched. It's refreshing to work with a company that truly understands the daily demands of the industry.\" ",
-    author: "Jason Clark",
-    role: "Site Foreman | TopBuild",
+      "“补全星科技帮助我们把农事服务调度、设备管理和过程留痕真正串了起来，项目上线后跨乡镇协同明显顺畅，客户对服务透明度也更认可。”",
+    author: "周海林",
+    role: "区域农业服务中心负责人",
     avatarSrc:
       "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?q=80&w=1374&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=facearea&facepad=2&w=320&h=320&q=80",
-    avatarAlt: "Image Description",
+    avatarAlt: "农业服务中心客户头像",
   },
-  // Second testimonial data
   {
     content:
-      " \"As an interior designer, I'm always looking for high-quality materials and tools that help bring my visions to life. ScrewFast's mixed screws assortment has been a game-changer for my projects, providing the perfect blend of quality and variety. The outstanding customer support was just the cherry on top!\" ",
-    author: "Maria Gonzalez",
-    role: "Interior Designer | Creative Spaces",
+      "“我们原本担心无人机与现场流程脱节，补全星科技在设备、平台和培训交付上做得很扎实，首批试点很快就形成了可复制的作业标准。”",
+    author: "刘敏",
+    role: "智慧农业项目经理",
     avatarSrc:
       "https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&w=1376&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D8&auto=format&fit=facearea&facepad=2&w=320&h=320&q=80",
-    avatarAlt: "Image Description",
+    avatarAlt: "智慧农业客户头像",
   },
-  // Third testimonial data
   {
     content:
-      " \"I've been a professional carpenter for over 15 years, and I can sincerely say that ScrewFast's tap bolts and nuts are some of the best I've used. They grip like no other, and I have full confidence in every joint and fixture. Plus, the service is impeccable – they truly care about my project's success.\" ",
-    author: "Richard Kim",
-    role: "Master Carpenter | WoodWright",
+      "“从无人车试点到多场景扩展，补全星科技不仅交付了平台，还把后续运营方式一起梳理清楚，团队对长期推进更有信心。”",
+    author: "陈致远",
+    role: "园区智能化运营负责人",
     avatarSrc:
       "https://images.unsplash.com/photo-1474176857210-7287d38d27c6?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D8&auto=format&fit=facearea&facepad=2&w=320&h=320&q=80",
-    avatarAlt: "Image Description",
+    avatarAlt: "园区客户头像",
   },
 ];
 
-const pageTitle: string = `Products | ${SITE.title}`;
+const pageTitle: string = `客户案例 | ${SITE.title}`;
 const metaDescription =
-  "Explore the durability and precision of ScrewFast tools, designed for both professionals and enthusiasts.";
-const ogTitle = "Hardware Tools | ScrewFast";
+  "查看补全星科技在农业社会化服务、无人机、无人车与协同交付方向的客户案例与落地经验。";
+const ogTitle = `客户案例 | ${SITE.title}`;
+const projectsUrl = new URL("/projects", SITE.url).toString();
 ---
 
 <MainLayout
@@ -74,19 +72,18 @@ const ogTitle = "Hardware Tools | ScrewFast";
   structuredData={{
     "@context": "https://schema.org",
     "@type": "WebPage",
-    "@id": "https://cybercraftlabs.org/projects",
-    url: "https://cybercraftlabs.org/projects",
-    name: "Project Showcase | Cybercraft Labs",
+    "@id": projectsUrl,
+    url: projectsUrl,
+    name: `客户案例 | ${SITE.title}`,
     description:
-      "Discover our diverse range of projects, from development to design, to deployment, maintenance, security and beyond.",
+      "查看补全星科技在农业社会化服务、无人机核心产品、无人车平台与场景化交付方向的客户案例。",
     isPartOf: {
       "@type": "WebSite",
-      url: "https://cybercraftlabs.org",
-      name: "Cybercraft Labs",
-      description:
-        "Cybercraft Labs is a pioneering company specializing in secure Software Development and Cybersecurity services.",
+      url: SITE.url,
+      name: SITE.title,
+      description: SITE.description,
     },
-    inLanguage: "en-US",
+    inLanguage: "zh-CN",
   }}
 >
   <div
@@ -112,11 +109,7 @@ const ogTitle = "Hardware Tools | ScrewFast";
             )
           }
         </div>
-        <PrimaryCTA
-          title="Customer Stories"
-          url="#testimonials"
-          noArrow={true}
-        />
+        <PrimaryCTA title="查看客户反馈" url="#testimonials" noArrow={true} />
       </div>
       {
         /* Displaying products in alternating styles. Alternative product gets different card styling.
@@ -137,17 +130,17 @@ const ogTitle = "Hardware Tools | ScrewFast";
     </div>
     {/* Features statistics section */}
     <FeaturesStatsAlt
-      title="Why Choose Cybercraft Labs?"
-      subTitle="Transform your ideas into tangible results with Cybercraft Labs tools. Whether you're starting with a sketch on a napkin or diving into a comprehensive construction project, our tools are engineered to help you build with confidence."
+      title="为什么选择补全星科技"
+      subTitle="我们将农业社会化服务经验、智能装备研发能力与场景交付方法结合起来，帮助客户从试点验证走向规模落地，在真实业务环境中持续创造可衡量的成果。"
       benefits={[
-        "Robust and reliable tools for long-lasting performance.",
-        "Innovative solutions tailored to modern construction needs.",
-        "Customer support dedicated to your project's success.",
+        "聚焦农业与无人化场景，方案更贴近真实业务流程与现场约束。",
+        "覆盖平台、设备、实施与培训协同，减少从方案到落地的断层。",
+        "坚持长期陪跑与迭代优化，帮助客户沉淀可复制的运营能力。",
       ]}
     />
     {/* Testimonials section */}
     <TestimonialsSectionAlt
-      title="What Our Customers Say"
+      title="客户反馈"
       testimonials={testimonials}
     />
   </div>
