@@ -247,6 +247,69 @@
   color utility to any element that depends on these defaults.
 */
 @layer base {
+  :root {
+    color-scheme: light;
+    --page-bg: oklch(0.985 0.004 250);
+    --page-bg-accent: oklch(0.95 0.01 248);
+    --surface-1: oklch(0.995 0.002 250);
+    --surface-2: oklch(0.97 0.006 248);
+    --surface-3: oklch(0.93 0.01 248);
+    --border-soft: oklch(0.83 0.01 250 / 32%);
+    --text-strong: oklch(0.24 0.012 255);
+    --text-body: oklch(0.38 0.01 255);
+    --text-muted: oklch(0.53 0.012 255);
+    --hero-glow: radial-gradient(circle at top, rgba(59, 130, 246, 0.14) 0%, rgba(255, 255, 255, 0) 54%);
+  }
+
+  html.dark {
+    color-scheme: dark;
+    --page-bg: oklch(0.19 0.012 258);
+    --page-bg-accent: oklch(0.27 0.018 252);
+    --surface-1: oklch(0.23 0.012 258);
+    --surface-2: oklch(0.28 0.014 258);
+    --surface-3: oklch(0.33 0.018 258);
+    --border-soft: oklch(0.72 0.008 260 / 18%);
+    --text-strong: oklch(0.96 0.003 260);
+    --text-body: oklch(0.84 0.008 260);
+    --text-muted: oklch(0.72 0.012 260);
+    --hero-glow: radial-gradient(circle at top, rgba(59, 130, 246, 0.18) 0%, rgba(17, 24, 39, 0) 58%);
+  }
+
+  html {
+    background-color: var(--page-bg);
+    color: var(--text-body);
+  }
+
+  body.theme-body {
+    background-color: var(--page-bg);
+    background-image: var(--hero-glow), radial-gradient(circle at top, var(--page-bg-accent) 0%, var(--page-bg) 58%, var(--page-bg) 100%);
+    background-attachment: fixed;
+    color: var(--text-body);
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    color: var(--text-strong);
+  }
+
+  p,
+  li,
+  span,
+  label,
+  input,
+  textarea,
+  select {
+    color: inherit;
+  }
+
+  a {
+    color: inherit;
+  }
+
   *,
   ::after,
   ::before,

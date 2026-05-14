@@ -1,13 +1,13 @@
 ---
-title: "场景化交付与协同方案"
-description: "覆盖项目咨询、系统交付、现场协同与持续运营支持的综合方案案例。"
+title: "方案服务案例"
+description: "从需求诊断到部署验证的无人化装备方案服务案例。"
 main:
-  id: 1
+  id: 4
   content: |
-    面向农业数字化、智能装备与无人化应用项目，补全星科技提供从需求梳理、方案设计到现场实施和运营陪跑的场景化交付能力，帮助客户更快把技术能力转化为业务成果。
-  imgCard: "@/images/product-image-1.avif"
-  imgMain: "@/images/product-image-main-1.avif"
-  imgAlt: "场景化交付与协同方案案例展示图"
+    在很多项目里，真正难的不是买到设备，而是把零件、部件、底盘和业务目标真正组织起来。补全星科技通过方案服务帮助客户把能力拼装、场景导入和验证节奏连成闭环。
+  imgCard: "@/images/product-image-4.avif"
+  imgMain: "@/images/product-image-main-4.avif"
+  imgAlt: "方案服务案例展示图"
 tabs:
   - id: "tabs-with-card-item-1"
     dataTab: "#tabs-with-card-1"
@@ -19,37 +19,37 @@ tabs:
     dataTab: "#tabs-with-card-3"
     title: "现场画面"
 longDescription:
-  title: "让方案不仅能展示，更能在现场稳定运行"
+  title: "把底层能力、场景目标和部署节奏真正串起来"
   subTitle: |
-    通过业务诊断、场景定义、设备接入、流程配置、培训交接与运营复盘等环节协同推进，项目交付更贴近客户现场，也更容易形成可持续扩展的数字化能力。
-  btnTitle: "获取协同方案"
+    方案服务的核心不是写文档，而是把需求澄清、部件组合、底盘选型、试点验证与后续优化连成一条可执行路径。这样客户拿到的不是孤立设备，而是一套更容易落地的推进方法。
+  btnTitle: "咨询方案服务"
   btnURL: "/contact"
 descriptionList:
-  - title: "咨询到落地闭环"
-    subTitle: "从前期需求梳理到后期运营支持保持同一交付逻辑，减少项目断层。"
-  - title: "跨团队协同"
-    subTitle: "打通客户管理层、业务团队、设备团队与平台团队的协同机制。"
-  - title: "持续优化能力"
-    subTitle: "基于试点反馈和现场数据持续迭代流程与功能，确保方案可用、好用、能扩展。"
+  - title: "需求先对齐"
+    subTitle: "先明确任务边界与业务目标，再组织能力组合。"
+  - title: "导入路径更清晰"
+    subTitle: "把试点、部署、验证和优化拆成更容易执行的阶段。"
+  - title: "更利于持续合作"
+    subTitle: "方案服务可以随着项目推进持续扩展，而不是一次性交付后失效。"
 specificationsLeft:
-  - title: "适配对象"
-    subTitle: "适用于需要系统、设备与服务一体化协同推进的农业与智能化项目。"
-  - title: "交付步骤"
-    subTitle: "通常包含调研诊断、蓝图设计、试点实施、培训上线与运营复盘。"
-  - title: "协同机制"
-    subTitle: "通过周例会、里程碑验收与问题清单追踪保证项目推进节奏。"
-  - title: "最终目标"
-    subTitle: "让客户在真实业务场景中形成可复制、可管理、可扩展的运营体系。"
+  - title: "适用对象"
+    subTitle: "适用于需求复杂、场景多变或需要多团队协同推进的无人化项目。"
+  - title: "服务重点"
+    subTitle: "围绕能力组合、部署节奏和场景验证构建可执行方案。"
+  - title: "导入方式"
+    subTitle: "支持试点先行、分阶段上线与滚动优化。"
+  - title: "业务价值"
+    subTitle: "帮助客户减少反复试错，把项目更快推到可见结果。"
 specificationsRight:
-  - title: "实施方式"
-    subTitle: "支持顾问式陪跑、联合试点和阶段性交付等灵活合作模式。"
-  - title: "交付成果"
-    subTitle: "输出面向管理、运营和执行层的系统能力、流程方法和落地经验。"
+  - title: "覆盖场景"
+    subTitle: "丘陵山地农业、园区巡检、公共服务与复合任务平台。"
+  - title: "协同方式"
+    subTitle: "可与客户研发、采购、项目和运营团队共同推进。"
   - title: "风险控制"
-    subTitle: "通过试点先行、分阶段验收与复盘机制控制项目落地不确定性。"
-  - title: "长期价值"
-    subTitle: "帮助客户沉淀自有能力，支撑后续更多业务场景快速复制。"
+    subTitle: "通过阶段验证与关键节点复盘降低导入不确定性。"
+  - title: "长期意义"
+    subTitle: "让客户沉淀属于自己的无人化装备导入方法。"
 blueprints:
-  first: "@/images/blueprint-1.avif"
-  second: "@/images/blueprint-2.avif"
+  first: "@/images/product-image-main-2.avif"
+  second: "@/images/product-image-main-1.avif"
 ---

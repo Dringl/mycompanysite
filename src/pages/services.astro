@@ -5,12 +5,12 @@ import LeftSection from "@components/ui/blocks/LeftSection.astro";
 import RightSection from "@components/ui/blocks/RightSection.astro";
 import FeaturesStats from "@components/sections/features/FeaturesStats.astro";
 
-import blueprints from "@images/blueprints-image.avif";
-import personWorking from "@images/person-working.avif";
-import beforeAfter from "@images/before-after.avif";
-import constructionWorkers from "@images/construction-workers.avif";
-import aerialView from "@images/aerial-view.avif";
-import usingTools from "@images/using-tools.avif";
+import automatedTools from "@images/automated-tools.avif";
+import dashboardImage from "@images/dashboard-image.avif";
+import featuresImage from "@images/features-image.avif";
+import heroImage from "@images/hero-image.avif";
+import productMainOne from "@images/product-image-main-1.avif";
+import productMainTwo from "@images/product-image-main-2.avif";
 import { SITE } from "@data/constants";
 import { servicesPageContent } from "@data/company";
 
@@ -52,8 +52,8 @@ const sectionImages: (RightArticle | LeftArticle)[] = [
     btnExists: serviceSections[0].btnExists,
     btnTitle: serviceSections[0].btnTitle,
     btnURL: serviceSections[0].btnURL,
-    imgOne: aerialView,
-    imgTwo: personWorking,
+    imgOne: heroImage,
+    imgTwo: dashboardImage,
   },
   {
     type: "left",
@@ -63,7 +63,7 @@ const sectionImages: (RightArticle | LeftArticle)[] = [
     btnExists: serviceSections[1].btnExists,
     btnTitle: serviceSections[1].btnTitle,
     btnURL: serviceSections[1].btnURL,
-    img: beforeAfter,
+    img: productMainOne,
   },
   {
     type: "right",
@@ -72,8 +72,8 @@ const sectionImages: (RightArticle | LeftArticle)[] = [
     single: serviceSections[2].single,
     imgOneAlt: serviceSections[2].imgOneAlt,
     imgTwoAlt: serviceSections[2].imgTwoAlt,
-    imgOne: blueprints,
-    imgTwo: constructionWorkers,
+    imgOne: automatedTools,
+    imgTwo: productMainTwo,
   },
   {
     type: "left",
@@ -83,13 +83,13 @@ const sectionImages: (RightArticle | LeftArticle)[] = [
     btnExists: serviceSections[3].btnExists,
     btnTitle: serviceSections[3].btnTitle,
     btnURL: serviceSections[3].btnURL,
-    img: usingTools,
+    img: featuresImage,
   },
 ];
 
 const pageTitle = `产品与服务 | ${SITE.title}`;
 const metaDescription =
-  "补全星科技围绕农业社会化服务、无人机核心产品研发、无人车平台研发与场景化交付，提供面向真实农业现场的一体化产品与服务能力。";
+  "补全星科技围绕无人化零件供应、核心部件供应、模块化通用底盘与方案服务，提供面向真实场景的一体化产品与服务能力。";
 const ogTitle = "产品与服务 | 补全星科技";
 const servicesUrl = new URL("/services", SITE.url).toString();
 ---

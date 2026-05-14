@@ -39,16 +39,23 @@ interface Props {
     {/* Define the title of the page */}
     <title>{title}</title>
     <script is:inline>
-      // Script to handle dark mode. It will check if the theme is stored in localStorage or if dark theme is preferred by system settings
-      if (
-        localStorage.getItem("hs_theme") === "dark" ||
-        (!("hs_theme" in localStorage) &&
-          window.matchMedia("(prefers-color-scheme: dark)").matches)
-      ) {
-        document.documentElement.classList.add("dark");
-      } else {
-        document.documentElement.classList.remove("dark");
-      }
+      const STORAGE_KEY = "hs_theme";
+      const resolveAutoThemeByHour = (date = new Date()) => {
+        const hour = date.getHours();
+        return hour >= 7 && hour < 19 ? "light" : "dark";
+      };
+      const storedTheme = localStorage.getItem(STORAGE_KEY);
+      const preference =
+        storedTheme === "light" || storedTheme === "dark" || storedTheme === "auto"
+          ? storedTheme
+          : null;
+      const effectiveTheme =
+        preference === "light" || preference === "dark"
+          ? preference
+          : resolveAutoThemeByHour();
+
+      document.documentElement.classList.toggle("dark", effectiveTheme === "dark");
+      document.documentElement.dataset.theme = effectiveTheme;
     </script>
     <script>
       import "@scripts/lenisSmoothScroll.js";
@@ -60,13 +67,13 @@ interface Props {
   <!-- <body
     class="bg-neutral-200 selection:bg-primary-blue/80 selection:text-neutral-300 dark:bg-background-dark flex flex-col min-h-screen"
   > -->
-  <body class="flex flex-col min-h-screen" style="background: radial-gradient(ellipse at top, #26282b 0%, #1d1e22 60%, #16171b 100%); background-attachment: fixed; background-size: 100vw 100vh;">
+  <body class="theme-body flex min-h-screen flex-col selection:bg-primary-blue/20 selection:text-[var(--text-strong)]">
     {/*
     Setting up the main structure of the page.
     The Navbar is placed at the top, with a slot for the main content and FooterSection at the bottom.
     */}
     <!-- <div class="w-full mx-auto max-w-(--breakpoint-2xl) px-4 sm:px-6 lg:px-8 flex-grow"> -->
-    <div class="w-full mx-auto max-w-full flex-grow">
+    <div class="mx-auto flex w-full max-w-full flex-col flex-grow text-[var(--text-body)]">
       <Navbar />
       <main>
         <slot />

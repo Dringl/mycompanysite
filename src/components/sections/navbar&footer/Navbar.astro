@@ -21,7 +21,7 @@ const homeUrl = COMPANY_LINKS.home;
     aria-label="Global"
   > -->
   <nav
-    class="relative mx-2 w-full rounded-[36px] border border-yellow-100/40 bg-yellow-50/60 px-4 py-3 backdrop-blur-md dark:border-neutral-700/40 dark:bg-less-pure-dark/80 dark:backdrop-blur-md md:flex md:items-center md:justify-between md:px-6 md:py-0 lg:px-8 xl:mx-auto"
+    class="relative mx-2 w-full rounded-[36px] border border-[color:var(--border-soft)] bg-[color:var(--surface-1)]/88 px-4 py-3 shadow-[0_20px_60px_rgba(15,23,42,0.08)] backdrop-blur-md md:flex md:items-center md:justify-between md:px-6 md:py-0 lg:px-8 xl:mx-auto"
     aria-label="Global"
   >
     <div class="flex items-center justify-between md:my-3 lg:my-3 xl:my-3">
@@ -38,7 +38,7 @@ const homeUrl = COMPANY_LINKS.home;
       <div class="ml-auto mr-5 md:hidden">
         <button
           type="button"
-          class="hs-collapse-toggle flex h-8 w-8 items-center justify-center rounded-full text-sm font-bold text-neutral-600 transition duration-300 hover:bg-neutral-200 disabled:pointer-events-none disabled:opacity-50 dark:text-neutral-400 dark:hover:bg-neutral-700 dark:focus:outline-hidden"
+          class="hs-collapse-toggle flex h-8 w-8 items-center justify-center rounded-full text-sm font-bold text-[color:var(--text-body)] transition duration-300 hover:bg-[color:var(--surface-2)] disabled:pointer-events-none disabled:opacity-50"
           data-hs-collapse="#navbar-collapse-with-animation"
           aria-controls="navbar-collapse-with-animation"
           aria-label="Toggle navigation"
@@ -95,7 +95,7 @@ const homeUrl = COMPANY_LINKS.home;
 
         <a
           href={COMPANY_LINKS.contact}
-          class="inline-flex items-center justify-center rounded-full bg-neutral-900 px-5 py-2 text-sm font-semibold text-neutral-50 transition duration-300 hover:bg-neutral-700 focus-visible:outline-hidden focus-visible:ring-3 focus-visible:ring-zinc-500 dark:bg-primary-blue dark:text-neutral-50 dark:hover:bg-primary-blue/80 dark:focus-visible:ring-zinc-200"
+          class="inline-flex items-center justify-center rounded-full bg-primary-blue px-5 py-2 text-sm font-semibold text-white transition duration-300 hover:bg-primary-blue/80 focus-visible:outline-hidden focus-visible:ring-3 focus-visible:ring-zinc-500 dark:focus-visible:ring-zinc-200"
         >
           {COMPANY_INFO.ctaLabel}
         </a>
@@ -110,105 +110,62 @@ const homeUrl = COMPANY_LINKS.home;
 </header>
 <!-- Theme Appearance script to manage light/dark modes -->
 <script is:inline>
-  const HSThemeAppearance = {
-    init() {
-      const defaultTheme = "default";
-      let theme = localStorage.getItem("hs_theme") || defaultTheme;
+  const STORAGE_KEY = "hs_theme";
+  const AUTO_THEME_START_HOUR = 7;
+  const AUTO_THEME_END_HOUR = 19;
 
-      if (document.querySelector("html").classList.contains("dark")) return;
-      this.setAppearance(theme);
-    },
-    _resetStylesOnLoad() {
-      const $resetStyles = document.createElement("style");
-      $resetStyles.innerText = `*{transition: unset !important;}`;
-      $resetStyles.setAttribute("data-hs-appearance-onload-styles", "");
-      document.head.appendChild($resetStyles);
-      return $resetStyles;
-    },
-    setAppearance(theme, saveInStore = true, dispatchEvent = true) {
-      const $resetStylesEl = this._resetStylesOnLoad();
-
-      if (saveInStore) {
-        localStorage.setItem("hs_theme", theme);
-      }
-
-      if (theme === "auto") {
-        theme = window.matchMedia("(prefers-color-scheme: dark)").matches
-          ? "dark"
-          : "default";
-      }
-
-      document.querySelector("html").classList.remove("dark");
-      document.querySelector("html").classList.remove("default");
-      document.querySelector("html").classList.remove("auto");
-
-      document
-        .querySelector("html")
-        .classList.add(this.getOriginalAppearance());
-
-      setTimeout(() => {
-        $resetStylesEl.remove();
-      });
-
-      if (dispatchEvent) {
-        window.dispatchEvent(
-          new CustomEvent("on-hs-appearance-change", { detail: theme }),
-        );
-      }
-    },
-    getAppearance() {
-      let theme = this.getOriginalAppearance();
-      if (theme === "auto") {
-        theme = window.matchMedia("(prefers-color-scheme: dark)").matches
-          ? "dark"
-          : "default";
-      }
-      return theme;
-    },
-    getOriginalAppearance() {
-      const defaultTheme = "default";
-      return localStorage.getItem("hs_theme") || defaultTheme;
-    },
+  const resolveAutoThemeByHour = (date = new Date()) => {
+    const hour = date.getHours();
+    return hour >= AUTO_THEME_START_HOUR && hour < AUTO_THEME_END_HOUR
+      ? "light"
+      : "dark";
   };
-  HSThemeAppearance.init();
 
-  window
-    .matchMedia("(prefers-color-scheme: dark)")
-    .addEventListener("change", () => {
-      if (HSThemeAppearance.getOriginalAppearance() === "auto") {
-        HSThemeAppearance.setAppearance("auto", false);
-      }
+  const getStoredThemePreference = () => {
+    const value = localStorage.getItem(STORAGE_KEY);
+    return value === "light" || value === "dark" || value === "auto"
+      ? value
+      : null;
+  };
+
+  const getEffectiveTheme = (preference) => {
+    if (preference === "light" || preference === "dark") return preference;
+    return resolveAutoThemeByHour();
+  };
+
+  const applyTheme = (theme) => {
+    document.documentElement.classList.toggle("dark", theme === "dark");
+    document.documentElement.dataset.theme = theme;
+
+    document.querySelectorAll(".theme-toggle-light").forEach((button) => {
+      button.classList.toggle("hidden", theme === "dark");
+      button.classList.toggle("flex", theme !== "dark");
     });
+
+    document.querySelectorAll(".theme-toggle-dark").forEach((button) => {
+      button.classList.toggle("hidden", theme !== "dark");
+      button.classList.toggle("flex", theme === "dark");
+    });
+  };
+
+  const setThemePreference = (preference) => {
+    localStorage.setItem(STORAGE_KEY, preference);
+    applyTheme(getEffectiveTheme(preference));
+  };
+
+  const syncTheme = () => {
+    applyTheme(getEffectiveTheme(getStoredThemePreference()));
+  };
 
   window.addEventListener("load", () => {
-    const $clickableThemes = document.querySelectorAll(
-      "[data-hs-theme-click-value]",
-    );
-    const $switchableThemes = document.querySelectorAll(
-      "[data-hs-theme-switch]",
-    );
+    syncTheme();
 
-    $clickableThemes.forEach(($item) => {
-      $item.addEventListener("click", () =>
-        HSThemeAppearance.setAppearance(
-          $item.getAttribute("data-hs-theme-click-value"),
-          true,
-          $item,
-        ),
-      );
-    });
-
-    $switchableThemes.forEach(($item) => {
-      $item.addEventListener("change", (e) => {
-        HSThemeAppearance.setAppearance(e.target.checked ? "dark" : "default");
-      });
-
-      $item.checked = HSThemeAppearance.getAppearance() === "dark";
-    });
-
-    window.addEventListener("on-hs-appearance-change", (e) => {
-      $switchableThemes.forEach(($item) => {
-        $item.checked = e.detail === "dark";
+    document.querySelectorAll("[data-theme-toggle]").forEach((button) => {
+      button.addEventListener("click", () => {
+        const nextTheme = button.getAttribute("data-theme-toggle");
+        if (nextTheme === "light" || nextTheme === "dark") {
+          setThemePreference(nextTheme);
+        }
       });
     });
   });

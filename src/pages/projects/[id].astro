@@ -1,5 +1,6 @@
 ---
-// Import section components
+export const prerender = true;
+
 import MainLayout from "@/layouts/MainLayout.astro";
 import ProductTabBtn from "@components/ui/buttons/ProductTabBtn.astro";
 import PrimaryCTA from "@components/ui/buttons/PrimaryCTA.astro";
@@ -17,11 +18,9 @@ declare global {
 // This gets the static paths for all the unique products
 
 export async function getStaticPaths() {
-  const productEntries = await getCollection("products", ({ id }) =>
-    id.startsWith("en/")
-  );
+  const productEntries = await getCollection("products");
   return productEntries.map((product) => {
-    const idWithoutLang = product.id.replace(/^en\//, ""); // Remove the "en/" prefix
+    const idWithoutLang = product.id.replace(/^en\//, "");
     return {
       params: { id: idWithoutLang },
       props: { product },
@@ -31,9 +30,9 @@ export async function getStaticPaths() {
 
 const { product } = Astro.props;
 
-const pageTitle: string = `${product.data.title} | ${SITE.title}`;
+const pageTitle: string = `${product.data.title}｜${SITE.title}`;
 const metaDescription = product.data.description;
-const ogTitle = `${product.data.title} | 客户案例 | ${SITE.title}`;
+const ogTitle = `${product.data.title}｜客户案例｜${SITE.title}`;
 const blueprintAltPrefix = `${product.data.title}现场画面`;
 const productPath = `/projects/${product.id.replace(/^en\//, "")}`;
 const productUrl = new URL(productPath, SITE.url).toString();

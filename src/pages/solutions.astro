@@ -5,12 +5,12 @@ import LeftSection from "@components/ui/blocks/LeftSection.astro";
 import RightSection from "@components/ui/blocks/RightSection.astro";
 import FeaturesStats from "@components/sections/features/FeaturesStats.astro";
 
-import aerialView from "@images/aerial-view.avif";
-import personWorking from "@images/person-working.avif";
-import usingTools from "@images/using-tools.avif";
-import blueprints from "@images/blueprints-image.avif";
-import progressBuilding from "@images/progress-building.avif";
-import constructionWorkers from "@images/construction-workers.avif";
+import automatedTools from "@images/automated-tools.avif";
+import dashboardImage from "@images/dashboard-image.avif";
+import featuresImage from "@images/features-image.avif";
+import heroImage from "@images/hero-image.avif";
+import productMainThree from "@images/product-image-main-3.avif";
+import productMainFour from "@images/product-image-main-4.avif";
 import { SITE } from "@data/constants";
 import { solutionsPageContent } from "@data/company";
 
@@ -52,15 +52,15 @@ const sectionImages: (RightArticle | LeftArticle)[] = [
     btnExists: solutionSections[0].btnExists,
     btnTitle: solutionSections[0].btnTitle,
     btnURL: solutionSections[0].btnURL,
-    imgOne: aerialView,
-    imgTwo: personWorking,
+    imgOne: heroImage,
+    imgTwo: dashboardImage,
   },
   {
     type: "left",
     title: solutionSections[1].title,
     subTitle: solutionSections[1].subTitle,
     imgAlt: solutionSections[1].imgAlt,
-    img: usingTools,
+    img: featuresImage,
   },
   {
     type: "right",
@@ -69,8 +69,8 @@ const sectionImages: (RightArticle | LeftArticle)[] = [
     single: solutionSections[2].single,
     imgOneAlt: solutionSections[2].imgOneAlt,
     imgTwoAlt: solutionSections[2].imgTwoAlt,
-    imgOne: blueprints,
-    imgTwo: progressBuilding,
+    imgOne: automatedTools,
+    imgTwo: productMainThree,
   },
   {
     type: "left",
@@ -80,13 +80,13 @@ const sectionImages: (RightArticle | LeftArticle)[] = [
     btnExists: solutionSections[3].btnExists,
     btnTitle: solutionSections[3].btnTitle,
     btnURL: solutionSections[3].btnURL,
-    img: constructionWorkers,
+    img: productMainFour,
   },
 ];
 
 const pageTitle = `解决方案 | ${SITE.title}`;
 const metaDescription =
-  "补全星科技提供农业社会化服务、低空作业、无人车平台联动与定制化场景运营支持等解决方案，帮助客户把无人化能力落到真实业务现场。";
+  "补全星科技提供围绕零件、部件、通用底盘与方案服务的场景化解决方案，帮助客户把无人化能力落到真实业务现场。";
 const ogTitle = "解决方案 | 补全星科技";
 const solutionsUrl = new URL("/solutions", SITE.url).toString();
 ---

@@ -14,9 +14,7 @@ import { SITE } from "@data/constants";
 
 // Fetching all the product related content and sorting it by main.id
 const product: CollectionEntry<"products">[] = (
-  await getCollection("products", ({ id }) => {
-    return id.startsWith("en/");
-  })
+  await getCollection("products")
 ).sort(
   (a: CollectionEntry<"products">, b: CollectionEntry<"products">) =>
     a.data.main.id - b.data.main.id
@@ -25,42 +23,42 @@ const product: CollectionEntry<"products">[] = (
 // Define variables for page content
 const title: string = "客户案例";
 const subTitle: string =
-  "聚焦补全星科技在农业社会化服务、无人机核心产品、无人车平台与场景化交付中的真实落地实践。";
+  "聚焦补全星科技在无人化零件供应、核心部件供应、通用底盘与方案服务方向的典型落地案例。";
 
 // Testimonial data that will be rendered in the component
 const testimonials = [
   {
     content:
-      "“补全星科技帮助我们把农事服务调度、设备管理和过程留痕真正串了起来，项目上线后跨乡镇协同明显顺畅，客户对服务透明度也更认可。”",
-    author: "周海林",
-    role: "区域农业服务中心负责人",
+      "“补全星科技在零件与部件配套上给了我们很大的帮助，很多本来会卡在适配和采购节奏的问题，被提前化解掉了。”",
+    author: "李工",
+    role: "无人化项目集成负责人",
     avatarSrc:
       "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?q=80&w=1374&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=facearea&facepad=2&w=320&h=320&q=80",
-    avatarAlt: "农业服务中心客户头像",
+    avatarAlt: "无人化项目客户头像",
   },
   {
     content:
-      "“我们原本担心无人机与现场流程脱节，补全星科技在设备、平台和培训交付上做得很扎实，首批试点很快就形成了可复制的作业标准。”",
-    author: "刘敏",
-    role: "智慧农业项目经理",
+      "“通用底盘方案让我们少走了很多弯路，后面新场景进来时不用再从头搭一套，扩展效率高很多。”",
+    author: "王敏",
+    role: "平台产品经理",
     avatarSrc:
       "https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&w=1376&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D8&auto=format&fit=facearea&facepad=2&w=320&h=320&q=80",
-    avatarAlt: "智慧农业客户头像",
+    avatarAlt: "平台客户头像",
   },
   {
     content:
-      "“从无人车试点到多场景扩展，补全星科技不仅交付了平台，还把后续运营方式一起梳理清楚，团队对长期推进更有信心。”",
-    author: "陈致远",
-    role: "园区智能化运营负责人",
+      "“方案服务不是只给一份文档，而是真的陪着我们把部署顺下来，这对项目推进特别重要。”",
+    author: "陈总",
+    role: "场景项目负责人",
     avatarSrc:
       "https://images.unsplash.com/photo-1474176857210-7287d38d27c6?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D8&auto=format&fit=facearea&facepad=2&w=320&h=320&q=80",
-    avatarAlt: "园区客户头像",
+    avatarAlt: "场景客户头像",
   },
 ];
 
 const pageTitle: string = `客户案例 | ${SITE.title}`;
 const metaDescription =
-  "查看补全星科技在农业社会化服务、无人机、无人车与协同交付方向的客户案例与落地经验。";
+  "查看补全星科技在无人化零件供应、核心部件供应、通用底盘与方案服务方向的典型案例与落地经验。";
 const ogTitle = `客户案例 | ${SITE.title}`;
 const projectsUrl = new URL("/projects", SITE.url).toString();
 ---
@@ -76,7 +74,7 @@ const projectsUrl = new URL("/projects", SITE.url).toString();
     url: projectsUrl,
     name: `客户案例 | ${SITE.title}`,
     description:
-      "查看补全星科技在农业社会化服务、无人机核心产品、无人车平台与场景化交付方向的客户案例。",
+      "查看补全星科技在无人化零件供应、核心部件供应、通用底盘与方案服务方向的客户案例。",
     isPartOf: {
       "@type": "WebSite",
       url: SITE.url,
