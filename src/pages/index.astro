@@ -55,7 +55,7 @@ const pageTitle = `${COMPANY_INFO.shortName}｜${COMPANY_INFO.tagline}`;
     <VideoShowcase
       title="通过一段短片快速了解补全星科技"
       subTitle="我们更关注无人化装备如何真正进入业务现场：零件和部件如何组合、底盘平台如何复用、方案服务如何落地，这些比单纯展示设备外观更关键。"
-      videoUrl="/videos/company-intro.mp4"
+      videoUrl="/videos/company-intro-h264.mp4"
       highlights={[
         "第一印象先落在无人化装备公司，而不是单一农业装备公司。",
         "主营业务聚焦零件供应、部件供应、通用底盘供应与方案服务。",
@@ -81,10 +81,7 @@ const pageTitle = `${COMPANY_INFO.shortName}｜${COMPANY_INFO.tagline}`;
       <div class="grid gap-6 lg:grid-cols-3">
         {
           homeCaseHighlights.map((item) => (
-            <a
-              href={item.href}
-              class="group relative overflow-hidden rounded-3xl border border-white/10 bg-neutral-950 p-6 shadow-xl outline-hidden ring-zinc-500 transition duration-300 hover:-translate-y-1 focus-visible:ring-3 dark:ring-zinc-200"
-            >
+            <article class="group relative overflow-hidden rounded-3xl border border-white/10 bg-neutral-950 p-6 shadow-xl transition duration-300 hover:-translate-y-1">
               <Image
                 src={item.image}
                 alt={item.title}
@@ -106,7 +103,7 @@ const pageTitle = `${COMPANY_INFO.shortName}｜${COMPANY_INFO.tagline}`;
                   </div>
                 </div>
               </div>
-            </a>
+            </article>
           ))
         }
       </div>
