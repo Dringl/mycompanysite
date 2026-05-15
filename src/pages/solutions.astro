@@ -4,10 +4,12 @@ import MainSection from "@components/ui/blocks/MainSection.astro";
 import LeftSection from "@components/ui/blocks/LeftSection.astro";
 import RightSection from "@components/ui/blocks/RightSection.astro";
 import FeaturesStats from "@components/sections/features/FeaturesStats.astro";
-import agriculturalMountainImage from "@images/doc-assets/ppt/image50.jpeg";
-import industrialWorkshopImage from "@images/doc-assets/ppt/image38.jpeg";
-import publicServiceImage from "@images/doc-assets/ppt/image61.jpeg";
-import serviceFlowImage from "@images/doc-assets/ppt/image46.jpeg";
+import agriculturalMountainImage from "@images/doc-assets/word/image13.jpeg";
+import agriculturalDroneImage from "@images/doc-assets/word/image14.jpeg";
+import inspectionPlatformImage from "@images/doc-assets/ppt/image48.jpeg";
+import publicServiceDroneImage from "@images/doc-assets/ppt/image37.jpeg";
+import serviceFlowSupportImage from "@images/doc-assets/ppt/image39.jpeg";
+import serviceIconImage from "@images/solutions-service-icon-black.png";
 import { SITE } from "@data/constants";
 import { solutionsPageContent } from "@data/company";
 
@@ -50,14 +52,14 @@ const sectionImages: (RightArticle | LeftArticle)[] = [
     btnTitle: solutionSections[0].btnTitle,
     btnURL: solutionSections[0].btnURL,
     imgOne: agriculturalMountainImage,
-    imgTwo: industrialWorkshopImage,
+    imgTwo: agriculturalDroneImage,
   },
   {
     type: "left",
     title: solutionSections[1].title,
     subTitle: solutionSections[1].subTitle,
     imgAlt: solutionSections[1].imgAlt,
-    img: publicServiceImage,
+    img: inspectionPlatformImage,
   },
   {
     type: "right",
@@ -66,8 +68,8 @@ const sectionImages: (RightArticle | LeftArticle)[] = [
     single: solutionSections[2].single,
     imgOneAlt: solutionSections[2].imgOneAlt,
     imgTwoAlt: solutionSections[2].imgTwoAlt,
-    imgOne: serviceFlowImage,
-    imgTwo: publicServiceImage,
+    imgOne: publicServiceDroneImage,
+    imgTwo: serviceFlowSupportImage,
   },
   {
     type: "left",
@@ -77,7 +79,7 @@ const sectionImages: (RightArticle | LeftArticle)[] = [
     btnExists: solutionSections[3].btnExists,
     btnTitle: solutionSections[3].btnTitle,
     btnURL: solutionSections[3].btnURL,
-    img: agriculturalMountainImage,
+    img: serviceIconImage,
   },
 ];
 

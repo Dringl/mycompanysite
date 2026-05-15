@@ -1,4 +1,5 @@
 ---
+import { Image } from "astro:assets";
 import MainLayout from "@/layouts/MainLayout.astro";
 import HeroSection from "@components/sections/landing/HeroSection.astro";
 import HeroSectionAlt from "@components/sections/landing/HeroSectionAlt.astro";
@@ -82,9 +83,14 @@ const pageTitle = `${COMPANY_INFO.shortName}｜${COMPANY_INFO.tagline}`;
           homeCaseHighlights.map((item) => (
             <a
               href={item.href}
-              class="group relative overflow-hidden rounded-3xl border border-white/10 bg-cover bg-center p-6 shadow-xl outline-hidden ring-zinc-500 transition duration-300 hover:-translate-y-1 focus-visible:ring-3 dark:ring-zinc-200"
-              style={`background-image:url(${item.image})`}
+              class="group relative overflow-hidden rounded-3xl border border-white/10 bg-neutral-950 p-6 shadow-xl outline-hidden ring-zinc-500 transition duration-300 hover:-translate-y-1 focus-visible:ring-3 dark:ring-zinc-200"
             >
+              <Image
+                src={item.image}
+                alt={item.title}
+                class="absolute inset-0 h-full w-full object-cover transition duration-500 group-hover:scale-105"
+                sizes="(min-width: 1024px) 30vw, 100vw"
+              />
               <div class="absolute inset-0 bg-linear-to-t from-neutral-950 via-neutral-950/70 to-neutral-950/15 transition duration-300 group-hover:from-neutral-900"></div>
               <div class="relative z-10 flex min-h-[320px] flex-col justify-between">
                 <span class="inline-flex w-fit rounded-full border border-white/10 bg-white/10 px-3 py-1 text-xs font-medium tracking-[0.18em] text-white/80 uppercase">

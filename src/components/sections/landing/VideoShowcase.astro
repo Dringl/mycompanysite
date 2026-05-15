@@ -1,5 +1,6 @@
 ---
 import PrimaryCTA from "@/components/ui/buttons/PrimaryCTA.astro";
+import videoPoster from "@images/doc-assets/word/image12.jpeg";
 
 const {
   title,
@@ -8,7 +9,17 @@ const {
   highlights = [],
   ctaTitle,
   ctaUrl,
+  poster = videoPoster,
+  videoLabel = `${title}视频展示`,
+  failureHint = "若视频加载较慢或播放失败，可刷新页面后重试，或直接下载视频文件查看。",
 } = Astro.props;
+
+const showcaseId = `video-showcase-${title
+  .toLowerCase()
+  .replace(/[^a-z0-9一-龥]+/g, "-")
+  .replace(/^-|-$/g, "")}`;
+const statusId = `${showcaseId}-status`;
+const downloadLabel = `下载${title}视频`;
 
 interface Props {
   title: string;
@@ -17,23 +28,48 @@ interface Props {
   highlights?: string[];
   ctaTitle?: string;
   ctaUrl?: string;
+  poster?: any;
+  videoLabel?: string;
+  failureHint?: string;
 }
 ---
 
 <section class="mx-auto max-w-[85rem] px-4 py-10 sm:px-6 lg:px-8 lg:py-14 2xl:max-w-full">
   <div class="grid items-center gap-10 overflow-hidden rounded-3xl border border-white/10 bg-white/5 p-6 backdrop-blur-sm lg:grid-cols-[1.2fr_0.8fr] lg:p-10">
-    <div class="overflow-hidden rounded-2xl border border-white/10 bg-neutral-950/70 shadow-2xl shadow-black/30">
-      <video
-        class="aspect-video h-full w-full object-cover"
-        src={videoUrl}
-        controls
-        muted
-        loop
-        playsinline
-        preload="metadata"
-      >
-        您的浏览器暂不支持视频播放。
-      </video>
+    <div class="overflow-hidden rounded-2xl border border-white/10 bg-neutral-950/80 shadow-2xl shadow-black/30">
+      <div class="relative isolate aspect-video bg-neutral-950">
+        <video
+          id={showcaseId}
+          class="aspect-video h-full w-full object-cover"
+          src={videoUrl}
+          poster={poster.src}
+          controls
+          muted
+          loop
+          playsinline
+          preload="metadata"
+          controlslist="nodownload noplaybackrate"
+          aria-label={videoLabel}
+          aria-describedby={statusId}
+          data-video-showcase
+          data-failure-hint={failureHint}
+        >
+          您的浏览器暂不支持视频播放，可直接下载视频查看。
+        </video>
+        <div class="pointer-events-none absolute inset-x-0 bottom-0 flex items-end justify-between gap-3 bg-linear-to-t from-neutral-950/85 via-neutral-950/35 to-transparent px-4 py-3">
+          <p id={statusId} class="min-h-[1.25rem] text-xs leading-6 text-white/80 sm:text-sm" aria-live="polite">
+            正在准备视频播放…
+          </p>
+          <a
+            href={videoUrl}
+            class="pointer-events-auto inline-flex shrink-0 items-center rounded-full border border-white/15 bg-white/10 px-3 py-1.5 text-xs font-medium text-white/90 transition hover:bg-white/15 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-blue"
+            download
+            aria-label={downloadLabel}
+          >
+            下载视频
+          </a>
+        </div>
+      </div>
     </div>
     <div>
       <h2 class="text-balance text-3xl font-bold text-neutral-800 dark:text-neutral-100 lg:text-4xl">
@@ -58,6 +94,9 @@ interface Props {
           </ul>
         )
       }
+      <div class="mt-4 rounded-2xl border border-white/10 bg-neutral-950/40 px-4 py-3 text-sm leading-7 text-neutral-300">
+        建议在较稳定网络下播放首轮预览；{failureHint}
+      </div>
       {
         ctaTitle && ctaUrl && (
           <div class="mt-6">
@@ -68,3 +107,70 @@ interface Props {
     </div>
   </div>
 </section>
+
+<script>
+  const statusMessages = {
+    loading: "正在加载视频元数据…",
+    canplay: "视频已就绪，可直接播放。",
+    waiting: "视频缓冲中，请稍候…",
+    playing: "视频正在播放。",
+    paused: "视频已暂停，可继续播放。",
+  };
+
+  const fallbackHint = "视频暂时无法播放，请刷新页面重试，或使用下载按钮直接查看源文件。";
+
+  const updateStatus = (statusEl: HTMLElement | null, message: string) => {
+    if (statusEl) statusEl.textContent = message;
+  };
+
+  const formatError = (video: HTMLVideoElement) => {
+    const customHint = video?.dataset?.failureHint?.trim();
+    const mediaError = video?.error;
+    if (!mediaError) return customHint || fallbackHint;
+    const codeMap = {
+      1: "视频加载已被浏览器中止。",
+      2: "网络波动导致视频下载失败。",
+      3: "浏览器在解码视频时失败。",
+      4: "浏览器当前无法识别该视频格式。",
+    };
+
+    return codeMap[mediaError.code as keyof typeof codeMap] ?? customHint ?? fallbackHint;
+  };
+
+  const setupVideoShowcase = (root: Element) => {
+    const video = root.querySelector("[data-video-showcase]");
+    const statusEl = root.querySelector("[aria-live='polite']");
+    if (!(video instanceof HTMLVideoElement) || !(statusEl instanceof HTMLElement)) return;
+
+    updateStatus(statusEl, statusMessages.loading);
+
+    const onLoadedMetadata = () => {
+      const duration = Number.isFinite(video.duration) ? `，时长约 ${Math.round(video.duration)} 秒` : "";
+      updateStatus(statusEl, `视频元数据已加载${duration}。`);
+    };
+    const onCanPlay = () => updateStatus(statusEl, statusMessages.canplay);
+    const onWaiting = () => updateStatus(statusEl, statusMessages.waiting);
+    const onPlaying = () => updateStatus(statusEl, statusMessages.playing);
+    const onPause = () => {
+      if (!video.ended) updateStatus(statusEl, statusMessages.paused);
+    };
+    const onEnded = () => updateStatus(statusEl, "视频播放结束，可重新播放。" );
+    const onError = () => updateStatus(statusEl, formatError(video));
+
+    video.addEventListener("loadedmetadata", onLoadedMetadata);
+    video.addEventListener("canplay", onCanPlay);
+    video.addEventListener("waiting", onWaiting);
+    video.addEventListener("playing", onPlaying);
+    video.addEventListener("pause", onPause);
+    video.addEventListener("ended", onEnded);
+    video.addEventListener("error", onError);
+
+    if (video.readyState >= HTMLMediaElement.HAVE_CURRENT_DATA) {
+      updateStatus(statusEl, statusMessages.canplay);
+    }
+  };
+
+  document.querySelectorAll("section").forEach((section) => {
+    if (section.querySelector("[data-video-showcase]")) setupVideoShowcase(section);
+  });
+</script>
