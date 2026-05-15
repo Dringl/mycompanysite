@@ -12,14 +12,14 @@ export interface NavigationSection {
 export interface HomePillar {
   title: string;
   summary: string;
-  image: string;
+  image: any;
 }
 
 export interface HomeSolutionTab {
   heading: string;
   content: string;
   svg: string;
-  src: string;
+  src: any;
   alt: string;
   first?: boolean;
   second?: boolean;
@@ -29,11 +29,21 @@ export interface HomeCaseHighlight {
   title: string;
   summary: string;
   tag: string;
-  image: string;
+  image: any;
   href: string;
 }
 
 import homeAerialView from "@/images/aerial-view.avif";
+import homePillarParts from "@/images/doc-assets/word/image18.png";
+import homePillarComponents from "@/images/doc-assets/ppt/image46.jpeg";
+import homePillarChassis from "@/images/doc-assets/ppt/image47.jpeg";
+import homePillarService from "@/images/doc-assets/ppt/image16.jpeg";
+import homeSolutionPlatform from "@/images/doc-assets/ppt/image36.jpeg";
+import homeSolutionSupply from "@/images/doc-assets/ppt/image49.jpeg";
+import homeSolutionScenario from "@/images/doc-assets/ppt/image37.jpeg";
+import homeCaseAgriculture from "@/images/doc-assets/ppt/image33.jpeg";
+import homeCaseInspection from "@/images/doc-assets/ppt/image38.jpeg";
+import homeCasePublicService from "@/images/doc-assets/ppt/image27.jpeg";
 
 export interface CompanyContentSection {
   title: string;
@@ -128,24 +138,25 @@ export const homePillars: HomePillar[] = [
   {
     title: "无人化零件供应",
     summary: "提供适配无人化装备系统集成所需的关键零件，帮助客户缩短从选型到装配的推进周期。",
-    image: "/home/aimage1.jpg",
+    image: homePillarParts,
   },
   {
     title: "核心部件供应",
     summary: "围绕动力、控制、执行与协同链路提供核心部件支撑，强化整机与平台的稳定性与可扩展性。",
-    image: "/home/aimage2.jpg",
+    image: homePillarComponents,
   },
   {
     title: "模块化通用底盘",
     summary: "以通用底盘为基础承接运输、巡检、作业与二次开发需求，为多类无人化装备提供统一底座。",
-    image: "/home/aimage3.jpg",
+    image: homePillarChassis,
   },
   {
     title: "方案服务",
     summary: "从需求梳理、部件组合到场景适配和交付验证，帮助客户把无人化能力真正导入业务现场。",
-    image: "/home/aimage4.jpg",
+    image: homePillarService,
   },
 ];
+
 
 export const homeSolutionTabs: HomeSolutionTab[] = [
   {
@@ -153,8 +164,8 @@ export const homeSolutionTabs: HomeSolutionTab[] = [
     content:
       "围绕运输、巡检、作业挂载与二次开发需求，构建可复用的通用底盘平台，让客户能够更快完成无人化装备系统集成。",
     svg: "tools",
-    src: "/home/simg1.jpg",
-    alt: "通用底盘平台与场景适配示意图",
+    src: homeSolutionPlatform,
+    alt: "丘陵山地农田中的无人化通用底盘平台场景图",
     first: true,
   },
   {
@@ -162,18 +173,19 @@ export const homeSolutionTabs: HomeSolutionTab[] = [
     content:
       "从关键零件到核心部件，帮助客户建立更清晰的装备搭建链路，降低定制化无人化项目中的采购与协同成本。",
     svg: "dashboard",
-    src: "/home/simg2.jpg",
-    alt: "无人化装备零件与部件供应示意图",
+    src: homeSolutionSupply,
+    alt: "无人化装备核心控制部件与配套零件图",
   },
   {
     heading: "行业方案导入服务",
     content:
       "针对丘陵山地农业、园区巡检、公共服务等场景，结合底盘、部件与任务目标输出更可落地的方案服务。",
     svg: "house",
-    src: "/home/simg3.jpg",
-    alt: "无人化行业方案服务示意图",
+    src: homeSolutionScenario,
+    alt: "山地农业无人机喷洒作业场景图",
   },
 ];
+
 
 export const homeCaseHighlights: HomeCaseHighlight[] = [
   {
@@ -181,7 +193,7 @@ export const homeCaseHighlights: HomeCaseHighlight[] = [
     summary:
       "面向复杂地形与高通过性要求，组合底盘、执行部件与场景服务能力，支撑丘陵山地场景中的无人化作业验证。",
     tag: "通用底盘 + 方案服务",
-    image: "/home/simg1.jpg",
+    image: homeCaseAgriculture,
     href: "/projects",
   },
   {
@@ -189,7 +201,7 @@ export const homeCaseHighlights: HomeCaseHighlight[] = [
     summary:
       "围绕巡检、采集与移动执行需求，输出零件、部件与控制链路的组合方案，帮助项目更快进入交付阶段。",
     tag: "零件 + 部件供应",
-    image: "/home/simg2.jpg",
+    image: homeCaseInspection,
     href: "/projects",
   },
   {
@@ -197,10 +209,11 @@ export const homeCaseHighlights: HomeCaseHighlight[] = [
     summary:
       "通过模块化底盘平台承接运输、巡逻、公共服务等不同任务，保留后续功能扩展与二次开发空间。",
     tag: "模块化底盘",
-    image: "/home/simg3.jpg",
+    image: homeCasePublicService,
     href: "/projects",
   },
 ];
+
 
 export const companyAdvantages = [
   "以无人化装备底层能力切入，优先解决零件、部件、通用底盘与集成协同这些真正影响项目落地的问题。",
@@ -248,7 +261,7 @@ export const aboutPageContent = {
       "重庆起步、西南深耕：更熟悉丘陵山地与复杂业务环境下的真实约束。",
       "多行业延展空间：农业是重点方向，但平台能力同样适用于园区、巡检和公共服务。",
     ],
-    src: "/home/aerial-view.avif",
+    src: homeAerialView,
     alt: "无人化装备平台与场景协同示意图",
   },
   stats: {
@@ -309,8 +322,9 @@ export const inquiryTypes = [
 
 export const contactHighlights = [
   {
-    heading: "需求沟通",
-    content: "欢迎通过表单提交应用场景、目标与合作方向，我们会尽快回访。",
+    heading: "提交后如何查看线索",
+    content:
+      "表单提交成功后，联系人信息会同步发送到 15340530127@163.com，页面也会弹出微信二维码，便于你直接跟进。",
     isLinkVisible: false,
     linkTitle: undefined,
     linkURL: undefined,
