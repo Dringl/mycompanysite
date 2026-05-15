@@ -5,8 +5,8 @@ main:
   id: 3
   content: |
     补全星科技围绕模块化通用底盘能力，为客户承接运输、巡检、挂载作业和二次开发等任务需求，帮助项目建立统一底座，减少不同场景下重复造轮子的成本。
-  imgCard: "@/images/doc-assets/word/image2.png"
-  imgMain: "@/images/doc-assets/ppt/image39.jpeg"
+  imgCard: "@/images/pages/projects/projects-case-03-card.png"
+  imgMain: "@/images/pages/projects/projects-case-03-main.jpeg"
   imgAlt: "通用底盘供应案例展示图"
 tabs:
   - id: "tabs-with-card-item-1"
@@ -50,6 +50,6 @@ specificationsRight:
   - title: "长期意义"
     subTitle: "让无人化项目从单点验证迈向平台化复用。"
 blueprints:
-  first: "@/images/doc-assets/ppt/image61.jpeg"
-  second: "@/images/doc-assets/ppt/image50.jpeg"
+  first: "@/images/pages/projects/projects-case-03-blueprint-01.jpeg"
+  second: "@/images/pages/projects/projects-case-03-blueprint-02.jpeg"
 ---

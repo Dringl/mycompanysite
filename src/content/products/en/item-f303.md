@@ -5,8 +5,8 @@ main:
   id: 1
   content: |
     面向需要快速推进样机集成和首轮验证的无人化项目，补全星科技围绕关键零件供应、适配确认与交付节奏协同，帮助客户缩短从需求确认到系统拼装的前置周期。
-  imgCard: "@/images/doc-assets/word/image17.png"
-  imgMain: "@/images/doc-assets/word/image18.png"
+  imgCard: "@/images/pages/projects/projects-case-01-card.png"
+  imgMain: "@/images/pages/projects/projects-case-01-main.png"
   imgAlt: "无人化零件供应案例展示图"
 tabs:
   - id: "tabs-with-card-item-1"
@@ -50,6 +50,6 @@ specificationsRight:
   - title: "长期意义"
     subTitle: "让后续部件集成与平台化交付建立在更稳的基础之上。"
 blueprints:
-  first: "@/images/doc-assets/ppt/image47.jpeg"
-  second: "@/images/doc-assets/ppt/image46.jpeg"
+  first: "@/images/pages/projects/projects-case-01-blueprint-01.jpeg"
+  second: "@/images/pages/projects/projects-case-01-blueprint-02.jpeg"
 ---

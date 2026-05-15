@@ -33,17 +33,17 @@ export interface HomeCaseHighlight {
   href: string;
 }
 
-import homeAerialView from "@/images/aerial-view.avif";
-import homePillarParts from "@/images/doc-assets/ppt/image33.jpeg";
-import homePillarComponents from "@/images/doc-assets/word/image18.png";
-import homePillarChassis from "@/images/doc-assets/ppt/image47.jpeg";
-import homePillarService from "@/images/doc-assets/ppt/image37.jpeg";
-import homeSolutionPlatform from "@/images/doc-assets/ppt/image36.jpeg";
-import homeSolutionSupply from "@/images/doc-assets/ppt/image49.jpeg";
-import homeSolutionScenario from "@/images/doc-assets/ppt/image38.jpeg";
-import homeCaseAgriculture from "@/images/doc-assets/word/image14.jpeg";
-import homeCaseInspection from "@/images/doc-assets/ppt/image27.jpeg";
-import homeCasePublicService from "@/images/doc-assets/ppt/image48.jpeg";
+import sharedCompanyAerialView from "@/images/shared/shared-company-aerial-view.avif";
+import homePillars01 from "@/images/pages/home/home-pillars-01.jpeg";
+import homePillars02 from "@/images/pages/home/home-pillars-02.png";
+import homePillars03 from "@/images/pages/home/home-pillars-03.jpeg";
+import homePillars04 from "@/images/pages/home/home-pillars-04.jpeg";
+import homeSolutionTabs01 from "@/images/pages/home/home-solution-tabs-01.jpeg";
+import homeSolutionTabs02 from "@/images/pages/home/home-solution-tabs-02.jpeg";
+import homeSolutionTabs03 from "@/images/pages/home/home-solution-tabs-03.jpeg";
+import homeCaseHighlights01 from "@/images/pages/home/home-case-highlights-01.jpeg";
+import homeCaseHighlights02 from "@/images/pages/home/home-case-highlights-02.jpeg";
+import homeCaseHighlights03 from "@/images/pages/home/home-case-highlights-03.jpeg";
 
 export interface CompanyContentSection {
   title: string;
@@ -138,22 +138,22 @@ export const homePillars: HomePillar[] = [
   {
     title: "无人化零件供应",
     summary: "提供适配无人化装备系统集成所需的关键零件，帮助客户缩短从选型到装配的推进周期。",
-    image: homePillarParts,
+    image: homePillars01,
   },
   {
     title: "核心部件供应",
     summary: "围绕动力、控制、执行与协同链路提供核心部件支撑，强化整机与平台的稳定性与可扩展性。",
-    image: homePillarComponents,
+    image: homePillars02,
   },
   {
     title: "模块化通用底盘",
     summary: "以通用底盘为基础承接运输、巡检、作业与二次开发需求，为多类无人化装备提供统一底座。",
-    image: homePillarChassis,
+    image: homePillars03,
   },
   {
     title: "方案服务",
     summary: "从需求梳理、部件组合到场景适配和交付验证，帮助客户把无人化能力真正导入业务现场。",
-    image: homePillarService,
+    image: homePillars04,
   },
 ];
 
@@ -164,7 +164,7 @@ export const homeSolutionTabs: HomeSolutionTab[] = [
     content:
       "围绕运输、巡检、作业挂载与二次开发需求，构建可复用的通用底盘平台，让客户能够更快完成无人化装备系统集成。",
     svg: "tools",
-    src: homeSolutionPlatform,
+    src: homeSolutionTabs01,
     alt: "丘陵山地农田中的无人化通用底盘平台场景图",
     first: true,
   },
@@ -173,7 +173,7 @@ export const homeSolutionTabs: HomeSolutionTab[] = [
     content:
       "从关键零件到核心部件，帮助客户建立更清晰的装备搭建链路，降低定制化无人化项目中的采购与协同成本。",
     svg: "dashboard",
-    src: homeSolutionSupply,
+    src: homeSolutionTabs02,
     alt: "无人化装备核心控制部件与配套零件图",
   },
   {
@@ -181,7 +181,7 @@ export const homeSolutionTabs: HomeSolutionTab[] = [
     content:
       "针对丘陵山地农业、园区巡检、公共服务等场景，结合底盘、部件与任务目标输出更可落地的方案服务。",
     svg: "house",
-    src: homeSolutionScenario,
+    src: homeSolutionTabs03,
     alt: "山地农业无人机喷洒作业场景图",
   },
 ];
@@ -193,7 +193,7 @@ export const homeCaseHighlights: HomeCaseHighlight[] = [
     summary:
       "面向复杂地形与高通过性要求，组合底盘、执行部件与场景服务能力，支撑丘陵山地场景中的无人化作业验证。",
     tag: "通用底盘 + 方案服务",
-    image: homeCaseAgriculture,
+    image: homeCaseHighlights01,
     href: "/projects",
   },
   {
@@ -201,7 +201,7 @@ export const homeCaseHighlights: HomeCaseHighlight[] = [
     summary:
       "围绕巡检、采集与移动执行需求，输出零件、部件与控制链路的组合方案，帮助项目更快进入交付阶段。",
     tag: "零件 + 部件供应",
-    image: homeCaseInspection,
+    image: homeCaseHighlights02,
     href: "/projects",
   },
   {
@@ -209,7 +209,7 @@ export const homeCaseHighlights: HomeCaseHighlight[] = [
     summary:
       "通过模块化底盘平台承接运输、巡逻、公共服务等不同任务，保留后续功能扩展与二次开发空间。",
     tag: "模块化底盘",
-    image: homeCasePublicService,
+    image: homeCaseHighlights03,
     href: "/projects",
   },
 ];
@@ -261,7 +261,7 @@ export const aboutPageContent = {
       "重庆起步、西南深耕：更熟悉丘陵山地与复杂业务环境下的真实约束。",
       "多行业延展空间：农业是重点方向，但平台能力同样适用于园区、巡检和公共服务。",
     ],
-    src: homeAerialView,
+    src: sharedCompanyAerialView,
     alt: "无人化装备平台与场景协同示意图",
   },
   stats: {
@@ -357,7 +357,7 @@ export const contactHighlights = [
 ] as const;
 
 export const homeAdvantageVisual = {
-  src: homeAerialView,
+  src: sharedCompanyAerialView,
   alt: "农业与园区场景航拍示意图",
 } as const;
 

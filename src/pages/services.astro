@@ -5,12 +5,12 @@ import LeftSection from "@components/ui/blocks/LeftSection.astro";
 import RightSection from "@components/ui/blocks/RightSection.astro";
 import FeaturesStats from "@components/sections/features/FeaturesStats.astro";
 
-import partsBoardImage from "@images/doc-assets/word/image17.png";
-import partsModuleImage from "@images/doc-assets/word/image18.png";
-import componentsBoardImage from "@images/doc-assets/ppt/image47.jpeg";
-import chassisRenderImage from "@images/doc-assets/word/image2.png";
-import chassisWorkshopImage from "@images/doc-assets/ppt/image39.jpeg";
-import serviceMeetingImage from "@images/doc-assets/ppt/image49.jpeg";
+import servicesSection01Image01 from "@images/pages/services/services-section-01-image-01.png";
+import servicesSection01Image02 from "@images/pages/services/services-section-01-image-02.png";
+import servicesSection02Image from "@images/pages/services/services-section-02-image.jpeg";
+import servicesSection03Image01 from "@images/pages/services/services-section-03-image-01.png";
+import servicesSection03Image02 from "@images/pages/services/services-section-03-image-02.jpeg";
+import servicesSection04Image from "@images/pages/services/services-section-04-image.jpeg";
 import { SITE } from "@data/constants";
 import { servicesPageContent } from "@data/company";
 
@@ -52,8 +52,8 @@ const sectionImages: (RightArticle | LeftArticle)[] = [
     btnExists: serviceSections[0].btnExists,
     btnTitle: serviceSections[0].btnTitle,
     btnURL: serviceSections[0].btnURL,
-    imgOne: partsBoardImage,
-    imgTwo: partsModuleImage,
+    imgOne: servicesSection01Image01,
+    imgTwo: servicesSection01Image02,
   },
   {
     type: "left",
@@ -63,7 +63,7 @@ const sectionImages: (RightArticle | LeftArticle)[] = [
     btnExists: serviceSections[1].btnExists,
     btnTitle: serviceSections[1].btnTitle,
     btnURL: serviceSections[1].btnURL,
-    img: componentsBoardImage,
+    img: servicesSection02Image,
   },
   {
     type: "right",
@@ -72,8 +72,8 @@ const sectionImages: (RightArticle | LeftArticle)[] = [
     single: serviceSections[2].single,
     imgOneAlt: serviceSections[2].imgOneAlt,
     imgTwoAlt: serviceSections[2].imgTwoAlt,
-    imgOne: chassisRenderImage,
-    imgTwo: chassisWorkshopImage,
+    imgOne: servicesSection03Image01,
+    imgTwo: servicesSection03Image02,
   },
   {
     type: "left",
@@ -83,7 +83,7 @@ const sectionImages: (RightArticle | LeftArticle)[] = [
     btnExists: serviceSections[3].btnExists,
     btnTitle: serviceSections[3].btnTitle,
     btnURL: serviceSections[3].btnURL,
-    img: serviceMeetingImage,
+    img: servicesSection04Image,
   },
 ];
 

@@ -4,11 +4,11 @@ import MainSection from "@components/ui/blocks/MainSection.astro";
 import LeftSection from "@components/ui/blocks/LeftSection.astro";
 import RightSection from "@components/ui/blocks/RightSection.astro";
 import FeaturesStats from "@components/sections/features/FeaturesStats.astro";
-import agriculturalMountainImage from "@images/doc-assets/word/image13.jpeg";
-import agriculturalDroneImage from "@images/doc-assets/word/image14.jpeg";
-import inspectionPlatformImage from "@images/doc-assets/ppt/image48.jpeg";
-import publicServiceDroneImage from "@images/doc-assets/ppt/image37.jpeg";
-import serviceFlowSupportImage from "@images/doc-assets/ppt/image39.jpeg";
+import solutionsSection01Image01 from "@images/pages/solutions/solutions-section-01-image-01.jpeg";
+import solutionsSection01Image02 from "@images/pages/solutions/solutions-section-01-image-02.jpeg";
+import solutionsSection02Image from "@images/pages/solutions/solutions-section-02-image.jpeg";
+import solutionsSection03Image01 from "@images/pages/solutions/solutions-section-03-image-01.jpeg";
+import solutionsSection03Image02 from "@images/pages/solutions/solutions-section-03-image-02.jpeg";
 import serviceIconImage from "@images/solutions-service-icon-black.png";
 import { SITE } from "@data/constants";
 import { solutionsPageContent } from "@data/company";
@@ -51,15 +51,15 @@ const sectionImages: (RightArticle | LeftArticle)[] = [
     btnExists: solutionSections[0].btnExists,
     btnTitle: solutionSections[0].btnTitle,
     btnURL: solutionSections[0].btnURL,
-    imgOne: agriculturalMountainImage,
-    imgTwo: agriculturalDroneImage,
+    imgOne: solutionsSection01Image01,
+    imgTwo: solutionsSection01Image02,
   },
   {
     type: "left",
     title: solutionSections[1].title,
     subTitle: solutionSections[1].subTitle,
     imgAlt: solutionSections[1].imgAlt,
-    img: inspectionPlatformImage,
+    img: solutionsSection02Image,
   },
   {
     type: "right",
@@ -68,8 +68,8 @@ const sectionImages: (RightArticle | LeftArticle)[] = [
     single: solutionSections[2].single,
     imgOneAlt: solutionSections[2].imgOneAlt,
     imgTwoAlt: solutionSections[2].imgTwoAlt,
-    imgOne: publicServiceDroneImage,
-    imgTwo: serviceFlowSupportImage,
+    imgOne: solutionsSection03Image01,
+    imgTwo: solutionsSection03Image02,
   },
   {
     type: "left",
