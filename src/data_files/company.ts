@@ -34,16 +34,16 @@ export interface HomeCaseHighlight {
 }
 
 import homeAerialView from "@/images/aerial-view.avif";
-import homePillarParts from "@/images/doc-assets/word/image18.png";
-import homePillarComponents from "@/images/doc-assets/ppt/image46.jpeg";
+import homePillarParts from "@/images/doc-assets/ppt/image33.jpeg";
+import homePillarComponents from "@/images/doc-assets/word/image18.png";
 import homePillarChassis from "@/images/doc-assets/ppt/image47.jpeg";
-import homePillarService from "@/images/doc-assets/ppt/image16.jpeg";
+import homePillarService from "@/images/doc-assets/ppt/image37.jpeg";
 import homeSolutionPlatform from "@/images/doc-assets/ppt/image36.jpeg";
 import homeSolutionSupply from "@/images/doc-assets/ppt/image49.jpeg";
-import homeSolutionScenario from "@/images/doc-assets/ppt/image37.jpeg";
-import homeCaseAgriculture from "@/images/doc-assets/ppt/image33.jpeg";
-import homeCaseInspection from "@/images/doc-assets/ppt/image38.jpeg";
-import homeCasePublicService from "@/images/doc-assets/ppt/image27.jpeg";
+import homeSolutionScenario from "@/images/doc-assets/ppt/image38.jpeg";
+import homeCaseAgriculture from "@/images/doc-assets/word/image14.jpeg";
+import homeCaseInspection from "@/images/doc-assets/ppt/image27.jpeg";
+import homeCasePublicService from "@/images/doc-assets/ppt/image48.jpeg";
 
 export interface CompanyContentSection {
   title: string;
@@ -246,7 +246,7 @@ export const aboutPageContent = {
       "在丘陵山地农业、园区巡检与公共服务等场景中沉淀更可执行的导入路径。",
       "通过方案服务把装备能力、场景约束与交付节奏真正衔接起来。",
     ],
-    videoUrl: "/videos/company-intro.mp4",
+    videoUrl: "/videos/company-intro-h264.mp4",
     ctaTitle: "咨询合作方案",
     ctaUrl: "/contact",
   },

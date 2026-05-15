@@ -1,10 +1,12 @@
 ---
+import { Image } from "astro:assets";
+
 const { id, aria, src, alt, first, second } = Astro.props;
 
 interface Props {
   id: string;
   aria: string;
-  src?: string;
+  src?: any;
   alt: string;
   first?: boolean;
   second?: boolean;
@@ -17,7 +19,7 @@ const secondClass = second
 ---
 
 <div id={id} role="tabpanel" class={firstClass} aria-labelledby={aria}>
-  <img
+  <Image
     src={src}
     alt={alt}
     class={secondClass}
