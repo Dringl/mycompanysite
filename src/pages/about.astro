@@ -6,8 +6,8 @@ import MainSection from "@components/ui/blocks/MainSection.astro";
 import FeaturesStatsAlt from "@components/sections/features/FeaturesStatsAlt.astro";
 import VideoShowcase from "@components/sections/landing/VideoShowcase.astro";
 import { Image } from "astro:assets";
-import aboutIntroImage from "@images/doc-assets/ppt/image33.jpeg";
-import aboutStrengthImage from "@images/doc-assets/ppt/image27.jpeg";
+import aboutOverviewImage from "@images/pages/about/about-overview-image.jpeg";
+import aboutStrengthsImage from "@images/pages/about/about-strengths-image.jpeg";
 import { aboutPageContent, COMPANY_INFO, COMPANY_LINKS } from "@data/company";
 import { SITE } from "@data/constants";
 
@@ -67,7 +67,7 @@ const canonicalUrl = `${SITE.url}/about`;
           </p>
         </div>
         <Image
-          src={aboutIntroImage}
+          src={aboutOverviewImage}
           alt="补全星科技参加行业活动现场"
           class="w-full rounded-2xl object-cover"
           format={"avif"}
@@ -88,7 +88,7 @@ const canonicalUrl = `${SITE.url}/about`;
       title={aboutPageContent.strengths.title}
       subTitle={aboutPageContent.strengths.subTitle}
       benefits={[...aboutPageContent.strengths.benefits]}
-      src={aboutStrengthImage}
+      src={aboutStrengthsImage}
       alt={aboutPageContent.strengths.alt}
     />
 

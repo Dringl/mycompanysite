@@ -5,8 +5,8 @@ main:
   id: 2
   content: |
     面向需要提升整机稳定性和任务一致性的无人化项目，补全星科技围绕动力、控制、执行等关键链路提供核心部件供应与组合支持，帮助客户更稳地推进中期验证和批量导入。
-  imgCard: "@/images/doc-assets/ppt/image47.jpeg"
-  imgMain: "@/images/doc-assets/ppt/image15.jpeg"
+  imgCard: "@/images/pages/projects/projects-case-02-card.jpeg"
+  imgMain: "@/images/pages/projects/projects-case-02-main.jpeg"
   imgAlt: "核心部件供应案例展示图"
 tabs:
   - id: "tabs-with-card-item-1"
@@ -49,6 +49,6 @@ tableData:
       - ["适配场景", "农业、园区巡检、公共服务"]
       - ["长期方向", "支撑标准化复制与平台延展"]
 blueprints:
-  first: "@/images/doc-assets/ppt/image16.jpeg"
-  second: "@/images/doc-assets/word/image5.png"
+  first: "@/images/pages/projects/projects-case-02-blueprint-01.jpeg"
+  second: "@/images/pages/projects/projects-case-02-blueprint-02.png"
 ---

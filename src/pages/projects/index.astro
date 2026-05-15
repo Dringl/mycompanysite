@@ -5,10 +5,10 @@ import CardSmall from "@components/ui/cards/CardSmall.astro";
 import CardWide from "@components/ui/cards/CardWide.astro";
 import FeaturesStatsAlt from "@components/sections/features/FeaturesStatsAlt.astro";
 import TestimonialsSectionAlt from "@components/sections/testimonials/TestimonialsSectionAlt.astro";
-import testimonialAvatarOne from "@images/doc-assets/ppt/image49.jpeg";
-import testimonialAvatarTwo from "@images/doc-assets/ppt/image33.jpeg";
-import testimonialAvatarThree from "@images/doc-assets/ppt/image39.jpeg";
-import projectsStatsImage from "@images/doc-assets/ppt/image50.jpeg";
+import projectsTestimonialAvatar01 from "@images/pages/projects/projects-testimonial-avatar-01.jpeg";
+import projectsTestimonialAvatar02 from "@images/pages/projects/projects-testimonial-avatar-02.jpeg";
+import projectsTestimonialAvatar03 from "@images/pages/projects/projects-testimonial-avatar-03.jpeg";
+import projectsStatsImage from "@images/pages/projects/projects-stats-image.jpeg";
 
 // Importing necessary functions from Astro
 import { getCollection } from "astro:content";
@@ -35,7 +35,7 @@ const testimonials = [
       "“补全星科技在零件与部件配套上给了我们很大的帮助，很多本来会卡在适配和采购节奏的问题，被提前化解掉了。”",
     author: "李工",
     role: "无人化项目集成负责人",
-    avatarSrc: testimonialAvatarOne.src,
+    avatarSrc: projectsTestimonialAvatar01.src,
     avatarAlt: "无人化项目客户头像",
   },
   {
@@ -43,7 +43,7 @@ const testimonials = [
       "“通用底盘方案让我们少走了很多弯路，后面新场景进来时不用再从头搭一套，扩展效率高很多。”",
     author: "王敏",
     role: "平台产品经理",
-    avatarSrc: testimonialAvatarTwo.src,
+    avatarSrc: projectsTestimonialAvatar02.src,
     avatarAlt: "平台客户头像",
   },
   {
@@ -51,7 +51,7 @@ const testimonials = [
       "“方案服务不是只给一份文档，而是真的陪着我们把部署顺下来，这对项目推进特别重要。”",
     author: "陈总",
     role: "场景项目负责人",
-    avatarSrc: testimonialAvatarThree.src,
+    avatarSrc: projectsTestimonialAvatar03.src,
     avatarAlt: "场景客户头像",
   },
 ];
