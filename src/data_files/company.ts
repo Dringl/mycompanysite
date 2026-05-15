@@ -322,15 +322,6 @@ export const inquiryTypes = [
 
 export const contactHighlights = [
   {
-    heading: "提交后如何查看线索",
-    content:
-      "表单提交成功后，联系人信息会同步发送到 15340530127@163.com，页面也会弹出微信二维码，便于你直接跟进。",
-    isLinkVisible: false,
-    linkTitle: undefined,
-    linkURL: undefined,
-    isArrowVisible: undefined,
-  },
-  {
     heading: "查看服务方向",
     content: "如果你还在梳理需求，可以先了解我们的核心业务与适配场景。",
     isLinkVisible: true,
@@ -358,7 +349,7 @@ export const contactHighlights = [
 
 export const homeAdvantageVisual = {
   src: sharedCompanyAerialView,
-  alt: "农业与园区场景航拍示意图",
+  alt: "无人化装备平台与部件生态展示图",
 } as const;
 
 export const servicesPageContent = {

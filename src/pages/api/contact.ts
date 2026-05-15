@@ -217,7 +217,7 @@ export const POST: APIRoute = async ({ request }) => {
   return new Response(
     JSON.stringify({
       ok: true,
-      message: "提交成功，线索已同步，我们会尽快与您联系，也欢迎直接扫码添加微信。",
+      message: "提交成功，我们会尽快与您联系。",
     }),
     { status: 200, headers: jsonHeaders },
   );
