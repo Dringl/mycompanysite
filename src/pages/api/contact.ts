@@ -1,4 +1,7 @@
 import type { APIRoute } from "astro";
+import { readFile } from "node:fs/promises";
+import os from "node:os";
+import path from "node:path";
 
 const jsonHeaders = {
   "Content-Type": "application/json",
@@ -19,6 +22,52 @@ const gmailSendEndpoint = "https://gmail.googleapis.com/gmail/v1/users/me/messag
 
 type ContactPayload = Record<(typeof requiredFields)[number], string>;
 
+type EnvLookup = Record<string, string | undefined>;
+
+type HermesGoogleToken = {
+  refresh_token?: string;
+  client_id?: string;
+  client_secret?: string;
+  account?: string;
+};
+
+const getEnv = (): EnvLookup => {
+  const importMetaEnv = typeof import.meta !== "undefined" ? import.meta.env : undefined;
+
+  return {
+    CONTACT_WEBHOOK_URL: importMetaEnv?.CONTACT_WEBHOOK_URL ?? process.env.CONTACT_WEBHOOK_URL,
+    CONTACT_NOTIFICATION_EMAIL:
+      importMetaEnv?.CONTACT_NOTIFICATION_EMAIL ?? process.env.CONTACT_NOTIFICATION_EMAIL,
+    GOOGLE_WORKSPACE_CLIENT_ID:
+      importMetaEnv?.GOOGLE_WORKSPACE_CLIENT_ID ?? process.env.GOOGLE_WORKSPACE_CLIENT_ID,
+    GOOGLE_WORKSPACE_CLIENT_SECRET:
+      importMetaEnv?.GOOGLE_WORKSPACE_CLIENT_SECRET ?? process.env.GOOGLE_WORKSPACE_CLIENT_SECRET,
+    GOOGLE_WORKSPACE_REFRESH_TOKEN:
+      importMetaEnv?.GOOGLE_WORKSPACE_REFRESH_TOKEN ?? process.env.GOOGLE_WORKSPACE_REFRESH_TOKEN,
+    GOOGLE_WORKSPACE_SENDER_EMAIL:
+      importMetaEnv?.GOOGLE_WORKSPACE_SENDER_EMAIL ?? process.env.GOOGLE_WORKSPACE_SENDER_EMAIL,
+  };
+};
+
+const encodeMimeHeader = (value: string) => `=?UTF-8?B?${Buffer.from(value).toString("base64")}?=`;
+const senderDisplayName = encodeMimeHeader("补全星助手");
+
+const readHermesGoogleToken = async (): Promise<HermesGoogleToken | null> => {
+  try {
+    const tokenFile = path.join(os.homedir(), ".hermes", "google_token.json");
+    const raw = await readFile(tokenFile, "utf8");
+    const token = JSON.parse(raw) as HermesGoogleToken;
+
+    if (!token.refresh_token || !token.client_id || !token.client_secret) {
+      return null;
+    }
+
+    return token;
+  } catch {
+    return null;
+  }
+};
+
 const encodeBase64Url = (value: string) =>
   Buffer.from(value)
     .toString("base64")
@@ -37,7 +86,7 @@ const normalizePayload = (payload: Record<string, unknown>): ContactPayload => {
 };
 
 const createMessage = (payload: ContactPayload, recipient: string, sender: string) => {
-  const subject = `官网咨询线索 | ${payload.company} | ${payload.name}`;
+  const subject = encodeMimeHeader(`官网咨询线索 | ${payload.company} | ${payload.name}`);
   const body = [
     "官网收到新的咨询线索。",
     "",
@@ -50,15 +99,17 @@ const createMessage = (payload: ContactPayload, recipient: string, sender: strin
   ].join("\n");
 
   return [
-    `From: ${sender}`,
+    `From: ${senderDisplayName} <${sender}>`,
     `To: ${recipient}`,
     `Subject: ${subject}`,
     "Content-Type: text/plain; charset=UTF-8",
+    "Content-Transfer-Encoding: 8bit",
     "MIME-Version: 1.0",
     "",
     body,
   ].join("\r\n");
 };
+
 
 const getGoogleAccessToken = async (clientId: string, clientSecret: string, refreshToken: string) => {
   const response = await fetch(googleTokenEndpoint, {
@@ -112,18 +163,13 @@ const getGoogleWorkspaceSender = async (accessToken: string, sender?: string) =>
 };
 
 const sendViaGoogleWorkspace = async (payload: ContactPayload) => {
-  const clientId =
-    import.meta.env.GOOGLE_WORKSPACE_CLIENT_ID ?? process.env.GOOGLE_WORKSPACE_CLIENT_ID;
-  const clientSecret =
-    import.meta.env.GOOGLE_WORKSPACE_CLIENT_SECRET ?? process.env.GOOGLE_WORKSPACE_CLIENT_SECRET;
-  const refreshToken =
-    import.meta.env.GOOGLE_WORKSPACE_REFRESH_TOKEN ?? process.env.GOOGLE_WORKSPACE_REFRESH_TOKEN;
-  const configuredSender =
-    import.meta.env.GOOGLE_WORKSPACE_SENDER_EMAIL ?? process.env.GOOGLE_WORKSPACE_SENDER_EMAIL;
-  const recipient =
-    import.meta.env.CONTACT_NOTIFICATION_EMAIL ??
-    process.env.CONTACT_NOTIFICATION_EMAIL ??
-    defaultNotificationEmail;
+  const env = getEnv();
+  const hermesToken = await readHermesGoogleToken();
+  const clientId = env.GOOGLE_WORKSPACE_CLIENT_ID ?? hermesToken?.client_id;
+  const clientSecret = env.GOOGLE_WORKSPACE_CLIENT_SECRET ?? hermesToken?.client_secret;
+  const refreshToken = env.GOOGLE_WORKSPACE_REFRESH_TOKEN ?? hermesToken?.refresh_token;
+  const configuredSender = env.GOOGLE_WORKSPACE_SENDER_EMAIL ?? hermesToken?.account;
+  const recipient = env.CONTACT_NOTIFICATION_EMAIL ?? defaultNotificationEmail;
 
   if (!clientId || !clientSecret || !refreshToken) {
     return false;
@@ -149,7 +195,7 @@ const sendViaGoogleWorkspace = async (payload: ContactPayload) => {
 };
 
 const forwardViaWebhook = async (payload: ContactPayload) => {
-  const webhookUrl = import.meta.env.CONTACT_WEBHOOK_URL ?? process.env.CONTACT_WEBHOOK_URL;
+  const webhookUrl = getEnv().CONTACT_WEBHOOK_URL;
 
   if (!webhookUrl) {
     return false;

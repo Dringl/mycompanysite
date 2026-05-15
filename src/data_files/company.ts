@@ -34,6 +34,7 @@ export interface HomeCaseHighlight {
 }
 
 import sharedCompanyAerialView from "@/images/shared/shared-company-aerial-view.avif";
+import homeAdvantageVisualImage from "@/images/shared/shared-company-intro-poster.jpeg";
 import homePillars01 from "@/images/pages/home/home-pillars-01.jpeg";
 import homePillars02 from "@/images/pages/home/home-pillars-02.png";
 import homePillars03 from "@/images/pages/home/home-pillars-03.jpeg";
@@ -348,7 +349,7 @@ export const contactHighlights = [
 ] as const;
 
 export const homeAdvantageVisual = {
-  src: sharedCompanyAerialView,
+  src: homeAdvantageVisualImage,
   alt: "无人化装备平台与部件生态展示图",
 } as const;
 
