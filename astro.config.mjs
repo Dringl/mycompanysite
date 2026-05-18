@@ -2,16 +2,14 @@ import { defineConfig } from "astro/config";
 import tailwindcss from "@tailwindcss/vite";
 import sitemap from "@astrojs/sitemap";
 import compressor from "astro-compressor";
-import vercel from "@astrojs/vercel";
+import node from "@astrojs/node";
 
 // https://astro.build/config
 export default defineConfig({
   // https://docs.astro.build/en/guides/images/#authorizing-remote-images
   site: "https://bq-star.com/",
   output: "server",
-  adapter: vercel({
-    imageService: true,
-  }),
+  adapter: node({ mode: "standalone" }),
   image: {
     domains: ["images.unsplash.com"],
   },

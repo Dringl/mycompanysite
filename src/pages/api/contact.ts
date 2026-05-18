@@ -52,6 +52,13 @@ const getEnv = (): EnvLookup => {
 const encodeMimeHeader = (value: string) => `=?UTF-8?B?${Buffer.from(value).toString("base64")}?=`;
 const senderDisplayName = encodeMimeHeader("补全星助手");
 
+const hasGoogleWorkspaceEnv = (env: EnvLookup) =>
+  Boolean(
+    env.GOOGLE_WORKSPACE_CLIENT_ID &&
+      env.GOOGLE_WORKSPACE_CLIENT_SECRET &&
+      env.GOOGLE_WORKSPACE_REFRESH_TOKEN,
+  );
+
 const readHermesGoogleToken = async (): Promise<HermesGoogleToken | null> => {
   try {
     const tokenFile = path.join(os.homedir(), ".hermes", "google_token.json");
@@ -165,10 +172,20 @@ const getGoogleWorkspaceSender = async (accessToken: string, sender?: string) =>
 const sendViaGoogleWorkspace = async (payload: ContactPayload) => {
   const env = getEnv();
   const hermesToken = await readHermesGoogleToken();
-  const clientId = env.GOOGLE_WORKSPACE_CLIENT_ID ?? hermesToken?.client_id;
-  const clientSecret = env.GOOGLE_WORKSPACE_CLIENT_SECRET ?? hermesToken?.client_secret;
-  const refreshToken = env.GOOGLE_WORKSPACE_REFRESH_TOKEN ?? hermesToken?.refresh_token;
-  const configuredSender = env.GOOGLE_WORKSPACE_SENDER_EMAIL ?? hermesToken?.account;
+  const useHermesFallback = !hasGoogleWorkspaceEnv(env);
+
+  const clientId = useHermesFallback
+    ? hermesToken?.client_id
+    : env.GOOGLE_WORKSPACE_CLIENT_ID;
+  const clientSecret = useHermesFallback
+    ? hermesToken?.client_secret
+    : env.GOOGLE_WORKSPACE_CLIENT_SECRET;
+  const refreshToken = useHermesFallback
+    ? hermesToken?.refresh_token
+    : env.GOOGLE_WORKSPACE_REFRESH_TOKEN;
+  const configuredSender = useHermesFallback
+    ? hermesToken?.account
+    : env.GOOGLE_WORKSPACE_SENDER_EMAIL;
   const recipient = env.CONTACT_NOTIFICATION_EMAIL ?? defaultNotificationEmail;
 
   if (!clientId || !clientSecret || !refreshToken) {
