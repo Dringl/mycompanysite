@@ -378,6 +378,21 @@ export const Icons = {
     strokeLinejoin: "round",
     stroke: "currentColor",
   },
+  contactChannel: {
+    paths: [
+      {
+        d: "M3.75 5.25A2.25 2.25 0 0 1 6 3h12a2.25 2.25 0 0 1 2.25 2.25v7.5A2.25 2.25 0 0 1 18 15H9.31l-3.53 3.22A.75.75 0 0 1 4.5 17.67V15A2.25 2.25 0 0 1 3.75 12.75v-7.5ZM7.5 8.25h9m-9 3h5.25",
+      },
+    ],
+    class:
+      "mt-1.5 h-6 w-6 shrink-0 text-neutral-600 dark:text-neutral-400",
+    viewBox: "0 0 24 24",
+    fill: "none",
+    strokeWidth: "1.5",
+    strokeLinecap: "round",
+    strokeLinejoin: "round",
+    stroke: "currentColor",
+  },
   mapPin: {
     paths: [
       {

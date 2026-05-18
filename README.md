@@ -20,9 +20,9 @@ ScrewFast is an **open-source template** designed for quick and efficient web pr
   * [Installation](#installation)
   * [Development Commands](#development-commands)
 * [Deployment](#deployment)
-  * [Building Your Site](#building-your-site)
-  * [Deploying to Vercel](#deploying-to-vercel)
-  * [Deploying to Netlify](#deploying-to-netlify)
+  * [Building the Site](#building-the-site)
+  * [Running in Production](#running-in-production)
+  * [Recommended Production Stack](#recommended-production-stack)
 * [Project Structure](#project-structure)
 * [Static Assets and Public Resources](#static-assets-and-public-resources)
 * [Customization](#customization)
@@ -148,27 +148,32 @@ For detailed help with Astro CLI commands, visit [Astro's documentation](https:/
 
 ## Deployment
 
-### Building Your Site
-
-Before deployment, you need to create a production build:
+### Building the site
 
 ```bash
+npm install
 npm run build
 ```
 
-This creates a `dist/` directory with your built site (configurable via [outDir in Astro](https://docs.astro.build/en/reference/configuration-reference/#outdir)).
+### Running in production
 
-### Deploying to Vercel
+```bash
+HOST=127.0.0.1 PORT=18743 node ./dist/server/entry.mjs
+```
 
-Click the button below to start deploying your project on Vercel:  
+### Recommended production stack
 
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fmearashadowfax%2FScrewFast)
+- Ubuntu/Debian
+- Node.js LTS
+- Nginx reverse proxy
+- systemd service management
+- Cloudflare DNS and proxy
 
-### Deploying to Netlify
-
-Click the button below to start deploying your project on Netlify:  
-
-[![Deploy to Netlify](https://www.netlify.com/img/deploy/button.svg)](https://app.netlify.com/start/deploy?repository=https://github.com/mearashadowfax/ScrewFast)
+See:
+- `docs/deployment/env/bq-star.env.example`
+- `docs/deployment/systemd/bq-star.service.example`
+- `docs/deployment/nginx/bq-star.conf.example`
+- `docs/deployment/cloudflare/cloudflare-cutover-checklist.md`
 
 ## Project Structure
 
@@ -640,24 +645,14 @@ To ensure consistent code formatting, particularly for class sorting, we have in
 
 ### Deployment and Security
 
-We deploy our project on [Vercel](https://vercel.com), capitalizing on their robust platform for seamless CI/CD workflows. Using `vercel.json`, we set stringent security headers and caching policies, ensuring adherence to security and performance best practices:
+This project now targets self-hosted deployment on Ubuntu/Debian with Node.js LTS, Nginx, systemd, and Cloudflare. Security headers from the previous hosted setup are mirrored in `docs/deployment/nginx/bq-star.conf.example`, so the reverse proxy remains the single production entry point for HTTPS, redirects, and header enforcement.
 
-```json
-{
-  "headers": [
-    {
-      "source": "/(.*)",
-      "headers": [
-        {
-          "key": "Content-Security-Policy",
-          "value": "default-src 'self'; [other-directives]"
-        },
-        "Additional security headers..."
-      ]
-    }
-  ]
-}
-```
+Recommended references:
+
+- `docs/deployment/env/bq-star.env.example`
+- `docs/deployment/systemd/bq-star.service.example`
+- `docs/deployment/nginx/bq-star.conf.example`
+- `docs/deployment/cloudflare/cloudflare-cutover-checklist.md`
 
 ### HTML Minification
 
@@ -680,7 +675,6 @@ We encourage you to refer to the detailed documentation for each tool to fully u
 
 * [Preline UI Documentation](https://preline.co/docs)
 * [Tailwind CSS Documentation](https://tailwindcss.com/docs)
-* [Vercel Documentation](https://vercel.com/docs)
 * [html-minifier-terser Documentation](https://github.com/terser/html-minifier-terser)
 
 ## Contributing

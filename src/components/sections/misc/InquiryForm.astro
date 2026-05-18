@@ -12,86 +12,105 @@ interface Props {
   compact?: boolean;
 }
 
-const formClass = compact ? "grid gap-4" : "grid gap-4";
-const successModalId = "contact-inquiry-success-modal";
+const formClass = "grid gap-4";
 ---
 
-<form class={formClass} data-inquiry-form data-success-modal={`#${successModalId}`}>
-  <TextInput id="contact-name" label="姓名" name="name" />
-  <TextInput id="contact-company" label="公司名称" name="company" />
-  <TextInput id="contact-channel" label="联系方式" name="contact" />
-  <div>
-    <label for="contact-inquiry-type" class="sr-only">需求类型</label>
-    <select
-      id="contact-inquiry-type"
-      name="inquiryType"
-      class="block w-full rounded-lg border border-neutral-200 bg-neutral-50 px-4 py-3 text-sm text-neutral-700 focus:border-neutral-200 focus:outline-hidden focus:ring-3 focus:ring-neutral-400 disabled:pointer-events-none disabled:opacity-50 dark:border-neutral-600 dark:bg-neutral-700/30 dark:text-neutral-300 dark:focus:ring-1"
-    >
-      {inquiryTypes.map((item) => <option value={item}>{item}</option>)}
-    </select>
-  </div>
-  <TextAreaInput id="contact-details" label="需求描述" name="details" />
-  <button
-    type="submit"
-    class="inline-flex items-center justify-center rounded-lg bg-zinc-600 px-4 py-3 text-sm font-bold text-white transition duration-300 hover:bg-zinc-500"
-  >
-    {submitLabel}
-  </button>
-  <p class="text-sm text-neutral-600 dark:text-neutral-400" data-inquiry-status>
-    填写后我们会尽快与你联系。
-  </p>
-</form>
-
-<div
-  id={successModalId}
-  class="hs-overlay hs-overlay-backdrop-open:bg-neutral-900/90 fixed start-0 top-0 z-80 hidden h-full w-full overflow-y-auto"
-  data-lenis-prevent
-  aria-labelledby="contact-inquiry-success-title"
->
-  <div class="hs-overlay-open:mt-7 hs-overlay-open:opacity-100 hs-overlay-open:duration-500 m-3 mt-0 flex min-h-[calc(100%-3.5rem)] items-center opacity-0 transition-all ease-out sm:mx-auto sm:w-full sm:max-w-lg">
-    <div class="w-full rounded-2xl border border-white/10 bg-white p-6 text-center shadow-2xl dark:bg-neutral-900">
-      <div class="mx-auto flex max-w-sm flex-col items-center gap-4">
-        <div>
-          <h3
-            id="contact-inquiry-success-title"
-            class="text-xl font-bold text-neutral-800 dark:text-neutral-100"
-          >
-            提交成功，欢迎微信继续沟通
-          </h3>
-          <p class="mt-2 text-sm text-neutral-600 dark:text-neutral-400">
-            我们已收到你的需求，也可以直接扫码添加微信继续沟通。
-          </p>
-        </div>
-        <div class="overflow-hidden rounded-2xl border border-neutral-200 bg-white p-3 shadow-sm dark:border-neutral-700 dark:bg-neutral-950">
-          <Image
-            src={contactWechatQr}
-            alt="补全星科技联系微信二维码"
-            class="mx-auto h-auto w-64 max-w-full rounded-xl"
-            widths={[256, 384]}
-            sizes="(max-width: 640px) 80vw, 256px"
-          />
-        </div>
-        <button
-          type="button"
-          class="inline-flex items-center justify-center rounded-lg bg-zinc-600 px-5 py-3 text-sm font-bold text-white transition duration-300 hover:bg-zinc-500"
-          data-hs-overlay={`#${successModalId}`}
+<div class="space-y-4" data-inquiry-root>
+  <form class={formClass} data-inquiry-form>
+    <div class="grid gap-4" data-inquiry-form-body>
+      <TextInput id="contact-name" label="姓名" name="name" />
+      <TextInput id="contact-company" label="公司名称" name="company" />
+      <TextInput id="contact-channel" label="联系方式" name="contact" />
+      <div>
+        <label for="contact-inquiry-type" class="sr-only">需求类型</label>
+        <select
+          id="contact-inquiry-type"
+          name="inquiryType"
+          class="block w-full rounded-lg border border-neutral-200 bg-neutral-50 px-4 py-3 text-sm text-neutral-700 focus:border-neutral-200 focus:outline-hidden focus:ring-3 focus:ring-neutral-400 disabled:pointer-events-none disabled:opacity-50 dark:border-neutral-600 dark:bg-neutral-700/30 dark:text-neutral-300 dark:focus:ring-1"
         >
-          我知道了
-        </button>
+          {inquiryTypes.map((item) => <option value={item}>{item}</option>)}
+        </select>
       </div>
+      <TextAreaInput id="contact-details" label="需求描述" name="details" />
+      <button
+        type="submit"
+        class="inline-flex items-center justify-center rounded-lg bg-zinc-600 px-4 py-3 text-sm font-bold text-white transition duration-300 hover:bg-zinc-500"
+      >
+        {submitLabel}
+      </button>
+    </div>
+    <p
+      class="text-sm text-neutral-600 dark:text-neutral-400"
+      data-inquiry-status
+      aria-live="polite"
+    >
+      填写后我们会尽快与你联系。
+    </p>
+  </form>
+
+  <div
+    class="hidden rounded-2xl border border-neutral-200 bg-white p-6 text-center shadow-sm dark:border-neutral-700 dark:bg-neutral-900"
+    data-inquiry-success-card
+  >
+    <div class="mx-auto flex max-w-sm flex-col items-center gap-4">
+      <div>
+        <h3
+          class="text-xl font-bold text-neutral-800 dark:text-neutral-100"
+          data-inquiry-success-title
+          tabindex="-1"
+        >
+          提交成功，欢迎微信继续沟通
+        </h3>
+        <p class="mt-2 text-sm text-neutral-600 dark:text-neutral-400">
+          我们已收到你的需求，也可以直接扫码添加微信继续沟通。
+        </p>
+      </div>
+      <div class="overflow-hidden rounded-2xl border border-neutral-200 bg-white p-3 shadow-sm dark:border-neutral-700 dark:bg-neutral-950">
+        <Image
+          src={contactWechatQr}
+          alt="补全星科技联系微信二维码"
+          class="mx-auto h-auto w-64 max-w-full rounded-xl"
+          widths={[256, 384]}
+          sizes="(max-width: 640px) 80vw, 256px"
+        />
+      </div>
+      <button
+        type="button"
+        class="inline-flex items-center justify-center rounded-lg bg-zinc-600 px-5 py-3 text-sm font-bold text-white transition duration-300 hover:bg-zinc-500"
+        data-inquiry-reset
+      >
+        继续填写
+      </button>
     </div>
   </div>
 </div>
 
 <script is:inline>
-  const forms = Array.from(document.querySelectorAll("[data-inquiry-form]"));
+  const roots = Array.from(document.querySelectorAll("[data-inquiry-root]"));
 
-  forms.forEach((form) => {
+  roots.forEach((root) => {
+    if (!(root instanceof HTMLElement)) return;
+
+    const form = root.querySelector("[data-inquiry-form]");
+    const formBody = root.querySelector("[data-inquiry-form-body]");
+    const successCard = root.querySelector("[data-inquiry-success-card]");
+    const successTitle = root.querySelector("[data-inquiry-success-title]");
+    const resetButton = root.querySelector("[data-inquiry-reset]");
+
     if (!(form instanceof HTMLFormElement)) return;
 
     const status = form.querySelector("[data-inquiry-status]");
     const submitButton = form.querySelector('button[type="submit"]');
-    const successModalSelector = form.dataset.successModal;
+
+    const setSuccessView = (showSuccess) => {
+      if (formBody instanceof HTMLElement) {
+        formBody.classList.toggle("hidden", showSuccess);
+      }
+
+      if (successCard instanceof HTMLElement) {
+        successCard.classList.toggle("hidden", !showSuccess);
+      }
+    };
 
     form.addEventListener("submit", async (event) => {
       event.preventDefault();
@@ -129,16 +148,12 @@ const successModalId = "contact-inquiry-success-modal";
             result.message || "提交成功，我们会尽快与你联系。";
         }
 
-        if (
-          successModalSelector &&
-          typeof window !== "undefined" &&
-          window.HSOverlay &&
-          typeof window.HSOverlay.open === "function"
-        ) {
-          const modal = document.querySelector(successModalSelector);
-          if (modal instanceof HTMLElement) {
-            window.HSOverlay.open(modal);
-          }
+        setSuccessView(true);
+
+        if (successTitle instanceof HTMLElement) {
+          successTitle.focus();
+        } else if (resetButton instanceof HTMLButtonElement) {
+          resetButton.focus();
         }
       } catch (error) {
         if (status instanceof HTMLElement) {
@@ -151,5 +166,15 @@ const successModalId = "contact-inquiry-success-modal";
         }
       }
     });
+
+    if (resetButton instanceof HTMLButtonElement) {
+      resetButton.addEventListener("click", () => {
+        if (status instanceof HTMLElement) {
+          status.textContent = "填写后我们会尽快与你联系。";
+        }
+
+        setSuccessView(false);
+      });
+    }
   });
 </script>

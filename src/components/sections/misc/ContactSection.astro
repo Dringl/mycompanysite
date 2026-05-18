@@ -2,8 +2,21 @@
 import ContactIconBlock from "@components/ui/blocks/ContactIconBlock.astro";
 import InquiryForm from "@components/sections/misc/InquiryForm.astro";
 import Icon from "@components/ui/icons/Icon.astro";
-import { COMPANY_INFO, contactHighlights } from "@data/company";
+import { COMPANY_INFO } from "@data/company";
+import { contactHighlightCards as contactHighlightCardsSource } from "@data_files/contact-highlights.mjs";
+import { Icons } from "@components/ui/icons/icons";
 
+interface ContactHighlightCard {
+  heading: string;
+  content: string;
+  icon: keyof typeof Icons;
+  isLinkVisible: boolean;
+  linkTitle: string;
+  linkURL: string;
+  isArrowVisible: boolean;
+}
+
+const contactHighlightCards = contactHighlightCardsSource as ContactHighlightCard[];
 const title = "联系我们";
 const subTitle = COMPANY_INFO.contactIntro;
 const formTitle = "提交咨询需求";
@@ -34,7 +47,7 @@ const formSubTitle = "填写基础信息后，我们会尽快与你联系。";
 
       <div class="flex h-full flex-col divide-y divide-neutral-300 rounded-2xl border border-white/10 bg-white/5 px-4 backdrop-blur-sm sm:px-6 lg:px-8 dark:divide-neutral-700">
         {
-          contactHighlights.map((item, index) => (
+          contactHighlightCards.map((item) => (
             <ContactIconBlock
               heading={item.heading}
               content={item.content}
@@ -43,9 +56,7 @@ const formSubTitle = "填写基础信息后，我们会尽快与你联系。";
               linkURL={item.linkURL}
               isArrowVisible={item.isArrowVisible}
             >
-              <Icon
-                name={index === 0 ? "chatBubble" : index === 1 ? "briefcase" : index === 2 ? "openInNew" : "question"}
-              />
+              <Icon name={item.icon} />
             </ContactIconBlock>
           ))
         }
