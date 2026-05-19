@@ -8,6 +8,8 @@ const defaultProps = {
   structuredData: SEO.structuredData,
   customDescription: null,
   customOgTitle: null,
+  lang: "zh-CN",
+  locale: "zh_CN",
 };
 
 const {
@@ -15,6 +17,8 @@ const {
   structuredData = defaultProps.structuredData,
   customDescription = defaultProps.customDescription,
   customOgTitle = defaultProps.customOgTitle,
+  lang = defaultProps.lang,
+  locale = defaultProps.locale,
 } = Astro.props;
 
 const description = customDescription || meta;
@@ -50,7 +54,7 @@ const appleTouchIcon = await getImage({
 <meta charset="utf-8" />
 <meta content={description} name="description" />
 <meta name="web_author" content={author} />
-<meta name="language" content="zh-CN" />
+<meta name="language" content={lang} />
 <meta
   name="viewport"
   content="width=device-width, initial-scale=1.0, maximum-scale=5.0, minimum-scale=1.0"
@@ -58,7 +62,7 @@ const appleTouchIcon = await getImage({
 <meta http-equiv="X-UA-Compatible" content="ie=edge" />
 <link rel="canonical" href={canonical} />
 
-<meta property="og:locale" content="zh_CN" />
+<meta property="og:locale" content={locale} />
 <meta property="og:url" content={canonical} />
 <meta property="og:type" content="website" />
 <meta property="og:title" content={ogTitle} />

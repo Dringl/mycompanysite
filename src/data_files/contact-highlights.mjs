@@ -27,3 +27,33 @@ export const contactHighlightCards = [
     isArrowVisible: true,
   },
 ];
+
+export const enContactHighlightCards = [
+  {
+    heading: "Explore Services",
+    content: "If you are still shaping your needs, start with our core business capabilities and scenarios.",
+    icon: "chatBubble",
+    isLinkVisible: true,
+    linkTitle: "View Products & Services",
+    linkURL: "/en/services",
+    isArrowVisible: true,
+  },
+  {
+    heading: "See Projects",
+    content: "Review representative deployments in agriculture and unmanned equipment scenarios.",
+    icon: "contactChannel",
+    isLinkVisible: true,
+    linkTitle: "View Projects",
+    linkURL: "/en/projects",
+    isArrowVisible: true,
+  },
+  {
+    heading: "Learn About Us",
+    content: "If you want to understand our positioning, capability boundaries, and collaboration model, visit the about page.",
+    icon: "openInNew",
+    isLinkVisible: true,
+    linkTitle: "About Buquanxing Tech",
+    linkURL: "/en/about",
+    isArrowVisible: true,
+  },
+];

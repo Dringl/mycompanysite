@@ -1,0 +1,127 @@
+---
+import MainLayout from "@/layouts/MainLayout.astro";
+import PrimaryCTA from "@components/ui/buttons/PrimaryCTA.astro";
+import CardSmall from "@components/ui/cards/CardSmall.astro";
+import CardWide from "@components/ui/cards/CardWide.astro";
+import FeaturesStatsAlt from "@components/sections/features/FeaturesStatsAlt.astro";
+import TestimonialsSectionAlt from "@components/sections/testimonials/TestimonialsSectionAlt.astro";
+import projectsTestimonialAvatar01 from "@images/pages/projects/projects-testimonial-avatar-01.jpeg";
+import projectsTestimonialAvatar02 from "@images/pages/projects/projects-testimonial-avatar-02.jpeg";
+import projectsTestimonialAvatar03 from "@images/pages/projects/projects-testimonial-avatar-03.jpeg";
+import projectsStatsImage from "@images/pages/projects/projects-stats-image.jpeg";
+import { getCollection } from "astro:content";
+import type { CollectionEntry } from "astro:content";
+import { SITE } from "@data/constants";
+import { EN_COMPANY_INFO, EN_PROJECTS_PAGE_CONTENT } from "@data/company.en";
+
+const product: CollectionEntry<"products">[] = (
+  await getCollection("products")
+).sort(
+  (a: CollectionEntry<"products">, b: CollectionEntry<"products">) =>
+    a.data.main.id - b.data.main.id
+);
+
+const title = EN_PROJECTS_PAGE_CONTENT.title;
+const subTitle = EN_PROJECTS_PAGE_CONTENT.subTitle;
+
+const testimonials = [
+  {
+    content: EN_PROJECTS_PAGE_CONTENT.testimonials[0].content,
+    author: EN_PROJECTS_PAGE_CONTENT.testimonials[0].author,
+    role: EN_PROJECTS_PAGE_CONTENT.testimonials[0].role,
+    avatarSrc: projectsTestimonialAvatar01.src,
+    avatarAlt: "Integration lead avatar",
+  },
+  {
+    content: EN_PROJECTS_PAGE_CONTENT.testimonials[1].content,
+    author: EN_PROJECTS_PAGE_CONTENT.testimonials[1].author,
+    role: EN_PROJECTS_PAGE_CONTENT.testimonials[1].role,
+    avatarSrc: projectsTestimonialAvatar02.src,
+    avatarAlt: "Platform product manager avatar",
+  },
+  {
+    content: EN_PROJECTS_PAGE_CONTENT.testimonials[2].content,
+    author: EN_PROJECTS_PAGE_CONTENT.testimonials[2].author,
+    role: EN_PROJECTS_PAGE_CONTENT.testimonials[2].role,
+    avatarSrc: projectsTestimonialAvatar03.src,
+    avatarAlt: "Scenario project lead avatar",
+  },
+];
+
+const pageTitle = `Projects | ${EN_COMPANY_INFO.shortName}`;
+const metaDescription =
+  "See representative Buquanxing Tech deployments across parts supply, core systems, modular chassis, and scenario services.";
+const ogTitle = `Projects | ${EN_COMPANY_INFO.shortName}`;
+const projectsUrl = new URL("/en/projects", SITE.url).toString();
+---
+
+<MainLayout
+  title={pageTitle}
+  customDescription={metaDescription}
+  customOgTitle={ogTitle}
+  structuredData={{
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    "@id": projectsUrl,
+    url: projectsUrl,
+    name: `${EN_COMPANY_INFO.shortName} Projects`,
+    description: metaDescription,
+    isPartOf: {
+      "@type": "WebSite",
+      url: SITE.url,
+      name: SITE.title,
+      description: SITE.description,
+    },
+    inLanguage: "en",
+  }}
+  lang="en"
+>
+  <div class="mx-auto w-full max-w-(--breakpoint-2xl) flex-grow px-4 sm:px-6 lg:px-8">
+    <div class="mx-auto max-w-[85rem] px-4 py-10 sm:px-6 lg:px-8 lg:py-14 2xl:max-w-full">
+      <div class="mb-4 flex items-center justify-between gap-8 sm:mb-8 md:mb-12">
+        <div class="flex items-center gap-12">
+          <h1 class="text-2xl font-bold tracking-tight text-balance text-neutral-800 md:text-4xl md:leading-tight dark:text-neutral-200">
+            {title}
+          </h1>
+          {
+            subTitle && (
+              <p class="hidden max-w-(--breakpoint-sm) text-pretty text-neutral-600 md:block dark:text-neutral-400">
+                {subTitle}
+              </p>
+            )
+          }
+        </div>
+        <PrimaryCTA title="View Feedback" url="#testimonials" noArrow={true} />
+      </div>
+      <section class="grid grid-cols-1 gap-4 sm:grid-cols-3 md:gap-6 xl:gap-8">
+        {
+          product.map((product, index) => {
+            const position = index % 4;
+            if (position === 0 || position === 3) {
+              return <CardSmall product={product} />;
+            } else {
+              return <CardWide product={product} />;
+            }
+          })
+        }
+      </section>
+    </div>
+
+    <FeaturesStatsAlt
+      title="Why Work With Buquanxing Tech"
+      subTitle="We combine scenario understanding, equipment capability, and delivery discipline to help customers move from pilot validation to scalable deployment in real operating environments."
+      benefits={[
+        "Stay close to real operating flows and field constraints in agriculture and unmanned scenarios.",
+        "Coordinate platform, hardware, implementation, and collaboration to reduce gaps between planning and deployment.",
+        "Keep iterating with customers so the scenario can evolve into a reusable operating capability.",
+      ]}
+      src={projectsStatsImage}
+      alt="Unmanned equipment operating in rugged terrain"
+    />
+
+    <TestimonialsSectionAlt
+      title="Client Feedback"
+      testimonials={testimonials}
+    />
+  </div>
+</MainLayout>

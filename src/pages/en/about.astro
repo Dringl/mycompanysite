@@ -1,0 +1,147 @@
+---
+export const prerender = true;
+
+import MainLayout from "@/layouts/MainLayout.astro";
+import MainSection from "@components/ui/blocks/MainSection.astro";
+import FeaturesStatsAlt from "@components/sections/features/FeaturesStatsAlt.astro";
+import VideoShowcase from "@components/sections/landing/VideoShowcase.astro";
+import { Image } from "astro:assets";
+import aboutOverviewImage from "@images/pages/about/about-overview-image.jpeg";
+import aboutStrengthsImage from "@images/pages/about/about-strengths-image.jpeg";
+import { EN_ABOUT_PAGE_CONTENT, EN_COMPANY_INFO } from "@data/company.en";
+import { SITE } from "@data/constants";
+
+const pageTitle = `About | ${EN_COMPANY_INFO.shortName}`;
+const metaDescription =
+  "Learn how Buquanxing Tech positions itself as an unmanned equipment company built around parts supply, system supply, modular chassis, and scenario solution services.";
+const canonicalUrl = `${SITE.url}/en/about`;
+---
+
+<MainLayout
+  title={pageTitle}
+  customDescription={metaDescription}
+  customOgTitle={pageTitle}
+  structuredData={{
+    "@context": "https://schema.org",
+    "@type": "AboutPage",
+    "@id": canonicalUrl,
+    url: canonicalUrl,
+    name: `${EN_COMPANY_INFO.shortName} About`,
+    description: metaDescription,
+    about: {
+      "@type": "Organization",
+      name: EN_COMPANY_INFO.name,
+      alternateName: EN_COMPANY_INFO.shortName,
+      description: EN_COMPANY_INFO.description,
+      url: `${SITE.url}/en`,
+    },
+    isPartOf: {
+      "@type": "WebSite",
+      url: SITE.url,
+      name: SITE.title,
+      description: SITE.description,
+    },
+    inLanguage: "en",
+  }}
+  lang="en"
+>
+  <div class="mx-auto w-full max-w-(--breakpoint-2xl) flex-grow px-4 sm:px-6 lg:px-8">
+    <MainSection
+      title={EN_ABOUT_PAGE_CONTENT.hero.title}
+      subTitle={EN_ABOUT_PAGE_CONTENT.hero.subTitle}
+      btnExists={EN_ABOUT_PAGE_CONTENT.hero.btnExists}
+      btnTitle={EN_ABOUT_PAGE_CONTENT.hero.btnTitle}
+      btnURL={EN_ABOUT_PAGE_CONTENT.hero.btnURL}
+    />
+
+    <section class="mx-auto max-w-[85rem] px-4 py-6 sm:px-6 lg:px-8 lg:py-10 2xl:max-w-full">
+      <div class="grid items-center gap-8 rounded-3xl border border-[color:var(--border-soft)] bg-[color:var(--surface-1)]/88 p-6 backdrop-blur-sm lg:grid-cols-[1.1fr_0.9fr] lg:p-8">
+        <div>
+          <p class="text-sm font-semibold uppercase tracking-[0.2em] text-primary-blue">
+            Company Overview
+          </p>
+          <h2 class="mt-4 text-3xl font-bold text-[color:var(--text-strong)] lg:text-4xl">
+            {EN_ABOUT_PAGE_CONTENT.overview.title}
+          </h2>
+          <p class="mt-5 text-pretty text-base leading-8 text-[color:var(--text-body)] lg:text-lg">
+            {EN_ABOUT_PAGE_CONTENT.overview.subTitle}
+          </p>
+        </div>
+        <Image
+          src={aboutOverviewImage}
+          alt="Buquanxing Tech team discussing unmanned equipment solutions"
+          class="w-full rounded-2xl object-cover"
+          format={"avif"}
+        />
+      </div>
+    </section>
+
+    <VideoShowcase
+      title={EN_ABOUT_PAGE_CONTENT.mission.title}
+      subTitle={EN_ABOUT_PAGE_CONTENT.mission.subTitle}
+      highlights={[...EN_ABOUT_PAGE_CONTENT.mission.highlights]}
+      videoUrl={EN_ABOUT_PAGE_CONTENT.mission.videoUrl}
+      ctaTitle={EN_ABOUT_PAGE_CONTENT.mission.ctaTitle}
+      ctaUrl={EN_ABOUT_PAGE_CONTENT.mission.ctaUrl}
+    />
+
+    <FeaturesStatsAlt
+      title={EN_ABOUT_PAGE_CONTENT.strengths.title}
+      subTitle={EN_ABOUT_PAGE_CONTENT.strengths.subTitle}
+      benefits={[...EN_ABOUT_PAGE_CONTENT.strengths.benefits]}
+      src={aboutStrengthsImage}
+      alt={EN_ABOUT_PAGE_CONTENT.strengths.alt}
+    />
+
+    <section class="mx-auto max-w-[85rem] px-4 py-10 sm:px-6 lg:px-8 lg:py-14 2xl:max-w-full">
+      <div class="rounded-3xl border border-white/10 bg-neutral-950/40 p-6 lg:p-10">
+        <div class="max-w-3xl">
+          <p class="text-sm font-semibold uppercase tracking-[0.2em] text-primary-blue">
+            Capability Snapshot
+          </p>
+          <h2 class="mt-4 text-3xl font-bold text-neutral-100 lg:text-4xl">
+            {EN_ABOUT_PAGE_CONTENT.stats.title}
+          </h2>
+          <p class="mt-4 text-pretty leading-8 text-neutral-300">
+            {EN_ABOUT_PAGE_CONTENT.stats.subTitle}
+          </p>
+        </div>
+
+        <div class="mt-10 grid gap-6 lg:grid-cols-[0.9fr_1.1fr] lg:items-start">
+          <div class="rounded-2xl border border-primary-blue/20 bg-primary-blue/10 p-6">
+            <div class="text-5xl font-extrabold text-neutral-50 lg:text-6xl">
+              {EN_ABOUT_PAGE_CONTENT.stats.mainStatTitle}
+            </div>
+            <p class="mt-4 text-base leading-7 text-neutral-200">
+              {EN_ABOUT_PAGE_CONTENT.stats.mainStatSubTitle}
+            </p>
+          </div>
+
+          <div class="grid gap-4 sm:grid-cols-2">
+            {EN_ABOUT_PAGE_CONTENT.stats.items.map((item) => (
+              <article class="rounded-2xl border border-white/10 bg-white/5 p-5">
+                <h3 class="text-lg font-semibold text-neutral-100">{item.stat}</h3>
+                <p class="mt-3 text-sm leading-7 text-neutral-300">{item.description}</p>
+              </article>
+            ))}
+          </div>
+        </div>
+
+        <div class="mt-8 flex flex-wrap items-center gap-4">
+          <a
+            href="/en/contact"
+            class="inline-flex items-center justify-center rounded-full bg-primary-blue px-6 py-3 text-sm font-semibold text-neutral-950 transition duration-300 hover:bg-primary-blue/80"
+          >
+            {EN_ABOUT_PAGE_CONTENT.stats.primaryCtaTitle}
+          </a>
+          <a
+            href="/en/services"
+            class="text-sm font-medium text-neutral-200 underline underline-offset-4 transition duration-300 hover:text-neutral-50"
+          >
+            {EN_ABOUT_PAGE_CONTENT.stats.secondaryCtaTitle}
+          </a>
+        </div>
+      </div>
+    </section>
+  </div>
+</MainLayout>

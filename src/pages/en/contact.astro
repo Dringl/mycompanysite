@@ -1,0 +1,62 @@
+---
+import MainLayout from "@/layouts/MainLayout.astro";
+import ContactSection from "@components/sections/misc/ContactSection.astro";
+import { EN_COMPANY_INFO, EN_INQUIRY_TYPES } from "@data/company.en";
+import { enContactHighlightCards } from "@data_files/contact-highlights.mjs";
+import { SITE } from "@data/constants";
+
+const pageTitle = `Contact | ${EN_COMPANY_INFO.shortName}`;
+const metaDescription = EN_COMPANY_INFO.contactIntro;
+const canonicalUrl = `${SITE.url}/en/contact`;
+---
+
+<MainLayout
+  title={pageTitle}
+  customDescription={metaDescription}
+  customOgTitle={pageTitle}
+  structuredData={{
+    "@context": "https://schema.org",
+    "@type": "ContactPage",
+    "@id": canonicalUrl,
+    url: canonicalUrl,
+    name: `${EN_COMPANY_INFO.shortName} Contact`,
+    description: metaDescription,
+    isPartOf: {
+      "@type": "WebSite",
+      url: SITE.url,
+      name: SITE.title,
+      description: SITE.description,
+    },
+    inLanguage: "en",
+  }}
+  lang="en"
+>
+  <ContactSection
+    title="Contact Us"
+    subTitle={EN_COMPANY_INFO.contactIntro}
+    formTitle="Send Us Your Inquiry"
+    formSubTitle="Leave the basics of your scenario and we will get back to you soon."
+    submitLabel={EN_COMPANY_INFO.ctaLabel}
+    phoneLabel="Consulting Phone"
+    phoneName="Mr. Liu"
+    phoneNumber="18622472119"
+    contactHighlightCards={enContactHighlightCards}
+    locale="en-US"
+    inquiryTypeOptions={EN_INQUIRY_TYPES}
+    inquiryFormLabels={{
+      name: "Name",
+      company: "Company",
+      contact: "Contact Info",
+      inquiryType: "Inquiry Type",
+      details: "Project Details",
+      statusIdle: "Fill out the form and we will contact you soon.",
+      statusSubmitting: "Submitting, please wait…",
+      successTitle: "Submitted successfully — feel free to continue on WeChat",
+      successDescription:
+        "We have received your inquiry. You can also scan the QR code to keep the conversation going on WeChat.",
+      resetText: "Submit another inquiry",
+      successStatus: "Submitted successfully. We will contact you soon.",
+      failureStatus: "Submission failed. Please try again later.",
+    }}
+  />
+</MainLayout>
