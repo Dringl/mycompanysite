@@ -357,25 +357,29 @@ test("footer brand uses the standard logo asset without inversion", async () => 
   assert.doesNotMatch(footerSource, /invert/);
 });
 
-test("homepage hero copy matches the visual refresh messaging", async () => {
+test("homepage hero copy rolls back to the previously approved version", async () => {
   const companySource = await read("src/data_files/company.ts");
 
-  assert.match(companySource, /title:\s*"加速无人化装备走向真实场景"/);
-  assert.match(companySource, /brandTitle:\s*"让平台能力补全生产与服务链路"/);
+  assert.match(companySource, /title:\s*"加速无人化装备普及补全生活生产每一环从源头解放劳动力"/);
+  assert.match(companySource, /brandTitle:\s*"补全星科技"/);
   assert.match(
     companySource,
-    /subTitle:\s*"围绕零部件、核心系统、通用底盘与方案服务，推动无人化能力从研发验证走向规模化应用。"/,
+    /subTitle:\s*"围绕无人化装备零件供应、核心系统供应、通用底盘供应与场景解决方案服务，补全科研到落地全链条；产品不是我们的目的，解放劳动力是我们的终极目标。"/,
   );
-  assert.match(companySource, /title:\s*"无人化装备零件"/);
-  assert.match(companySource, /title:\s*"无人化装备系统"/);
-  assert.match(companySource, /title:\s*"模块化通用底盘"/);
-  assert.match(companySource, /title:\s*"场景解决方案"/);
-  assert.match(companySource, /title:\s*"农业场景解决方案"/);
-  assert.match(companySource, /title:\s*"养老场景解决方案"/);
-  assert.match(companySource, /title:\s*"工业场景解决方案"/);
-  assert.match(companySource, /针对农业劳动强度大，老龄化严重等问题，主打“一条农”服务，服务覆盖农业生产全周期，分为三大阶段共 10 项核心服务作业：前期包含除草、犁地、旋耕、起垄、播种、覆膜，中期提供打药、撒肥服务，后期完成收割、运输作业。/);
-  assert.match(companySource, /针对失能半失能老人，推出“全知”智能座椅，采用高通过底盘，集成健康监测、应急报警、情感陪护、自动遛弯、定时返航五大功能。/);
-  assert.match(companySource, /针对封闭工厂园区，推出“小蚂蚁”AMR自动物料转运和“黏人精”跟随工具车，解决封闭园区内多厂房之间的物料转运问题和手推工具车效率低下问题。/);
+});
+
+test("homepage first pillar uses a parts-focused replacement image", async () => {
+  const companySource = await read("src/data_files/company.ts");
+
+  assert.match(companySource, /import homePillars01 from "@\/images\/pages\/home\/home-pillars-01\.(png|jpe?g|jpg|avif)"/);
+  assert.match(
+    companySource,
+    /\{\s*title:\s*"无人化装备零件",\s*summary:\s*"围绕动力和控制，供应无人化装备系统集成所需的关键零件。",\s*image:\s*homePillars01,\s*\}/,
+  );
+  assert.doesNotMatch(
+    companySource,
+    /\{\s*title:\s*"无人化装备零件",\s*summary:\s*"围绕动力和控制，供应无人化装备系统集成所需的关键零件。",\s*image:\s*homePillars02,\s*\}/,
+  );
 });
 
 test("homepage video showcase copy matches the refresh plan", async () => {
@@ -420,24 +424,34 @@ test("services page includes a product catalog module backed by product material
   );
 });
 
-test("solutions pages use dedicated scene imagery instead of icon placeholders", async () => {
+test("solutions pages replace all four scene images with curated page assets", async () => {
   const solutionsSource = await read("src/pages/solutions.astro");
   const enSolutionsSource = await read("src/pages/en/solutions.astro");
 
+  assert.match(solutionsSource, /solutions-section-01-image-01/);
+  assert.match(solutionsSource, /solutions-section-01-image-02/);
+  assert.match(solutionsSource, /solutions-section-02-image/);
+  assert.match(solutionsSource, /solutions-section-03-image-01/);
+  assert.match(solutionsSource, /solutions-section-03-image-02/);
+  assert.match(solutionsSource, /solutions-section-04-image/);
+  assert.match(enSolutionsSource, /solutions-section-01-image-01/);
+  assert.match(enSolutionsSource, /solutions-section-01-image-02/);
+  assert.match(enSolutionsSource, /solutions-section-02-image/);
+  assert.match(enSolutionsSource, /solutions-section-03-image-01/);
+  assert.match(enSolutionsSource, /solutions-section-03-image-02/);
+  assert.match(enSolutionsSource, /solutions-section-04-image/);
   assert.doesNotMatch(solutionsSource, /solutions-service-icon-black/);
   assert.doesNotMatch(enSolutionsSource, /solutions-service-icon-black/);
-  assert.match(solutionsSource, /@images\/pages\/solutions\//);
-  assert.match(enSolutionsSource, /@images\/pages\/solutions\//);
 });
 
-test("about page content data avoids homepage shared aerial imagery", async () => {
-  const companySource = await read("src/data_files/company.ts");
-  const companyEnSource = await read("src/data_files/company.en.ts");
+test("about keyword summary uses the light business module style", async () => {
+  const aboutSource = await read("src/pages/about.astro");
+  const enAboutSource = await read("src/pages/en/about.astro");
 
-  assert.doesNotMatch(companySource, /src:\s*sharedCompanyAerialView/);
-  assert.doesNotMatch(companyEnSource, /src:\s*sharedCompanyAerialView/);
-  assert.doesNotMatch(companySource, /import sharedCompanyAerialView/);
-  assert.doesNotMatch(companyEnSource, /import sharedCompanyAerialView/);
+  assert.match(aboutSource, /bg-\[color:var\(--surface-1\)\]/);
+  assert.match(enAboutSource, /bg-\[color:var\(--surface-1\)\]/);
+  assert.doesNotMatch(aboutSource, /bg-neutral-950\/40/);
+  assert.doesNotMatch(enAboutSource, /bg-neutral-950\/40/);
 });
 
 
