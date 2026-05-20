@@ -77,17 +77,17 @@ export const COMPANY_INFO = {
     "重庆补全星科技有限公司以无人化装备公司定位对外展开业务，重点提供无人化零件供应、部件供应、通用底盘供应与方案服务，并围绕丘陵山地农业、园区巡检、公共服务等场景推进装备能力落地。",
   descriptionShort:
     "补全星科技聚焦无人化零件、部件、通用底盘与场景方案服务。",
-  ctaLabel: "咨询方案",
+  ctaLabel: "联系我们",
   contactIntro:
     "欢迎联系我们，沟通无人化零件供应、部件供应、通用底盘配套与场景方案服务需求。",
   footerNote:
     "以无人化装备底层能力为核心，提供零件、部件、通用底盘与场景方案服务。",
   hero: {
     tagline: "无人化装备 × 模块化平台 × 场景方案服务",
-    title: "让无人化装备更快进入真实业务现场",
+    title: "加速无人化装备普及补全生活生产每一环从源头解放劳动力",
     brandTitle: "补全星科技",
     subTitle:
-      "围绕无人化零件供应、核心部件供应、模块化通用底盘供应与方案服务，补全从能力拼装到场景落地的关键一环；农业是重点应用方向之一，但不是我们的唯一边界。",
+      "围绕无人化装备零件供应、核心系统供应、通用底盘供应与场景解决方案服务，补全科研到落地全链条；产品不是我们的目的，解放劳动力是我们的终极目标。",
     primaryText: "发起咨询",
     primaryUrl: "/contact",
     secondaryText: "查看解决方案",
@@ -97,11 +97,10 @@ export const COMPANY_INFO = {
 
 export const PRIMARY_NAVIGATION: NavigationLink[] = [
   { name: "首页", url: "/" },
-  { name: "产品与服务", url: "/services" },
+  { name: "服务", url: "/services" },
   { name: "解决方案", url: "/solutions" },
-  { name: "客户案例", url: "/projects" },
-  { name: "关于我们", url: "/about" },
-  { name: "联系我们", url: "/contact" },
+  { name: "案例", url: "/projects" },
+  { name: "关于", url: "/about" },
 ];
 
 export const FOOTER_NAVIGATION: NavigationSection[] = [
@@ -137,27 +136,26 @@ export const COMPANY_LINKS = {
 
 export const homePillars: HomePillar[] = [
   {
-    title: "无人化零件供应",
-    summary: "提供适配无人化装备系统集成所需的关键零件，帮助客户缩短从选型到装配的推进周期。",
+    title: "无人化装备零件",
+    summary: "围绕动力和控制，供应无人化装备系统集成所需的关键零件。",
     image: homePillars01,
   },
   {
-    title: "核心部件供应",
-    summary: "围绕动力、控制、执行与协同链路提供核心部件支撑，强化整机与平台的稳定性与可扩展性。",
+    title: "无人化装备系统",
+    summary: "提供三大自动化系统，可进行二次开发。",
     image: homePillars02,
   },
   {
     title: "模块化通用底盘",
-    summary: "以通用底盘为基础承接运输、巡检、作业与二次开发需求，为多类无人化装备提供统一底座。",
+    summary: "供应数种标准通用底盘，可在底盘基础上开发自己的场景解决方案。",
     image: homePillars03,
   },
   {
-    title: "方案服务",
-    summary: "从需求梳理、部件组合到场景适配和交付验证，帮助客户把无人化能力真正导入业务现场。",
+    title: "场景解决方案",
+    summary: "从需求梳理、能力组合到部署验证与优化迭代，协同客户把无人化能力落到真实业务现场。",
     image: homePillars04,
   },
 ];
-
 
 export const homeSolutionTabs: HomeSolutionTab[] = [
   {
@@ -190,31 +188,30 @@ export const homeSolutionTabs: HomeSolutionTab[] = [
 
 export const homeCaseHighlights: HomeCaseHighlight[] = [
   {
-    title: "丘陵山地作业装备组合方案",
+    title: "农业场景解决方案",
     summary:
-      "面向复杂地形与高通过性要求，组合底盘、执行部件与场景服务能力，支撑丘陵山地场景中的无人化作业验证。",
-    tag: "通用底盘 + 方案服务",
+      "针对农业劳动强度大，老龄化严重等问题，主打“一条农”服务，服务覆盖农业生产全周期，分为三大阶段共 10 项核心服务作业：前期包含除草、犁地、旋耕、起垄、播种、覆膜，中期提供打药、撒肥服务，后期完成收割、运输作业。",
+    tag: "农业",
     image: homeCaseHighlights01,
     href: "/projects",
   },
   {
-    title: "园区巡检平台快速集成",
+    title: "养老场景解决方案",
     summary:
-      "围绕巡检、采集与移动执行需求，输出零件、部件与控制链路的组合方案，帮助项目更快进入交付阶段。",
-    tag: "零件 + 部件供应",
+      "针对失能半失能老人，推出“全知”智能座椅，采用高通过底盘，集成健康监测、应急报警、情感陪护、自动遛弯、定时返航五大功能。",
+    tag: "养老",
     image: homeCaseHighlights02,
     href: "/projects",
   },
   {
-    title: "多场景底盘适配与扩展",
+    title: "工业场景解决方案",
     summary:
-      "通过模块化底盘平台承接运输、巡逻、公共服务等不同任务，保留后续功能扩展与二次开发空间。",
-    tag: "模块化底盘",
+      "针对封闭工厂园区，推出“小蚂蚁”AMR自动物料转运和“黏人精”跟随工具车，解决封闭园区内多厂房之间的物料转运问题和手推工具车效率低下问题。",
+    tag: "工业",
     image: homeCaseHighlights03,
     href: "/projects",
   },
 ];
-
 
 export const companyAdvantages = [
   "以无人化装备底层能力切入，优先解决零件、部件、通用底盘与集成协同这些真正影响项目落地的问题。",

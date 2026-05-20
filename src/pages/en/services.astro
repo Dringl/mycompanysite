@@ -13,7 +13,7 @@ import servicesSection03Image01 from "@images/pages/services/services-section-03
 import servicesSection03Image02 from "@images/pages/services/services-section-03-image-02.jpeg";
 import servicesSection04Image from "@images/pages/services/services-section-04-image.jpeg";
 import { SITE } from "@data/constants";
-import { servicesPageContent } from "@data/company";
+import { EN_COMPANY_INFO, EN_SERVICES_PAGE_CONTENT } from "@data/company.en";
 
 interface RightArticle {
   type: "right";
@@ -40,7 +40,7 @@ interface LeftArticle {
   btnURL?: string;
 }
 
-const serviceSections = servicesPageContent.sections;
+const serviceSections = EN_SERVICES_PAGE_CONTENT.sections;
 
 const sectionImages: (RightArticle | LeftArticle)[] = [
   {
@@ -88,11 +88,11 @@ const sectionImages: (RightArticle | LeftArticle)[] = [
   },
 ];
 
-const pageTitle = `产品与服务 | ${SITE.title}`;
+const pageTitle = `Services | ${EN_COMPANY_INFO.shortName}`;
 const metaDescription =
-  "补全星科技围绕无人化零件供应、核心部件供应、模块化通用底盘与方案服务，提供面向真实场景的一体化产品与服务能力。";
-const ogTitle = "产品与服务 | 补全星科技";
-const servicesUrl = new URL("/services", SITE.url).toString();
+  "Buquanxing Tech delivers parts supply, core systems, modular chassis, and solution services for real unmanned equipment deployment.";
+const ogTitle = `Services | ${EN_COMPANY_INFO.shortName}`;
+const servicesUrl = new URL("/en/services", SITE.url).toString();
 ---
 
 <MainLayout
@@ -104,7 +104,7 @@ const servicesUrl = new URL("/services", SITE.url).toString();
     "@type": "WebPage",
     "@id": servicesUrl,
     url: servicesUrl,
-    name: "补全星科技产品与服务",
+    name: `${EN_COMPANY_INFO.shortName} Services`,
     description: metaDescription,
     isPartOf: {
       "@type": "WebSite",
@@ -112,18 +112,17 @@ const servicesUrl = new URL("/services", SITE.url).toString();
       name: SITE.title,
       description: SITE.description,
     },
-    inLanguage: "zh-CN",
+    inLanguage: "en",
   }}
+  lang="en"
 >
-  <div
-    class="mx-auto w-full max-w-(--breakpoint-2xl) flex-grow px-4 sm:px-6 lg:px-8"
-  >
+  <div class="mx-auto w-full max-w-(--breakpoint-2xl) flex-grow px-4 sm:px-6 lg:px-8">
     <MainSection
-      title={servicesPageContent.hero.title}
-      subTitle={servicesPageContent.hero.subTitle}
-      btnExists={servicesPageContent.hero.btnExists}
-      btnTitle={servicesPageContent.hero.btnTitle}
-      btnURL={servicesPageContent.hero.btnURL}
+      title={EN_SERVICES_PAGE_CONTENT.hero.title}
+      subTitle={EN_SERVICES_PAGE_CONTENT.hero.subTitle}
+      btnExists={EN_SERVICES_PAGE_CONTENT.hero.btnExists}
+      btnTitle={EN_SERVICES_PAGE_CONTENT.hero.btnTitle}
+      btnURL={EN_SERVICES_PAGE_CONTENT.hero.btnURL}
     />
 
     {
@@ -155,14 +154,14 @@ const servicesUrl = new URL("/services", SITE.url).toString();
       })
     }
 
-    <ProductCatalog />
+    <ProductCatalog locale="en" />
 
     <FeaturesStats
-      title={servicesPageContent.stats.title}
-      subTitle={servicesPageContent.stats.subTitle}
-      mainStatTitle={servicesPageContent.stats.mainStatTitle}
-      mainStatSubTitle={servicesPageContent.stats.mainStatSubTitle}
-      stats={[...servicesPageContent.stats.items]}
+      title={EN_SERVICES_PAGE_CONTENT.stats.title}
+      subTitle={EN_SERVICES_PAGE_CONTENT.stats.subTitle}
+      mainStatTitle={EN_SERVICES_PAGE_CONTENT.stats.mainStatTitle}
+      mainStatSubTitle={EN_SERVICES_PAGE_CONTENT.stats.mainStatSubTitle}
+      stats={[...EN_SERVICES_PAGE_CONTENT.stats.items]}
     />
   </div>
 </MainLayout>

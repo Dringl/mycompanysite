@@ -13,7 +13,7 @@ interface Faq {
 
 interface FaqGroup {
   subTitle?: string;
-  faqs: Faq[];
+  faqs: ReadonlyArray<Faq>;
 }
 
 interface Props {

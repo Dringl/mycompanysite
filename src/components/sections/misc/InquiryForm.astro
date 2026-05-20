@@ -3,35 +3,75 @@ import { Image } from "astro:assets";
 import TextInput from "@components/ui/forms/input/TextInput.astro";
 import TextAreaInput from "@components/ui/forms/input/TextAreaInput.astro";
 import { inquiryTypes } from "@data/company";
+import { EN_INQUIRY_TYPES } from "@data/company.en";
 import contactWechatQr from "@images/contact-wechat-qr.jpg";
 
-const { submitLabel = "提交咨询", compact = false } = Astro.props;
+const {
+  submitLabel = "提交咨询",
+  compact = false,
+  locale = "zh-CN",
+  labels,
+  inquiryTypeOptions,
+} = Astro.props;
 
 interface Props {
   submitLabel?: string;
   compact?: boolean;
+  locale?: string;
+  inquiryTypeOptions?: readonly string[];
+  labels?: {
+    name?: string;
+    company?: string;
+    contact?: string;
+    inquiryType?: string;
+    details?: string;
+    statusIdle?: string;
+    statusSubmitting?: string;
+    successTitle?: string;
+    successDescription?: string;
+    resetText?: string;
+    successStatus?: string;
+    failureStatus?: string;
+  };
 }
 
-const formClass = "grid gap-4";
+const formClass = compact ? "grid gap-4" : "grid gap-6";
+const inquiryOptions = inquiryTypeOptions ?? (locale.startsWith("en") ? EN_INQUIRY_TYPES : inquiryTypes);
+
+const copy = {
+  name: labels?.name ?? "姓名",
+  company: labels?.company ?? "公司名称",
+  contact: labels?.contact ?? "联系方式",
+  inquiryType: labels?.inquiryType ?? "需求类型",
+  details: labels?.details ?? "需求描述",
+  statusIdle: labels?.statusIdle ?? "填写后我们会尽快与你联系。",
+  statusSubmitting: labels?.statusSubmitting ?? "正在提交，请稍候…",
+  successTitle: labels?.successTitle ?? "提交成功，欢迎微信继续沟通",
+  successDescription:
+    labels?.successDescription ?? "我们已收到你的需求，也可以直接扫码添加微信继续沟通。",
+  resetText: labels?.resetText ?? "继续填写",
+  successStatus: labels?.successStatus ?? "提交成功，我们会尽快与你联系。",
+  failureStatus: labels?.failureStatus ?? "提交失败，请稍后重试。",
+};
 ---
 
 <div class="space-y-4" data-inquiry-root>
   <form class={formClass} data-inquiry-form>
     <div class="grid gap-4" data-inquiry-form-body>
-      <TextInput id="contact-name" label="姓名" name="name" />
-      <TextInput id="contact-company" label="公司名称" name="company" />
-      <TextInput id="contact-channel" label="联系方式" name="contact" />
+      <TextInput id="contact-name" label={copy.name} name="name" />
+      <TextInput id="contact-company" label={copy.company} name="company" />
+      <TextInput id="contact-channel" label={copy.contact} name="contact" />
       <div>
-        <label for="contact-inquiry-type" class="sr-only">需求类型</label>
+        <label for="contact-inquiry-type" class="sr-only">{copy.inquiryType}</label>
         <select
           id="contact-inquiry-type"
           name="inquiryType"
           class="block w-full rounded-lg border border-neutral-200 bg-neutral-50 px-4 py-3 text-sm text-neutral-700 focus:border-neutral-200 focus:outline-hidden focus:ring-3 focus:ring-neutral-400 disabled:pointer-events-none disabled:opacity-50 dark:border-neutral-600 dark:bg-neutral-700/30 dark:text-neutral-300 dark:focus:ring-1"
         >
-          {inquiryTypes.map((item) => <option value={item}>{item}</option>)}
+          {inquiryOptions.map((item) => <option value={item}>{item}</option>)}
         </select>
       </div>
-      <TextAreaInput id="contact-details" label="需求描述" name="details" />
+      <TextAreaInput id="contact-details" label={copy.details} name="details" />
       <button
         type="submit"
         class="inline-flex items-center justify-center rounded-lg bg-zinc-600 px-4 py-3 text-sm font-bold text-white transition duration-300 hover:bg-zinc-500"
@@ -44,7 +84,7 @@ const formClass = "grid gap-4";
       data-inquiry-status
       aria-live="polite"
     >
-      填写后我们会尽快与你联系。
+      {copy.statusIdle}
     </p>
   </form>
 
@@ -59,10 +99,10 @@ const formClass = "grid gap-4";
           data-inquiry-success-title
           tabindex="-1"
         >
-          提交成功，欢迎微信继续沟通
+          {copy.successTitle}
         </h3>
         <p class="mt-2 text-sm text-neutral-600 dark:text-neutral-400">
-          我们已收到你的需求，也可以直接扫码添加微信继续沟通。
+          {copy.successDescription}
         </p>
       </div>
       <div class="overflow-hidden rounded-2xl border border-neutral-200 bg-white p-3 shadow-sm dark:border-neutral-700 dark:bg-neutral-950">
@@ -79,7 +119,7 @@ const formClass = "grid gap-4";
         class="inline-flex items-center justify-center rounded-lg bg-zinc-600 px-5 py-3 text-sm font-bold text-white transition duration-300 hover:bg-zinc-500"
         data-inquiry-reset
       >
-        继续填写
+        {copy.resetText}
       </button>
     </div>
   </div>
@@ -119,7 +159,7 @@ const formClass = "grid gap-4";
       const payload = Object.fromEntries(formData.entries());
 
       if (status instanceof HTMLElement) {
-        status.textContent = "正在提交，请稍候…";
+        status.textContent = copy.statusSubmitting;
       }
 
       if (submitButton instanceof HTMLButtonElement) {
@@ -138,14 +178,14 @@ const formClass = "grid gap-4";
         const result = await response.json();
 
         if (!response.ok || !result.ok) {
-          throw new Error(result.message || "提交失败，请稍后重试。");
+          throw new Error(result.message || copy.failureStatus);
         }
 
         form.reset();
 
         if (status instanceof HTMLElement) {
           status.textContent =
-            result.message || "提交成功，我们会尽快与你联系。";
+            result.message || copy.successStatus;
         }
 
         setSuccessView(true);
@@ -158,7 +198,7 @@ const formClass = "grid gap-4";
       } catch (error) {
         if (status instanceof HTMLElement) {
           status.textContent =
-            error instanceof Error ? error.message : "提交失败，请稍后重试。";
+            error instanceof Error ? error.message : copy.failureStatus;
         }
       } finally {
         if (submitButton instanceof HTMLButtonElement) {
@@ -170,7 +210,7 @@ const formClass = "grid gap-4";
     if (resetButton instanceof HTMLButtonElement) {
       resetButton.addEventListener("click", () => {
         if (status instanceof HTMLElement) {
-          status.textContent = "填写后我们会尽快与你联系。";
+          status.textContent = copy.statusIdle;
         }
 
         setSuccessView(false);

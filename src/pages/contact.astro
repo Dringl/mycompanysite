@@ -29,5 +29,14 @@ const canonicalUrl = `${SITE.url}/contact`;
     inLanguage: "zh-CN",
   }}
 >
-  <ContactSection />
+  <ContactSection
+    title="联系我们"
+    subTitle={COMPANY_INFO.contactIntro}
+    formTitle="提交咨询需求"
+    formSubTitle="填写基础信息后，我们会尽快与你联系。"
+    submitLabel={COMPANY_INFO.ctaLabel}
+    phoneLabel="咨询电话"
+    phoneName="刘先生"
+    phoneNumber="18622472119"
+  />
 </MainLayout>

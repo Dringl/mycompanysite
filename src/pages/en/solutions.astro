@@ -1,0 +1,160 @@
+---
+import MainLayout from "@/layouts/MainLayout.astro";
+import MainSection from "@components/ui/blocks/MainSection.astro";
+import LeftSection from "@components/ui/blocks/LeftSection.astro";
+import RightSection from "@components/ui/blocks/RightSection.astro";
+import FeaturesStats from "@components/sections/features/FeaturesStats.astro";
+import solutionsSection01Image01 from "@images/pages/solutions/solutions-section-01-image-01.jpeg";
+import solutionsSection01Image02 from "@images/pages/solutions/solutions-section-01-image-02.jpeg";
+import solutionsSection02Image from "@images/pages/solutions/solutions-section-02-image.jpeg";
+import solutionsSection03Image01 from "@images/pages/solutions/solutions-section-03-image-01.jpeg";
+import solutionsSection03Image02 from "@images/pages/solutions/solutions-section-03-image-02.jpeg";
+import serviceIconImage from "@images/solutions-service-icon-black.png";
+import { SITE } from "@data/constants";
+import { EN_COMPANY_INFO, EN_SOLUTIONS_PAGE_CONTENT } from "@data/company.en";
+
+interface RightArticle {
+  type: "right";
+  title: string;
+  subTitle: string;
+  single?: boolean;
+  imgOne: any;
+  imgOneAlt: string;
+  imgTwo?: any;
+  imgTwoAlt?: string;
+  btnExists?: boolean;
+  btnTitle?: string;
+  btnURL?: string;
+}
+
+interface LeftArticle {
+  type: "left";
+  title: string;
+  subTitle: string;
+  img: any;
+  imgAlt: string;
+  btnExists?: boolean;
+  btnTitle?: string;
+  btnURL?: string;
+}
+
+const solutionSections = EN_SOLUTIONS_PAGE_CONTENT.sections;
+
+const sectionImages: (RightArticle | LeftArticle)[] = [
+  {
+    type: "right",
+    title: solutionSections[0].title,
+    subTitle: solutionSections[0].subTitle,
+    single: solutionSections[0].single,
+    imgOneAlt: solutionSections[0].imgOneAlt,
+    imgTwoAlt: solutionSections[0].imgTwoAlt,
+    btnExists: solutionSections[0].btnExists,
+    btnTitle: solutionSections[0].btnTitle,
+    btnURL: solutionSections[0].btnURL,
+    imgOne: solutionsSection01Image01,
+    imgTwo: solutionsSection01Image02,
+  },
+  {
+    type: "left",
+    title: solutionSections[1].title,
+    subTitle: solutionSections[1].subTitle,
+    imgAlt: solutionSections[1].imgAlt,
+    img: solutionsSection02Image,
+  },
+  {
+    type: "right",
+    title: solutionSections[2].title,
+    subTitle: solutionSections[2].subTitle,
+    single: solutionSections[2].single,
+    imgOneAlt: solutionSections[2].imgOneAlt,
+    imgTwoAlt: solutionSections[2].imgTwoAlt,
+    imgOne: solutionsSection03Image01,
+    imgTwo: solutionsSection03Image02,
+  },
+  {
+    type: "left",
+    title: solutionSections[3].title,
+    subTitle: solutionSections[3].subTitle,
+    imgAlt: solutionSections[3].imgAlt,
+    btnExists: solutionSections[3].btnExists,
+    btnTitle: solutionSections[3].btnTitle,
+    btnURL: solutionSections[3].btnURL,
+    img: serviceIconImage,
+  },
+];
+
+const pageTitle = `Solutions | ${EN_COMPANY_INFO.shortName}`;
+const metaDescription =
+  "Explore deployment-oriented solutions built around parts, systems, modular chassis, and scenario services.";
+const ogTitle = `Solutions | ${EN_COMPANY_INFO.shortName}`;
+const solutionsUrl = new URL("/en/solutions", SITE.url).toString();
+---
+
+<MainLayout
+  title={pageTitle}
+  customDescription={metaDescription}
+  customOgTitle={ogTitle}
+  structuredData={{
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    "@id": solutionsUrl,
+    url: solutionsUrl,
+    name: `${EN_COMPANY_INFO.shortName} Solutions`,
+    description: metaDescription,
+    isPartOf: {
+      "@type": "WebSite",
+      url: SITE.url,
+      name: SITE.title,
+      description: SITE.description,
+    },
+    inLanguage: "en",
+  }}
+  lang="en"
+>
+  <div class="mx-auto w-full max-w-(--breakpoint-2xl) flex-grow px-4 sm:px-6 lg:px-8">
+    <MainSection
+      title={EN_SOLUTIONS_PAGE_CONTENT.hero.title}
+      subTitle={EN_SOLUTIONS_PAGE_CONTENT.hero.subTitle}
+      btnExists={EN_SOLUTIONS_PAGE_CONTENT.hero.btnExists}
+      btnTitle={EN_SOLUTIONS_PAGE_CONTENT.hero.btnTitle}
+      btnURL={EN_SOLUTIONS_PAGE_CONTENT.hero.btnURL}
+    />
+
+    {
+      sectionImages.map((article) => {
+        return article.type === "right" ? (
+          <RightSection
+            title={article.title}
+            subTitle={article.subTitle}
+            single={article.single}
+            imgOne={article.imgOne}
+            imgOneAlt={article.imgOneAlt}
+            imgTwo={article.imgTwo}
+            imgTwoAlt={article.imgTwoAlt}
+            btnExists={article.btnExists}
+            btnTitle={article.btnTitle}
+            btnURL={article.btnURL}
+          />
+        ) : (
+          <LeftSection
+            title={article.title}
+            subTitle={article.subTitle}
+            img={article.img}
+            imgAlt={article.imgAlt}
+            btnExists={article.btnExists}
+            btnTitle={article.btnTitle}
+            btnURL={article.btnURL}
+          />
+        );
+      })
+    }
+
+    <FeaturesStats
+      title={EN_SOLUTIONS_PAGE_CONTENT.stats.title}
+      subTitle={EN_SOLUTIONS_PAGE_CONTENT.stats.subTitle}
+      mainStatTitle={EN_SOLUTIONS_PAGE_CONTENT.stats.mainStatTitle}
+      mainStatSubTitle={EN_SOLUTIONS_PAGE_CONTENT.stats.mainStatSubTitle}
+      stats={[...EN_SOLUTIONS_PAGE_CONTENT.stats.items]}
+    />
+  </div>
+</MainLayout>

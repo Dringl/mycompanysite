@@ -330,3 +330,65 @@ test("contact inquiry form uses inline success qr card instead of HSOverlay moda
   assert.doesNotMatch(inquiryFormSource, /hs-overlay/);
 });
 
+test("navbar uses language switch plus contact CTA without duplicate contact link", async () => {
+  const navbarSource = await read("src/components/sections/navbar&footer/Navbar.astro");
+
+  assert.match(navbarSource, /Contact Us/);
+  assert.match(navbarSource, /EN/);
+  assert.doesNotMatch(navbarSource, /咨询方案/);
+  assert.doesNotMatch(navbarSource, /strings\.navBarLinks[\s\S]*联系我们[\s\S]*href=\{COMPANY_LINKS\.contact\}/);
+});
+
+test("homepage company copy matches the new Chinese positioning", async () => {
+  const companySource = await read("src/data_files/company.ts");
+
+  assert.match(companySource, /加速无人化装备普及补全生活生产每一环从源头解放劳动力/);
+  assert.match(companySource, /围绕无人化装备零件供应、核心系统供应、通用底盘供应与场景解决方案服务，补全科研到落地全链条；产品不是我们的目的，解放劳动力是我们的终极目标。/);
+  assert.match(companySource, /title:\s*"无人化装备零件"/);
+  assert.match(companySource, /title:\s*"无人化装备系统"/);
+  assert.match(companySource, /title:\s*"模块化通用底盘"/);
+  assert.match(companySource, /title:\s*"场景解决方案"/);
+  assert.match(companySource, /title:\s*"农业场景解决方案"/);
+  assert.match(companySource, /title:\s*"养老场景解决方案"/);
+  assert.match(companySource, /title:\s*"工业场景解决方案"/);
+  assert.match(companySource, /针对农业劳动强度大，老龄化严重等问题，主打“一条农”服务，服务覆盖农业生产全周期，分为三大阶段共 10 项核心服务作业：前期包含除草、犁地、旋耕、起垄、播种、覆膜，中期提供打药、撒肥服务，后期完成收割、运输作业。/);
+  assert.match(companySource, /针对失能半失能老人，推出“全知”智能座椅，采用高通过底盘，集成健康监测、应急报警、情感陪护、自动遛弯、定时返航五大功能。/);
+  assert.match(companySource, /针对封闭工厂园区，推出“小蚂蚁”AMR自动物料转运和“黏人精”跟随工具车，解决封闭园区内多厂房之间的物料转运问题和手推工具车效率低下问题。/);
+});
+
+
+test("contact page exposes consulting phone in the contact info area", async () => {
+  const contactSectionSource = await read("src/components/sections/misc/ContactSection.astro");
+
+  assert.match(contactSectionSource, /18622472119/);
+  assert.match(contactSectionSource, /刘先生/);
+});
+
+test("services page includes a product catalog module backed by product materials", async () => {
+  const servicesSource = await read("src/pages/services.astro");
+  const productsSource = await read("src/data_files/products.ts");
+
+  assert.match(servicesSource, /ProductCatalog/);
+  assert.match(productsSource, /无人车零部件/);
+  assert.match(productsSource, /无人车核心系统/);
+  assert.match(productsSource, /无人车通用底盘/);
+  assert.match(productsSource, /无人机零部件/);
+  assert.match(productsSource, /场景解决方案/);
+});
+
+test("english site pages exist for the top-level routes", async () => {
+  const englishPages = [
+    "src/pages/en/index.astro",
+    "src/pages/en/about.astro",
+    "src/pages/en/services.astro",
+    "src/pages/en/solutions.astro",
+    "src/pages/en/projects/index.astro",
+    "src/pages/en/contact.astro",
+  ];
+
+  for (const page of englishPages) {
+    const source = await read(page);
+    assert.ok(source.length > 0, `${page} should exist`);
+  }
+});
+

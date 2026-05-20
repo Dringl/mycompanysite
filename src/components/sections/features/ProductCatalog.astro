@@ -1,0 +1,122 @@
+---
+import { PRODUCT_CATALOG, EN_PRODUCT_CATALOG } from "@data/products";
+
+interface Props {
+  locale?: "zh" | "en";
+  title?: string;
+  subTitle?: string;
+}
+
+const {
+  locale = "zh",
+  title = locale === "en" ? "Product Catalog" : "产品目录总览",
+  subTitle =
+    locale === "en"
+      ? "Browse category-based parts, systems, chassis, and scenario offerings drawn from Buquanxing's current product materials."
+      : "基于现有产品资料整理零部件、核心系统、通用底盘与场景方案，便于按方向快速浏览与沟通。",
+} = Astro.props;
+
+const categories = locale === "en" ? EN_PRODUCT_CATALOG : PRODUCT_CATALOG;
+const headingLabel = locale === "en" ? "Best-fit use cases" : "适用方向";
+---
+
+<section id="products" class="mx-auto max-w-[85rem] px-4 py-10 sm:px-6 lg:px-8 lg:py-14 2xl:max-w-full">
+  <div class="rounded-[2rem] border border-[color:var(--border-soft)] bg-[color:var(--surface-1)]/92 p-6 shadow-[0_24px_80px_rgba(15,23,42,0.08)] backdrop-blur-sm md:p-8 lg:p-10">
+    <div class="max-w-3xl">
+      <p class="text-sm font-semibold uppercase tracking-[0.22em] text-primary-blue">
+        {locale === "en" ? "Catalog" : "Catalog"}
+      </p>
+      <h2 class="mt-4 text-balance text-3xl font-bold text-[color:var(--text-strong)] lg:text-4xl">
+        {title}
+      </h2>
+      <p class="mt-4 text-pretty leading-8 text-[color:var(--text-body)]">
+        {subTitle}
+      </p>
+    </div>
+
+    <div class="mt-8 flex flex-wrap gap-3" role="tablist" aria-label={title}>
+      {categories.map((category, index) => (
+        <button
+          type="button"
+          class={`catalog-tab inline-flex items-center rounded-full border px-4 py-2 text-sm font-semibold transition duration-300 ${
+            index === 0
+              ? "border-primary-blue bg-primary-blue text-white"
+              : "border-[color:var(--border-soft)] bg-transparent text-[color:var(--text-body)] hover:border-primary-blue hover:text-primary-blue"
+          }`}
+          data-catalog-tab={category.id}
+          aria-selected={index === 0 ? "true" : "false"}
+        >
+          {category.name}
+        </button>
+      ))}
+    </div>
+
+    <div class="mt-8 space-y-6">
+      {categories.map((category, index) => (
+        <div class={`${index === 0 ? "block" : "hidden"}`} data-catalog-panel={category.id}>
+          <div class="mb-6 rounded-3xl border border-[color:var(--border-soft)] bg-[color:var(--surface-2)]/70 px-5 py-4">
+            <p class="text-sm leading-7 text-[color:var(--text-body)]">{category.description}</p>
+          </div>
+          <div class="grid gap-5 md:grid-cols-2 xl:grid-cols-3">
+            {category.items.map((item) => (
+              <article class="overflow-hidden rounded-3xl border border-[color:var(--border-soft)] bg-[color:var(--surface-1)] shadow-[0_18px_60px_rgba(15,23,42,0.06)] transition duration-300 hover:-translate-y-1 hover:shadow-[0_26px_80px_rgba(15,23,42,0.12)]">
+                <img src={item.image.src} alt={item.name} class="h-52 w-full object-cover" loading="lazy" />
+                <div class="space-y-4 p-5">
+                  <div>
+                    <h3 class="text-xl font-semibold text-[color:var(--text-strong)]">{item.name}</h3>
+                    <p class="mt-3 text-sm leading-7 text-[color:var(--text-body)]">{item.summary}</p>
+                  </div>
+                  <div>
+                    <p class="text-xs font-semibold uppercase tracking-[0.18em] text-primary-blue">{headingLabel}</p>
+                    <div class="mt-3 flex flex-wrap gap-2">
+                      {item.useCases.map((useCase) => (
+                        <span class="rounded-full bg-primary-blue/10 px-3 py-1 text-xs font-medium text-primary-blue">
+                          {useCase}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              </article>
+            ))}
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<script is:inline>
+  if (!window.__productCatalogTabsBound) {
+    const bindCatalogTabs = () => {
+      document.querySelectorAll("[data-catalog-tab]").forEach((button) => {
+        if (!(button instanceof HTMLButtonElement)) return;
+        button.addEventListener("click", () => {
+          const target = button.dataset.catalogTab;
+          if (!target) return;
+
+          document.querySelectorAll("[data-catalog-tab]").forEach((tab) => {
+            if (!(tab instanceof HTMLButtonElement)) return;
+            const selected = tab.dataset.catalogTab === target;
+            tab.setAttribute("aria-selected", selected ? "true" : "false");
+            tab.classList.toggle("border-primary-blue", selected);
+            tab.classList.toggle("bg-primary-blue", selected);
+            tab.classList.toggle("text-white", selected);
+            tab.classList.toggle("border-[color:var(--border-soft)]", !selected);
+            tab.classList.toggle("text-[color:var(--text-body)]", !selected);
+          });
+
+          document.querySelectorAll("[data-catalog-panel]").forEach((panel) => {
+            if (!(panel instanceof HTMLElement)) return;
+            panel.classList.toggle("hidden", panel.dataset.catalogPanel !== target);
+            panel.classList.toggle("block", panel.dataset.catalogPanel === target);
+          });
+        });
+      });
+    };
+
+    bindCatalogTabs();
+    document.addEventListener("astro:page-load", bindCatalogTabs);
+    window.__productCatalogTabsBound = true;
+  }
+</script>
