@@ -126,6 +126,8 @@ const servicesUrl = new URL("/services", SITE.url).toString();
       btnURL={servicesPageContent.hero.btnURL}
     />
 
+    <ProductCatalog />
+
     {
       sectionImages.map((article) => {
         return article.type === "right" ? (
@@ -154,8 +156,6 @@ const servicesUrl = new URL("/services", SITE.url).toString();
         );
       })
     }
-
-    <ProductCatalog />
 
     <FeaturesStats
       title={servicesPageContent.stats.title}

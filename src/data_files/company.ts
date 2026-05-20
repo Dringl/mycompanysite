@@ -33,7 +33,6 @@ export interface HomeCaseHighlight {
   href: string;
 }
 
-import sharedCompanyAerialView from "@/images/shared/shared-company-aerial-view.avif";
 import homeAdvantageVisualImage from "@/images/shared/shared-company-intro-poster.jpeg";
 import homePillars01 from "@/images/pages/home/home-pillars-01.jpeg";
 import homePillars02 from "@/images/pages/home/home-pillars-02.png";
@@ -84,10 +83,10 @@ export const COMPANY_INFO = {
     "以无人化装备底层能力为核心，提供零件、部件、通用底盘与场景方案服务。",
   hero: {
     tagline: "无人化装备 × 模块化平台 × 场景方案服务",
-    title: "加速无人化装备普及补全生活生产每一环从源头解放劳动力",
-    brandTitle: "补全星科技",
+    title: "加速无人化装备走向真实场景",
+    brandTitle: "让平台能力补全生产与服务链路",
     subTitle:
-      "围绕无人化装备零件供应、核心系统供应、通用底盘供应与场景解决方案服务，补全科研到落地全链条；产品不是我们的目的，解放劳动力是我们的终极目标。",
+      "围绕零部件、核心系统、通用底盘与方案服务，推动无人化能力从研发验证走向规模化应用。",
     primaryText: "发起咨询",
     primaryUrl: "/contact",
     secondaryText: "查看解决方案",
@@ -97,7 +96,7 @@ export const COMPANY_INFO = {
 
 export const PRIMARY_NAVIGATION: NavigationLink[] = [
   { name: "首页", url: "/" },
-  { name: "服务", url: "/services" },
+  { name: "产品与服务", url: "/services" },
   { name: "解决方案", url: "/solutions" },
   { name: "案例", url: "/projects" },
   { name: "关于", url: "/about" },
@@ -259,7 +258,6 @@ export const aboutPageContent = {
       "重庆起步、西南深耕：更熟悉丘陵山地与复杂业务环境下的真实约束。",
       "多行业延展空间：农业是重点方向，但平台能力同样适用于园区、巡检和公共服务。",
     ],
-    src: sharedCompanyAerialView,
     alt: "无人化装备平台与场景协同示意图",
   },
   stats: {

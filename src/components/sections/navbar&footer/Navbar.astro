@@ -121,17 +121,17 @@ const contactUrl = isEnglish ? "/en/contact" : COMPANY_LINKS.contact;
         ))}
 
         <a
-          href={languageToggleUrl}
-          class="inline-flex items-center justify-center rounded-full border border-[color:var(--border-soft)] px-4 py-2 text-sm font-semibold text-[color:var(--text-body)] transition duration-300 hover:border-primary-blue hover:text-primary-blue focus-visible:outline-hidden focus-visible:ring-3 focus-visible:ring-zinc-500 dark:focus-visible:ring-zinc-200"
-        >
-          {languageToggleLabel}
-        </a>
-
-        <a
           href={contactUrl}
           class="inline-flex items-center justify-center rounded-full bg-primary-blue px-5 py-2 text-sm font-semibold text-white transition duration-300 hover:bg-primary-blue/80 focus-visible:outline-hidden focus-visible:ring-3 focus-visible:ring-zinc-500 dark:focus-visible:ring-zinc-200"
         >
           {contactCtaLabel}
+        </a>
+
+        <a
+          href={languageToggleUrl}
+          class="inline-flex items-center justify-center rounded-full border border-[color:var(--border-soft)] px-4 py-2 text-sm font-semibold text-[color:var(--text-body)] transition duration-300 hover:border-primary-blue hover:text-primary-blue focus-visible:outline-hidden focus-visible:ring-3 focus-visible:ring-zinc-500 dark:focus-visible:ring-zinc-200"
+        >
+          {languageToggleLabel}
         </a>
 
         <!-- ThemeIcon component specifically for larger screens -->

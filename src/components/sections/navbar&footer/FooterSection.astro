@@ -2,7 +2,7 @@
 import { getNavigation } from "@utils/navigation.ts";
 import { COMPANY_INFO, COMPANY_LINKS, aboutPageContent } from "@data/company";
 import { EN_COMPANY_INFO, EN_ABOUT_PAGE_CONTENT } from "@data/company.en";
-import brandIcon from "@images/logo_trans.png";
+import brandIcon from "@images/logo.png";
 import { Image } from "astro:assets";
 
 const pathname = Astro.url.pathname;
@@ -18,17 +18,24 @@ const contactUrl = isEnglish ? "/en/contact" : COMPANY_LINKS.contact;
 const currentYear = new Date().getFullYear();
 ---
 
-<footer class="w-full bg-neutral-300 dark:bg-neutral-900">
+<footer class="w-full bg-[radial-gradient(circle_at_top,_rgba(255,255,255,0.72),_rgba(245,246,248,0.96))] dark:bg-[radial-gradient(circle_at_top,_rgba(15,23,42,0.92),_rgba(2,6,23,1))]">
   <div
     class="mx-auto w-full max-w-[85rem] px-4 py-10 sm:px-6 lg:px-16 lg:pt-20 2xl:max-w-(--breakpoint-2xl)"
   >
     <div class="grid grid-cols-2 gap-6 md:grid-cols-4 lg:grid-cols-5">
       <div class="col-span-full lg:col-span-2">
-        <Image src={brandIcon} alt={`${companyInfo.shortName} Logo`} class="mt-[-2rem] h-auto w-40 invert" />
-        <div class="mt-2 max-w-md space-y-3">
-          <h3 class="text-lg font-bold text-neutral-800 dark:text-neutral-100">
-            {companyInfo.name}
-          </h3>
+        <div class="inline-flex items-center gap-3 rounded-[1.75rem] border border-[color:var(--border-soft)] bg-white/70 px-4 py-3 shadow-[0_16px_40px_rgba(15,23,42,0.08)] backdrop-blur-sm dark:bg-white/5">
+          <Image src={brandIcon} alt={`${companyInfo.shortName} Logo`} class="h-10 w-10 object-contain" />
+          <div class="space-y-1">
+            <p class="text-xs font-semibold uppercase tracking-[0.24em] text-[color:var(--text-soft)]">
+              {footerContent.ctaTitle}
+            </p>
+            <h3 class="text-lg font-bold text-neutral-800 dark:text-neutral-100">
+              {companyInfo.name}
+            </h3>
+          </div>
+        </div>
+        <div class="mt-4 max-w-md space-y-3">
           <p class="text-sm leading-6 text-neutral-600 dark:text-neutral-400">
             {brandDescription}
           </p>
@@ -75,7 +82,7 @@ const currentYear = new Date().getFullYear();
     </div>
 
     <div
-      class="mt-9 grid gap-y-2 border-t border-neutral-400/40 pt-6 sm:mt-12 sm:flex sm:items-center sm:justify-between sm:gap-y-0 dark:border-neutral-700/40"
+      class="mt-9 grid gap-y-3 border-t border-neutral-400/40 pt-6 sm:mt-12 sm:flex sm:items-center sm:justify-between sm:gap-y-0 dark:border-neutral-700/40"
     >
       <div class="flex items-center justify-between">
         <p class="text-sm text-neutral-600 dark:text-neutral-400">
@@ -86,7 +93,7 @@ const currentYear = new Date().getFullYear();
       <div>
         <a
           href={contactUrl}
-          class="rounded-lg text-sm font-medium text-neutral-700 underline underline-offset-2 outline-hidden ring-zinc-500 transition duration-300 hover:text-neutral-900 hover:decoration-dashed focus-visible:ring-3 dark:text-neutral-300 dark:ring-zinc-200 dark:hover:text-neutral-100"
+          class="rounded-full border border-[color:var(--border-soft)] bg-white/70 px-4 py-2 text-sm font-medium text-neutral-700 shadow-sm transition duration-300 hover:border-primary-blue hover:text-primary-blue hover:shadow-md focus-visible:ring-3 dark:bg-white/5 dark:text-neutral-300 dark:hover:text-neutral-100"
         >
           {footerContent.ctaTitle}
         </a>

@@ -330,20 +330,42 @@ test("contact inquiry form uses inline success qr card instead of HSOverlay moda
   assert.doesNotMatch(inquiryFormSource, /hs-overlay/);
 });
 
-test("navbar uses language switch plus contact CTA without duplicate contact link", async () => {
+test("navbar renders contact CTA before the language toggle", async () => {
   const navbarSource = await read("src/components/sections/navbar&footer/Navbar.astro");
 
   assert.match(navbarSource, /Contact Us/);
   assert.match(navbarSource, /EN/);
-  assert.doesNotMatch(navbarSource, /咨询方案/);
-  assert.doesNotMatch(navbarSource, /strings\.navBarLinks[\s\S]*联系我们[\s\S]*href=\{COMPANY_LINKS\.contact\}/);
+  assert.ok(
+    navbarSource.indexOf("href={contactUrl}") < navbarSource.indexOf("href={languageToggleUrl}"),
+    "contact CTA should render before the language toggle",
+  );
 });
 
-test("homepage company copy matches the new Chinese positioning", async () => {
+test("primary navigation uses product and service naming in both languages", async () => {
+  const companySource = await read("src/data_files/company.ts");
+  const companyEnSource = await read("src/data_files/company.en.ts");
+
+  assert.match(companySource, /name:\s*"产品与服务"/);
+  assert.match(companyEnSource, /name:\s*"Products & Services"/);
+});
+
+test("footer brand uses the standard logo asset without inversion", async () => {
+  const footerSource = await read("src/components/sections/navbar&footer/FooterSection.astro");
+
+  assert.match(footerSource, /import brandIcon from "@images\/logo\.png"/);
+  assert.doesNotMatch(footerSource, /logo_trans\.png/);
+  assert.doesNotMatch(footerSource, /invert/);
+});
+
+test("homepage hero copy matches the visual refresh messaging", async () => {
   const companySource = await read("src/data_files/company.ts");
 
-  assert.match(companySource, /加速无人化装备普及补全生活生产每一环从源头解放劳动力/);
-  assert.match(companySource, /围绕无人化装备零件供应、核心系统供应、通用底盘供应与场景解决方案服务，补全科研到落地全链条；产品不是我们的目的，解放劳动力是我们的终极目标。/);
+  assert.match(companySource, /title:\s*"加速无人化装备走向真实场景"/);
+  assert.match(companySource, /brandTitle:\s*"让平台能力补全生产与服务链路"/);
+  assert.match(
+    companySource,
+    /subTitle:\s*"围绕零部件、核心系统、通用底盘与方案服务，推动无人化能力从研发验证走向规模化应用。"/,
+  );
   assert.match(companySource, /title:\s*"无人化装备零件"/);
   assert.match(companySource, /title:\s*"无人化装备系统"/);
   assert.match(companySource, /title:\s*"模块化通用底盘"/);
@@ -356,6 +378,19 @@ test("homepage company copy matches the new Chinese positioning", async () => {
   assert.match(companySource, /针对封闭工厂园区，推出“小蚂蚁”AMR自动物料转运和“黏人精”跟随工具车，解决封闭园区内多厂房之间的物料转运问题和手推工具车效率低下问题。/);
 });
 
+test("homepage video showcase copy matches the refresh plan", async () => {
+  const indexSource = await read("src/pages/index.astro");
+  const videoShowcaseSource = await read("src/components/sections/landing/VideoShowcase.astro");
+
+  assert.match(indexSource, /title="通过一段短片快速了解补全星科技"/);
+  assert.match(indexSource, /subTitle="通过一段简短介绍，快速理解补全星科技如何围绕平台能力、交付链路与场景延展来推进无人化装备落地。"/);
+  assert.match(indexSource, /以无人化装备平台能力为起点，建立面对多行业任务的通用基础。/);
+  assert.match(indexSource, /从关键零部件、核心系统到通用底盘与方案服务，形成更完整的能力链路。/);
+  assert.match(indexSource, /农业是重要落地方向之一，同时面向巡检、公共服务与复合型任务场景持续延展。/);
+  assert.doesNotMatch(videoShowcaseSource, /text-balance/);
+  assert.match(videoShowcaseSource, /xl:whitespace-nowrap/);
+});
+
 
 test("contact page exposes consulting phone in the contact info area", async () => {
   const contactSectionSource = await read("src/components/sections/misc/ContactSection.astro");
@@ -366,6 +401,7 @@ test("contact page exposes consulting phone in the contact info area", async () 
 
 test("services page includes a product catalog module backed by product materials", async () => {
   const servicesSource = await read("src/pages/services.astro");
+  const enServicesSource = await read("src/pages/en/services.astro");
   const productsSource = await read("src/data_files/products.ts");
 
   assert.match(servicesSource, /ProductCatalog/);
@@ -374,7 +410,36 @@ test("services page includes a product catalog module backed by product material
   assert.match(productsSource, /无人车通用底盘/);
   assert.match(productsSource, /无人机零部件/);
   assert.match(productsSource, /场景解决方案/);
+  assert.ok(
+    servicesSource.indexOf("<ProductCatalog") < servicesSource.indexOf("sectionImages.map"),
+    "Chinese services page should render ProductCatalog before service sections",
+  );
+  assert.ok(
+    enServicesSource.indexOf("<ProductCatalog") < enServicesSource.indexOf("sectionImages.map"),
+    "English services page should render ProductCatalog before service sections",
+  );
 });
+
+test("solutions pages use dedicated scene imagery instead of icon placeholders", async () => {
+  const solutionsSource = await read("src/pages/solutions.astro");
+  const enSolutionsSource = await read("src/pages/en/solutions.astro");
+
+  assert.doesNotMatch(solutionsSource, /solutions-service-icon-black/);
+  assert.doesNotMatch(enSolutionsSource, /solutions-service-icon-black/);
+  assert.match(solutionsSource, /@images\/pages\/solutions\//);
+  assert.match(enSolutionsSource, /@images\/pages\/solutions\//);
+});
+
+test("about page content data avoids homepage shared aerial imagery", async () => {
+  const companySource = await read("src/data_files/company.ts");
+  const companyEnSource = await read("src/data_files/company.en.ts");
+
+  assert.doesNotMatch(companySource, /src:\s*sharedCompanyAerialView/);
+  assert.doesNotMatch(companyEnSource, /src:\s*sharedCompanyAerialView/);
+  assert.doesNotMatch(companySource, /import sharedCompanyAerialView/);
+  assert.doesNotMatch(companyEnSource, /import sharedCompanyAerialView/);
+});
+
 
 test("english site pages exist for the top-level routes", async () => {
   const englishPages = [
