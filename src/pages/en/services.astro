@@ -125,6 +125,8 @@ const servicesUrl = new URL("/en/services", SITE.url).toString();
       btnURL={EN_SERVICES_PAGE_CONTENT.hero.btnURL}
     />
 
+    <ProductCatalog locale="en" />
+
     {
       sectionImages.map((article) => {
         return article.type === "right" ? (
@@ -153,8 +155,6 @@ const servicesUrl = new URL("/en/services", SITE.url).toString();
         );
       })
     }
-
-    <ProductCatalog locale="en" />
 
     <FeaturesStats
       title={EN_SERVICES_PAGE_CONTENT.stats.title}

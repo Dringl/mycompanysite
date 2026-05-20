@@ -7,15 +7,19 @@ import {
   EN_PRIMARY_NAVIGATION,
 } from "@data/company.en";
 
-export const getNavigation = (isEnglish: boolean) => {
-  const navBarLinks = isEnglish ? EN_PRIMARY_NAVIGATION : PRIMARY_NAVIGATION;
-  const footerLinks = isEnglish ? EN_FOOTER_NAVIGATION : FOOTER_NAVIGATION;
+const NAVIGATION_BY_LOCALE = {
+  zh: {
+    navBarLinks: PRIMARY_NAVIGATION,
+    footerLinks: FOOTER_NAVIGATION,
+  },
+  en: {
+    navBarLinks: EN_PRIMARY_NAVIGATION,
+    footerLinks: EN_FOOTER_NAVIGATION,
+  },
+} as const;
 
-  return {
-    navBarLinks,
-    footerLinks,
-    socialLinks: {},
-  };
+export const getNavigation = (isEnglish: boolean) => {
+  return isEnglish ? NAVIGATION_BY_LOCALE.en : NAVIGATION_BY_LOCALE.zh;
 };
 
 const navigation = getNavigation(false);

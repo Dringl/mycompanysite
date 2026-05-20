@@ -9,7 +9,6 @@ import type {
   NavigationSection,
 } from "./company";
 
-import sharedCompanyAerialView from "@/images/shared/shared-company-aerial-view.avif";
 import homePillars01 from "@/images/pages/home/home-pillars-01.jpeg";
 import homePillars02 from "@/images/pages/home/home-pillars-02.png";
 import homePillars03 from "@/images/pages/home/home-pillars-03.jpeg";
@@ -51,7 +50,7 @@ export const EN_COMPANY_INFO = {
 
 export const EN_PRIMARY_NAVIGATION: NavigationLink[] = [
   { name: "Home", url: "/en" },
-  { name: "Services", url: "/en/services" },
+  { name: "Products & Services", url: "/en/services" },
   { name: "Solutions", url: "/en/solutions" },
   { name: "Projects", url: "/en/projects" },
   { name: "About", url: "/en/about" },
@@ -263,7 +262,6 @@ export const EN_ABOUT_PAGE_CONTENT = {
       "Chongqing roots, Southwest experience: stronger familiarity with hilly terrain and demanding operating environments.",
       "Cross-industry extension: agriculture is a focus, but the platform also serves campuses, inspection, and public services.",
     ],
-    src: sharedCompanyAerialView,
     alt: "Illustration of unmanned equipment platforms working with real scenarios",
   },
   stats: {
