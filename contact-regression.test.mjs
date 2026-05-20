@@ -454,6 +454,23 @@ test("about keyword summary uses the light business module style", async () => {
   assert.doesNotMatch(enAboutSource, /bg-neutral-950\/40/);
 });
 
+test("second-round image replacements keep the approved file targets", async () => {
+  const solutionsSource = await read("src/pages/solutions.astro");
+  const enSolutionsSource = await read("src/pages/en/solutions.astro");
+  const aboutSource = await read("src/pages/about.astro");
+  const enAboutSource = await read("src/pages/en/about.astro");
+  const caseSource = await read("src/content/products/en/item-a765.md");
+
+  assert.match(solutionsSource, /solutions-section-02-image\.jpeg/);
+  assert.match(solutionsSource, /solutions-section-04-image\.jpeg/);
+  assert.match(enSolutionsSource, /solutions-section-02-image\.jpeg/);
+  assert.match(enSolutionsSource, /solutions-section-04-image\.jpeg/);
+  assert.match(aboutSource, /about-overview-image\.jpeg/);
+  assert.match(enAboutSource, /about-overview-image\.jpeg/);
+  assert.match(caseSource, /projects-case-02-card\.jpeg/);
+  assert.match(caseSource, /projects-case-02-main\.jpeg/);
+});
+
 
 test("english site pages exist for the top-level routes", async () => {
   const englishPages = [
