@@ -1,53 +1,53 @@
 ---
-title: "核心部件供应案例"
-description: "围绕动力、控制与执行链路构建稳定配套的核心部件供应案例。"
+title: "Core Components Supply Case Study"
+description: "A case study on building a stable support chain for power, control, and execution components."
 main:
   id: 2
   content: |
-    面向需要提升整机稳定性和任务一致性的无人化项目，补全星科技围绕动力、控制、执行等关键链路提供核心部件供应与组合支持，帮助客户更稳地推进中期验证和批量导入。
+    For unmanned projects that need better whole-machine stability and more consistent mission performance, Buquanxing Tech provides core components supply and integration support across the power, control, and execution chain so customers can move more confidently into validation and scale-up.
   imgCard: "@/images/pages/projects/projects-case-02-card.jpeg"
   imgMain: "@/images/pages/projects/projects-case-02-main.jpeg"
-  imgAlt: "核心部件供应案例展示图"
+  imgAlt: "Core components supply case study image"
 tabs:
   - id: "tabs-with-card-item-1"
     dataTab: "#tabs-with-card-1"
-    title: "案例概览"
+    title: "Overview"
   - id: "tabs-with-card-item-2"
     dataTab: "#tabs-with-card-2"
-    title: "方案能力"
+    title: "Capability"
   - id: "tabs-with-card-item-3"
     dataTab: "#tabs-with-card-3"
-    title: "现场画面"
+    title: "Field View"
 longDescription:
-  title: "核心部件稳定，整机能力才有可能稳定"
+  title: "Stable core components make whole-machine capability more stable"
   subTitle: |
-    与只看单个部件参数不同，我们更关注部件进入整套系统后的协同表现。通过更贴近项目任务目标的部件组合与配套支持，客户能够在关键链路上减少不必要的试错成本。
-  btnTitle: "咨询部件合作"
+    Instead of looking only at individual component specs, we focus on how the parts behave once they are integrated into the full system. With component combinations aligned to project goals, customers can reduce unnecessary trial and error in critical links.
+  btnTitle: "Discuss Component Supply"
   btnURL: "/contact"
 descriptionList:
-  - title: "关键链路补齐"
-    subTitle: "优先保障动力、控制和执行环节的稳定性。"
-  - title: "组合效率更高"
-    subTitle: "降低部件之间接口、规格和节奏不一致带来的反复调整。"
-  - title: "适合后续批量导入"
-    subTitle: "为项目从验证走向更大范围复制打下更稳基础。"
+  - title: "Critical links filled"
+    subTitle: "Keep the power, control, and execution links stable first."
+  - title: "Higher combination efficiency"
+    subTitle: "Reduce repeated adjustment caused by mismatched interfaces, specs, or timing."
+  - title: "Ready for later scaling"
+    subTitle: "Create a stronger base for replication beyond the initial validation phase."
 specificationsLeft:
-  - title: "适用场景"
-    subTitle: "适用于整机优化、平台升级和项目复制扩展阶段。"
-  - title: "配套重点"
-    subTitle: "围绕控制、驱动、执行与协同链路进行部件支持。"
-  - title: "协同对象"
-    subTitle: "可与客户研发团队、系统集成团队和项目团队联动推进。"
-  - title: "交付价值"
-    subTitle: "帮助客户更快形成稳定可复用的整机能力组合。"
+  - title: "Applicable stage"
+    subTitle: "Suitable for whole-machine optimization, platform upgrades, and scale-out projects."
+  - title: "Support focus"
+    subTitle: "Component support centered on control, drive, execution, and coordination links."
+  - title: "Collaboration model"
+    subTitle: "Can work with customer R&D, system integration, and project teams."
+  - title: "Delivery value"
+    subTitle: "Helps customers form a stable and reusable whole-machine capability set."
 tableData:
-  - feature: ["能力维度", "案例说明"]
+  - feature: ["Capability", "Case note"]
     description:
-      - ["核心目标", "提升关键链路稳定性"]
-      - ["导入阶段", "中期验证与批量准备"]
-      - ["协同方式", "按模块和任务目标同步优化"]
-      - ["适配场景", "农业、园区巡检、公共服务"]
-      - ["长期方向", "支撑标准化复制与平台延展"]
+      - ["Core goal", "Improve stability across critical links"]
+      - ["Stage", "Mid-stage validation and scale preparation"]
+      - ["Coordination", "Optimize by module and mission target"]
+      - ["Applicable scenarios", "Agriculture, campus inspection, public services"]
+      - ["Long-term direction", "Support standardized replication and platform expansion"]
 blueprints:
   first: "@/images/pages/projects/projects-case-02-blueprint-01.jpeg"
   second: "@/images/pages/projects/projects-case-02-blueprint-02.png"

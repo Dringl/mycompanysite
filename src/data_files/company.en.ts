@@ -402,75 +402,75 @@ export const EN_SERVICES_PAGE_CONTENT = {
 
 export const EN_SOLUTIONS_PAGE_CONTENT = {
   hero: {
-    title: "Solutions Built Around Unmanned Equipment Deployment",
+    title: "Solutions for unmanned equipment deployment",
     subTitle:
-      "From parts and systems to modular chassis and solution services, Buquanxing Tech helps customers introduce unmanned capability into agriculture, inspection, public service, and other real-world scenarios.",
+      "Buquanxing Tech helps customers move unmanned capabilities into real scenarios faster by combining parts, components, modular chassis, and solution services across agriculture, campus inspection, and public service settings.",
     btnExists: true,
-    btnTitle: "Start a Consultation",
+    btnTitle: "Start a Solution Inquiry",
     btnURL: "/en/contact",
   },
   sections: [
     {
       type: "right",
-      title: "Hilly and mountainous agriculture deployment",
+      title: "Hillside agriculture deployment solution",
       subTitle:
-        "For agricultural scenarios that demand stronger passability, stability, and task organization, we combine systems, chassis adaptation, and validation workflows to help customers move more steadily toward unmanned deployment.",
+        "For hillside agriculture, where mobility, stability, and task orchestration matter more, we combine component packages, chassis adaptation, and validation to help customers land unmanned capability more reliably.",
       single: false,
-      imgOneAlt: "Unmanned equipment operating in hilly agricultural terrain",
-      imgTwoAlt: "Validation and task organization in complex terrain",
+      imgOneAlt: "Coordinated unmanned equipment in hillside agriculture",
+      imgTwoAlt: "Scenario validation and task orchestration in complex terrain",
       btnExists: true,
-      btnTitle: "Discuss Cooperation",
+      btnTitle: "Discuss Partnership",
       btnURL: "/en/contact",
-    } satisfies CompanyRightSection & { type: "right" },
+    },
     {
       type: "left",
-      title: "Large-campus and inspection solutions",
+      title: "Scaled campus and inspection solution",
       subTitle:
-        "For inspection, transport, mobile execution, and data collection, we use modular chassis and core systems to build extensible scenario solutions that reduce repeated investment across multiple build phases.",
+        "For inspection, transport, mobile execution, and data collection, we combine general-purpose chassis and core components into a more extensible scenario solution that reduces repeated investment across phases.",
       imgAlt: "Campus inspection and unmanned execution platform",
-    } satisfies CompanyLeftSection & { type: "left" },
+    },
     {
       type: "right",
-      title: "Public service and multi-mission platform solutions",
+      title: "Public service and mixed-mission platform solution",
       subTitle:
-        "When tasks require mobility, payload support, and stable continuous operation, we center the solution on modular chassis and pair it with the needed systems and control links.",
+        "When a task needs mobility, payload capacity, and consistent runtime stability, we center the solution on a modular chassis and pair it with the necessary parts and control chain to better support public service and mixed-mission delivery.",
       single: false,
-      imgOneAlt: "Public service unmanned platform structure",
-      imgTwoAlt: "Modular chassis used in a multi-mission scenario",
-    } satisfies CompanyRightSection & { type: "right" },
+      imgOneAlt: "Public-service unmanned platform structure",
+      imgTwoAlt: "General-purpose chassis in mixed-mission use",
+    },
     {
       type: "left",
-      title: "Solution services from diagnosis to delivery validation",
+      title: "Solution services from diagnosis to validation",
       subTitle:
-        "We do more than provide hardware platforms. Our solution services connect business goals, equipment capability, and deployment rhythm so projects can complete their first rollout faster and keep improving afterward.",
-      imgAlt: "Scenario delivery and validation workflow illustration",
+        "Buquanxing Tech does more than provide parts and platforms — our solution services connect business goals, equipment capability, and deployment rhythm so projects can complete their first rollout and keep improving.",
+      imgAlt: "Solution services workflow and deployment validation illustration",
       btnExists: true,
       btnTitle: "Contact Buquanxing Tech",
       btnURL: "/en/contact",
-    } satisfies CompanyLeftSection & { type: "left" },
+    },
   ],
   stats: {
-    title: "Solutions focused on four deployment outcomes",
+    title: "Solutions designed around four delivery outcomes",
     subTitle:
-      "We care more about lowering integration thresholds, shortening onboarding cycles, and supporting long-term expansion than simply presenting conceptual capabilities.",
-    mainStatTitle: "1",
-    mainStatSubTitle: "Closed-loop method from foundational supply to scenario deployment",
+      "We care less about showing a concept and more about reducing integration friction, shortening adoption cycles, and supporting long-term expansion.",
+    mainStatTitle: "1 set",
+    mainStatSubTitle: "A closed-loop solution method from foundational support to scenario rollout",
     items: [
       {
-        stat: "Capability Completion",
-        description: "Fill critical gaps across parts, systems, and chassis",
+        stat: "Capability completion",
+        description: "Fill critical gaps across parts, components, and chassis layers",
       },
       {
-        stat: "Scenario Fit",
-        description: "Align platform capability with business constraints",
+        stat: "Scenario fit",
+        description: "Align platform capability with real operating constraints",
       },
       {
-        stat: "Deployment Efficiency",
-        description: "Reduce rework between planning and validation",
+        stat: "Adoption efficiency",
+        description: "Reduce back-and-forth between plan and validation",
       },
       {
-        stat: "Scalable Expansion",
-        description: "Leave room for more missions and wider rollout",
+        stat: "Continuous expansion",
+        description: "Leave room for more tasks, regions, and future reuse",
       },
     ],
   },
@@ -517,10 +517,3 @@ export const EN_HOME_ADVANTAGE_VISUAL = {
 } as const;
 
 export const homePillars = EN_HOME_PILLARS;
-export const homeCaseHighlights = EN_HOME_CASE_HIGHLIGHTS;
-export const homeSolutionTabs = EN_HOME_SOLUTION_TABS;
-export const aboutPageContent = EN_ABOUT_PAGE_CONTENT;
-export const servicesPageContent = EN_SERVICES_PAGE_CONTENT;
-export const solutionsPageContent = EN_SOLUTIONS_PAGE_CONTENT;
-export const contactPageContent = EN_CONTACT_PAGE_CONTENT;
-export const projectsPageContent = EN_PROJECTS_PAGE_CONTENT;

@@ -98,9 +98,9 @@ const projectsUrl = new URL("/en/projects", SITE.url).toString();
           product.map((product, index) => {
             const position = index % 4;
             if (position === 0 || position === 3) {
-              return <CardSmall product={product} />;
+              return <CardSmall product={product} productLocale="en" />;
             } else {
-              return <CardWide product={product} />;
+              return <CardWide product={product} productLocale="en" />;
             }
           })
         }

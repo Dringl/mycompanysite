@@ -16,6 +16,20 @@ const decodeBase64Url = (value) => {
   return Buffer.from(padded, "base64").toString("utf8");
 };
 
+const HAN_RE = /[\p{Script=Han}]/u;
+
+const readStrict = async (relativePath) => {
+  try {
+    return await read(relativePath);
+  } catch (error) {
+    throw new Error(`${relativePath}: ${error.message}`);
+  }
+};
+
+const assertNoHanCharacters = (source, relativePath) => {
+  assert.doesNotMatch(source, HAN_RE, `${relativePath} still contains Han characters`);
+};
+
 
 test("contact API succeeds with Hermes local Google token fallback and uses clean mail headers", async () => {
   const tempHome = await fs.mkdtemp(path.join(os.tmpdir(), "bq-hermes-home-"));
@@ -453,21 +467,45 @@ test("about keyword summary uses the light business module style", async () => {
   assert.doesNotMatch(aboutSource, /bg-neutral-950\/40/);
   assert.doesNotMatch(enAboutSource, /bg-neutral-950\/40/);
 });
+test("image targets stay locked to the approved filenames", async () => {
+  const solutionsSource = await readStrict("src/pages/solutions.astro");
+  const enSolutionsSource = await readStrict("src/pages/en/solutions.astro");
+  const caseSource = await readStrict("src/content/products/en/item-a765.md");
+  const aboutSource = await readStrict("src/pages/about.astro");
+  const enAboutSource = await readStrict("src/pages/en/about.astro");
 
+  assert.match(solutionsSource, /solutions-section-04-image\.jpeg/);
+  assert.match(enSolutionsSource, /solutions-section-04-image\.jpeg/);
+  assert.match(caseSource, /projects-case-02-main\.jpeg/);
+  assert.match(aboutSource, /about-overview-image\.jpeg/);
+  assert.match(enAboutSource, /about-overview-image\.jpeg/);
+});
 
-test("english site pages exist for the top-level routes", async () => {
-  const englishPages = [
-    "src/pages/en/index.astro",
-    "src/pages/en/about.astro",
-    "src/pages/en/services.astro",
-    "src/pages/en/solutions.astro",
+test("english site content no longer contains Han characters", async () => {
+  const files = [
+    "src/content/products/en/item-a765.md",
+    "src/content/products/en/item-b203.md",
+    "src/content/products/en/item-f303.md",
+    "src/content/products/en/item-t845.md",
+    "src/data_files/company.en.ts",
     "src/pages/en/projects/index.astro",
+    "src/pages/en/projects/[id].astro",
     "src/pages/en/contact.astro",
+    "src/pages/en/about.astro",
   ];
 
-  for (const page of englishPages) {
-    const source = await read(page);
-    assert.ok(source.length > 0, `${page} should exist`);
+  for (const file of files) {
+    const source = await readStrict(file);
+    assertNoHanCharacters(source, file);
   }
 });
 
+test("contact pages use the internationalized phone number", async () => {
+  const contactSource = await readStrict("src/pages/contact.astro");
+  const enContactSource = await readStrict("src/pages/en/contact.astro");
+
+  assert.match(contactSource, /phoneNumber="86-18622472119"/);
+  assert.match(enContactSource, /phoneNumber="86-18622472119"/);
+  assert.doesNotMatch(contactSource, /phoneNumber="18622472119"/);
+  assert.doesNotMatch(enContactSource, /phoneNumber="18622472119"/);
+});
