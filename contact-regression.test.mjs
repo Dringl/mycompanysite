@@ -4,6 +4,7 @@ import fs from "node:fs/promises";
 import os from "node:os";
 import path from "node:path";
 import { pathToFileURL } from "node:url";
+import sharp from "sharp";
 
 const root = "/data/work/web/mycompanysite/.claude/worktrees/website-visual-refresh";
 
@@ -438,6 +439,15 @@ test("services page includes a product catalog module backed by product material
   );
 });
 
+test("product catalog tabs share one active blue style across all categories", async () => {
+  const productCatalogSource = await read("src/components/sections/features/ProductCatalog.astro");
+
+  assert.match(productCatalogSource, /const activeTabClasses = \["border-primary-blue", "bg-primary-blue", "text-white"\]/);
+  assert.match(productCatalogSource, /const inactiveTabClasses = \[[\s\S]*"hover:text-primary-blue"[\s\S]*\]/);
+  assert.match(productCatalogSource, /tab\.classList\.remove\(\.\.\.\(selected \? inactiveTabClasses : activeTabClasses\)\)/);
+  assert.match(productCatalogSource, /tab\.classList\.add\(\.\.\.\(selected \? activeTabClasses : inactiveTabClasses\)\)/);
+});
+
 test("solutions pages replace all four scene images with curated page assets", async () => {
   const solutionsSource = await read("src/pages/solutions.astro");
   const enSolutionsSource = await read("src/pages/en/solutions.astro");
@@ -467,6 +477,21 @@ test("about keyword summary uses the light business module style", async () => {
   assert.doesNotMatch(aboutSource, /bg-neutral-950\/40/);
   assert.doesNotMatch(enAboutSource, /bg-neutral-950\/40/);
 });
+test("projects page uses Chinese product content in Chinese mode", async () => {
+  const projectsIndexSource = await readStrict("src/pages/projects/index.astro");
+  const enProjectsIndexSource = await readStrict("src/pages/en/projects/index.astro");
+  const projectsDetailSource = await readStrict("src/pages/projects/[id].astro");
+  const enProjectsDetailSource = await readStrict("src/pages/en/projects/[id].astro");
+  const chineseItemSource = await readStrict("src/content/products/zh/item-a765.md");
+
+  assert.match(projectsIndexSource, /getCollection\("products",\s*\(\{\s*id\s*\}\)\s*=>\s*id\.startsWith\("zh\/"\)\)/);
+  assert.match(enProjectsIndexSource, /getCollection\("products",\s*\(\{\s*id\s*\}\)\s*=>\s*id\.startsWith\("en\/"\)\)/);
+  assert.match(projectsDetailSource, /getCollection\("products",\s*\(\{\s*id\s*\}\)\s*=>\s*id\.startsWith\("zh\/"\)\)/);
+  assert.match(enProjectsDetailSource, /getCollection\("products",\s*\(\{\s*id\s*\}\)\s*=>\s*id\.startsWith\("en\/"\)\)/);
+  assert.match(projectsIndexSource, /CardSmall product=\{product\} productLocale=\"zh\"/);
+  assert.match(chineseItemSource, /title: "核心部件供应案例"/);
+});
+
 test("image targets stay locked to the approved filenames", async () => {
   const solutionsSource = await readStrict("src/pages/solutions.astro");
   const enSolutionsSource = await readStrict("src/pages/en/solutions.astro");
@@ -479,6 +504,21 @@ test("image targets stay locked to the approved filenames", async () => {
   assert.match(caseSource, /projects-case-02-main\.jpeg/);
   assert.match(aboutSource, /about-overview-image\.jpeg/);
   assert.match(enAboutSource, /about-overview-image\.jpeg/);
+});
+
+test("critical replacement images are high resolution enough for page placement", async () => {
+  const files = [
+    "src/images/pages/projects/projects-case-02-main.jpeg",
+    "src/images/pages/services/services-section-04-image.jpeg",
+    "src/images/pages/solutions/solutions-section-02-image.jpeg",
+    "src/images/pages/solutions/solutions-section-04-image.jpeg",
+  ];
+
+  for (const file of files) {
+    const metadata = await sharp(path.join(root, file)).metadata();
+    assert.ok((metadata.width ?? 0) >= 1200, `${file} width is too small`);
+    assert.ok((metadata.height ?? 0) >= 1100, `${file} height is too small`);
+  }
 });
 
 test("english site content no longer contains Han characters", async () => {

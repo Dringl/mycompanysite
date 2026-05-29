@@ -17,7 +17,7 @@ import { SITE } from "@data/constants";
 
 // Fetching all the product related content and sorting it by main.id
 const product: CollectionEntry<"products">[] = (
-  await getCollection("products")
+  await getCollection("products", ({ id }) => id.startsWith("zh/"))
 ).sort(
   (a: CollectionEntry<"products">, b: CollectionEntry<"products">) =>
     a.data.main.id - b.data.main.id
@@ -118,9 +118,9 @@ const projectsUrl = new URL("/projects", SITE.url).toString();
           product.map((product, index) => {
             const position = index % 4;
             if (position === 0 || position === 3) {
-              return <CardSmall product={product} />;
+              return <CardSmall product={product} productLocale="zh" />;
             } else {
-              return <CardWide product={product} />;
+              return <CardWide product={product} productLocale="zh" />;
             }
           })
         }

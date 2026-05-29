@@ -18,9 +18,9 @@ declare global {
 // This gets the static paths for all the unique products
 
 export async function getStaticPaths() {
-  const productEntries = await getCollection("products");
+  const productEntries = await getCollection("products", ({ id }) => id.startsWith("zh/"));
   return productEntries.map((product) => {
-    const idWithoutLang = product.id.replace(/^en\//, "");
+    const idWithoutLang = product.id.replace(/^(en|zh)\//, "");
     return {
       params: { id: idWithoutLang },
       props: { product },
@@ -34,7 +34,7 @@ const pageTitle: string = `${product.data.title}｜${SITE.title}`;
 const metaDescription = product.data.description;
 const ogTitle = `${product.data.title}｜客户案例｜${SITE.title}`;
 const blueprintAltPrefix = `${product.data.title}现场画面`;
-const productPath = `/projects/${product.id.replace(/^en\//, "")}`;
+const productPath = `/projects/${product.id.replace(/^(en|zh)\//, "")}`;
 const productUrl = new URL(productPath, SITE.url).toString();
 ---
 

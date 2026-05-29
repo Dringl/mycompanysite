@@ -15,7 +15,7 @@ import { SITE } from "@data/constants";
 import { EN_COMPANY_INFO, EN_PROJECTS_PAGE_CONTENT } from "@data/company.en";
 
 const product: CollectionEntry<"products">[] = (
-  await getCollection("products")
+  await getCollection("products", ({ id }) => id.startsWith("en/"))
 ).sort(
   (a: CollectionEntry<"products">, b: CollectionEntry<"products">) =>
     a.data.main.id - b.data.main.id

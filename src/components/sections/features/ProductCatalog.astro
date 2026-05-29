@@ -18,6 +18,9 @@ const {
 
 const categories = locale === "en" ? EN_PRODUCT_CATALOG : PRODUCT_CATALOG;
 const headingLabel = locale === "en" ? "Best-fit use cases" : "适用方向";
+const activeTabClass = "border-primary-blue bg-primary-blue text-white";
+const inactiveTabClass =
+  "border-[color:var(--border-soft)] bg-transparent text-[color:var(--text-body)] hover:border-primary-blue hover:text-primary-blue";
 ---
 
 <section id="products" class="mx-auto max-w-[85rem] px-4 py-10 sm:px-6 lg:px-8 lg:py-14 2xl:max-w-full">
@@ -40,8 +43,8 @@ const headingLabel = locale === "en" ? "Best-fit use cases" : "适用方向";
           type="button"
           class={`catalog-tab inline-flex items-center rounded-full border px-4 py-2 text-sm font-semibold transition duration-300 ${
             index === 0
-              ? "border-primary-blue bg-primary-blue text-white"
-              : "border-[color:var(--border-soft)] bg-transparent text-[color:var(--text-body)] hover:border-primary-blue hover:text-primary-blue"
+              ? activeTabClass
+              : inactiveTabClass
           }`}
           data-catalog-tab={category.id}
           aria-selected={index === 0 ? "true" : "false"}
@@ -88,6 +91,15 @@ const headingLabel = locale === "en" ? "Best-fit use cases" : "适用方向";
 
 <script is:inline>
   if (!window.__productCatalogTabsBound) {
+    const activeTabClasses = ["border-primary-blue", "bg-primary-blue", "text-white"];
+    const inactiveTabClasses = [
+      "border-[color:var(--border-soft)]",
+      "bg-transparent",
+      "text-[color:var(--text-body)]",
+      "hover:border-primary-blue",
+      "hover:text-primary-blue",
+    ];
+
     const bindCatalogTabs = () => {
       document.querySelectorAll("[data-catalog-tab]").forEach((button) => {
         if (!(button instanceof HTMLButtonElement)) return;
@@ -99,11 +111,8 @@ const headingLabel = locale === "en" ? "Best-fit use cases" : "适用方向";
             if (!(tab instanceof HTMLButtonElement)) return;
             const selected = tab.dataset.catalogTab === target;
             tab.setAttribute("aria-selected", selected ? "true" : "false");
-            tab.classList.toggle("border-primary-blue", selected);
-            tab.classList.toggle("bg-primary-blue", selected);
-            tab.classList.toggle("text-white", selected);
-            tab.classList.toggle("border-[color:var(--border-soft)]", !selected);
-            tab.classList.toggle("text-[color:var(--text-body)]", !selected);
+            tab.classList.remove(...(selected ? inactiveTabClasses : activeTabClasses));
+            tab.classList.add(...(selected ? activeTabClasses : inactiveTabClasses));
           });
 
           document.querySelectorAll("[data-catalog-panel]").forEach((panel) => {

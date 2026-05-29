@@ -15,12 +15,16 @@ interface Props {
 const imageClass =
   "absolute inset-0 h-full w-full object-cover object-center transition duration-[600ms] ease-[cubic-bezier(0.45,0,0.55,1)] group-hover:scale-110";
 
-const localizedId = product.id.replace(/^en\//, "");
+const localizedId = product.id.replace(/^(en|zh)\//, "");
+const href =
+  productLocale && productLocale !== "zh"
+    ? `/${productLocale}/projects/${localizedId}/`
+    : `/projects/${localizedId}/`;
 ---
 
 <!-- A clickable card that leads to the details of the project -->
 <a
-  href={productLocale ? `/${productLocale}/projects/${localizedId}/` : `/projects/${localizedId}/`}
+  href={href}
   data-astro-prefetch
   class="group relative flex h-48 items-end overflow-hidden rounded-xl shadow-lg outline-hidden ring-zinc-500 focus-visible:ring-3 dark:ring-zinc-200 dark:focus:outline-hidden md:h-80"
 >

@@ -16,16 +16,14 @@ declare global {
 }
 
 export async function getStaticPaths() {
-  const productEntries = await getCollection("products");
-  return productEntries
-    .filter((product) => product.id.startsWith("en/"))
-    .map((product) => {
-      const idWithoutLang = product.id.replace(/^en\//, "");
-      return {
-        params: { id: idWithoutLang },
-        props: { product },
-      };
-    });
+  const productEntries = await getCollection("products", ({ id }) => id.startsWith("en/"));
+  return productEntries.map((product) => {
+    const idWithoutLang = product.id.replace(/^en\//, "");
+    return {
+      params: { id: idWithoutLang },
+      props: { product },
+    };
+  });
 }
 
 const { product } = Astro.props;
