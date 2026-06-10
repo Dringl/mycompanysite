@@ -375,7 +375,7 @@ test("footer brand uses the standard logo asset without inversion", async () => 
 test("homepage hero copy rolls back to the previously approved version", async () => {
   const companySource = await read("src/data_files/company.ts");
 
-  assert.match(companySource, /title:\s*"加速无人化装备普及补全生活生产每一环从源头解放劳动力"/);
+  assert.match(companySource, /title:\s*"加速无人化装备普及\\n补全生活生产每一环\\n从源头解放劳动力"/);
   assert.match(companySource, /brandTitle:\s*"补全星科技"/);
   assert.match(
     companySource,
